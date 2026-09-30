@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ALTR Turizm</title>
+<meta name="description" content="ALTR Turizm - Hüseyin ALTIER Gezi Kulübü. Günübirlik, konaklamalı ve yurt dışı turlar.">
+
+<!-- Tema / PWA / iOS meta etiketleri -->
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0d2b4e" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1420" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ALTR Turizm">
+<meta name="application-name" content="ALTR Turizm">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" id="favIcon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b4e'/%3E%3Ctext x='32' y='40' font-family='Arial' font-weight='800' font-size='22' fill='%23fff' text-anchor='middle'%3EALTR%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" id="appleIcon" href="">
+
+<style>
+/* =====================================================================
+   1) TEMEL DEĞİŞKENLER VE SIFIRLAMA
+   ===================================================================== */
+:root {
+    --navy: #0d2b4e;
+    --navy2: #123a63;
+    --blue: #1f6fb2;
+    --blue2: #4fa3e0;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #16233a;
+    --muted: #5b6b82;
+    --line: #e2e8f0;
+    --accent: #0f9d58;
+    --danger: #ea4335;
+    --shadow: 0 2px 10px rgba(0, 0, 0, .06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, .12);
+    --radius: 14px;
+    --wrap: 71.25rem;           /* ~1140px içerik genişliği */
+    --gutter: clamp(1rem, 4vw, 2rem);
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #0b1420;
+        --card: #101c2c;
+        --text: #eaf1fb;
+        --muted: #93a4bd;
+        --line: #22314a;
+        --navy: #4fa3e0;      /* koyu temada başlıklar okunaklı kalsın */
+        --shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    }
+    :root:not([data-theme="light"]) .topbar,
+    :root:not([data-theme="light"]) footer { background: #0a2340; }
+}
+:root[data-theme="dark"] {
+    --bg: #0b1420; --card: #101c2c; --text: #eaf1fb; --muted: #93a4bd; --line: #22314a; --navy: #4fa3e0;
+}
+
+*, *::before, *::after { -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(7rem + var(--sat));
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+body.noscroll { overflow: hidden; }
+
+img, svg, video { max-width: 100%; height: auto; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: var(--blue); }
+h1, h2, h3, h4 { line-height: 1.25; }
+
+:focus-visible { outline: 3px solid var(--blue2); outline-offset: 2px; }
+
+.wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+}
+[hidden] { display: none !important; }
+
+/* =====================================================================
+   2) BUTONLAR
+   ===================================================================== */
+.btn {
+    display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
+    gap: .4rem;
+    min-height: 2.75rem;
+    background: var(--blue);
+    color: #fff;
+    border: 2px solid var(--blue);
+    padding: .65rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    -webkit-transition: background .2s, -webkit-transform .1s;
+    transition: background .2s, transform .1s;
+}
+.btn:active { -webkit-transform: scale(.97); transform: scale(.97); }
+.btn.outline { background: transparent; color: var(--blue); }
+.btn.block { display: -webkit-box; display: -ms-flexbox; display: flex; width: 100%; }
+.btn.wa { background: #25d366; border-color: #25d366; }
+.btn.danger { background: var(--danger); border-color: var(--danger); }
+.btn.small { min-height: 2.25rem; padding: .35rem .8rem; font-size: .85rem; }
+
+/* =====================================================================
+   3) ÜST BANT + NAVİGASYON
+   ===================================================================== */
+.site-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: var(--card);
+    -webkit-box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+    border-bottom: 1px solid var(--line);
+}
+.topbar {
+    background: var(--navy2);
+    color: #fff;
+    padding-top: var(--sat);
+}
+.topbar .wrap {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;
+    min-height: 3rem;
+}
+.topbar-title { font-weight: 700; font-size: clamp(.9rem, 3.4vw, 1.05rem); letter-spacing: .3px; }
+.hamburger {
+    display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex;
+    align-items: center; justify-content: center; text-decoration: none;
+    width: 2.75rem; height: 2.75rem;
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 8px;
+    font-size: 1.3rem;
+    line-height: 1;
+}
+.navbar .wrap {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
+    -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;
+    padding-top: .5rem; padding-bottom: .5rem;
+}
+.logo-link { display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; align-items: center; text-decoration: none; }
+.brand-logo { height: 3rem; width: auto; display: block; -o-object-fit: contain; object-fit: contain; }
+.logo { font-weight: 850; font-size: 1.3rem; color: var(--navy); letter-spacing: 1px; }
+.logo span { color: var(--blue); }
+
+/* Mobil: açılır menü */
+nav.menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: var(--gutter);
+    width: min(15rem, calc(100vw - 2rem));
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    -webkit-box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    z-index: 95;
+}
+nav.menu.open, nav.menu:target { display: block; }
+nav.menu a {
+    display: block;
+    padding: .85rem 1.25rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+}
+nav.menu a:last-child { border-bottom: none; }
+nav.menu a:hover { background: var(--bg); }
+
+/* Masaüstü: menü yatay, hamburger gizli */
+@media (min-width: 48em) {
+    .hamburger { display: none; }
+    .navbar .wrap { padding-top: .35rem; padding-bottom: .35rem; }
+    nav.menu {
+        display: -webkit-box; display: -ms-flexbox; display: flex;
+        position: static; width: auto;
+        background: transparent; border: none; -webkit-box-shadow: none; box-shadow: none;
+        gap: .25rem; overflow: visible;
+    }
+    nav.menu a { border: none; border-radius: 8px; padding: .6rem 1rem; }
+}
+
+/* =====================================================================
+   4) TANITIM (PROMO) ALANI
+   ===================================================================== */
+.promo { padding: 1.25rem 0 .5rem; }
+.promo-brand { font-weight: 800; font-size: 1.3rem; color: var(--navy); letter-spacing: 1px; margin-bottom: .5rem; }
+.promo-brand span { color: var(--blue); }
+.promo-flex { display: -webkit-box; display: -ms-flexbox; display: flex; flex-direction: column; gap: 1rem; }
+.promo-text { display: -webkit-box; display: -ms-flexbox; display: flex; align-items: center; }
+#promoDynamicTitle {
+    margin: 0;
+    font-size: clamp(1.35rem, 5vw, 2rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.3;
+    -webkit-transition: opacity .4s ease, -webkit-transform .4s ease;
+    transition: opacity .4s ease, transform .4s ease;
+}
+#promoDynamicTitle.fade-out { opacity: 0; -webkit-transform: translateX(-15px); transform: translateX(-15px); }
+.promo-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--navy2);
+    cursor: pointer;
+    -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+}
+#promoSlides { position: relative; width: 100%; height: 100%; }
+.promo-slide {
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    background-size: cover; background-position: center;
+    opacity: 0; -webkit-transition: opacity .7s ease-in-out; transition: opacity .7s ease-in-out;
+    display: -webkit-box; display: -ms-flexbox; display: flex; align-items: flex-end;
+}
+.promo-slide.active { opacity: 1; z-index: 1; }
+.promo-caption {
+    width: 100%;
+    padding: 1.5rem 1rem 1rem;
+    background: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, .85));
+    background: linear-gradient(transparent, rgba(0, 0, 0, .85));
+    color: #fff; font-weight: 700; font-size: 1.05rem; line-height: 1.4;
+}
+.promo-dots { position: absolute; bottom: .75rem; right: 1rem; display: flex; gap: .4rem; z-index: 5; }
+.promo-dots span { width: .5rem; height: .5rem; border-radius: 50%; background: rgba(255, 255, 255, .45); -webkit-transition: transform .3s; transition: transform .3s; }
+.promo-dots span.active { background: #fff; -webkit-transform: scale(1.25); transform: scale(1.25); }
+
+@media (min-width: 48em) {
+    .promo-flex { flex-direction: row; align-items: stretch; gap: 2rem; }
+    .promo-text { -webkit-box-flex: 1; -ms-flex: 1 1 0%; flex: 1 1 0%; }
+    .promo-box { -webkit-box-flex: 1.4; -ms-flex: 1.4 1 0%; flex: 1.4 1 0%; aspect-ratio: 16 / 9; }
+}
+
+/* =====================================================================
+   5) ARAMA / FİLTRE
+   ===================================================================== */
+.search-box { padding: 1rem 0 .25rem; }
+.search-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .6rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: .75rem;
+    -webkit-box-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+}
+.search-content input,
+.search-content select,
+.formfield input,
+.formfield select {
+    width: 100%;
+    min-height: 2.75rem;
+    padding: .55rem .75rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;              /* 16px: iOS'ta otomatik yakınlaştırmayı engeller */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.search-content select,
+.formfield select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235b6b82' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right .8rem center;
+    padding-right: 2.2rem;
+}
+input::placeholder { color: var(--muted); }
+@media (min-width: 40em) {
+    .search-content { grid-template-columns: 1fr 1.3fr 1fr; }
+}
+
+/* =====================================================================
+   6) TUR KARTLARI
+   ===================================================================== */
+#tours { padding-top: .5rem; padding-bottom: 2rem; }
+h2.section-title { color: var(--navy); font-size: 1.3rem; margin: 1.2rem 0 .9rem; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+    gap: 1rem;
+}
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: var(--shadow);
+    box-shadow: var(--shadow);
+    -webkit-transition: -webkit-transform .2s, box-shadow .2s;
+    transition: transform .2s, box-shadow .2s;
+}
+@media (hover: hover) {
+    .card:hover { -webkit-transform: translateY(-3px); transform: translateY(-3px); -webkit-box-shadow: var(--shadow-lg); box-shadow: var(--shadow-lg); }
+}
+.card .img {
+    margin: .75rem .75rem 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: -webkit-linear-gradient(315deg, var(--blue), var(--navy2));
+    background: linear-gradient(135deg, var(--blue), var(--navy2));
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    align-items: center; justify-content: center;
+    color: #fff; font-size: 2.5rem;
+    background-size: cover; background-position: center;
+}
+.card .img.photo-grid-featured {
+    display: grid; grid-template-columns: 1fr; grid-template-rows: 2fr 1fr; gap: 2px; background: var(--line); font-size: 0;
+}
+.photo-sub-row { display: grid; gap: 2px; width: 100%; min-width: 0; }
+.photo-cell { background-size: cover; background-position: center; cursor: pointer; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.card .body { padding: .9rem; display: -webkit-box; display: -ms-flexbox; display: flex; flex-direction: column; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+.card h3 { margin: 0 0 .25rem; font-size: 1.1rem; color: var(--navy); font-weight: 750; }
+.card .meta { font-size: .88rem; color: var(--muted); margin-bottom: .5rem; }
+.card .tags span {
+    display: inline-block; background: var(--bg); border: 1px solid var(--line);
+    font-size: .75rem; padding: .2rem .5rem; border-radius: 6px; margin: 0 .25rem .25rem 0;
+}
+.card .foot {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between;
+    align-items: center; gap: .5rem;
+    margin-top: auto; padding-top: .75rem;
+}
+.card .foot .btn.outline {
+    background: var(--blue); color: #fff; border-color: var(--blue);
+    border-radius: 999px; padding: .45rem 1rem; font-size: .88rem;
+    -webkit-box-shadow: 0 4px 10px rgba(31, 111, 178, .18); box-shadow: 0 4px 10px rgba(31, 111, 178, .18);
+}
+.price { color: var(--accent); font-weight: 800; font-size: 1.15rem; white-space: nowrap; }
+.badge {
+    display: inline-block; background: #fde68a; color: #7a5b00;
+    padding: .1rem .5rem; border-radius: 6px; font-size: .75rem; font-weight: 700;
+}
+.card .meta .badge { background: var(--line); color: var(--text); font-weight: 600; }
+.badge.done { background: #bbf7d0; color: #065f46; }
+.empty { color: var(--muted); text-align: center; padding: 1.5rem 0; grid-column: 1 / -1; }
+
+/* =====================================================================
+   7) ALT BİLGİ, YÜZEN BUTONLAR, TOAST
+   ===================================================================== */
+footer { background: var(--navy2); color: #cfe0f2; padding: 1.5rem 0 calc(1.5rem + var(--sab)); font-size: .92rem; }
+footer a { color: #cfe0f2; text-decoration: none; }
+footer .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+footer h4 { color: #fff; margin: 0 0 .6rem; font-size: 1rem; }
+footer ul { margin: 0; padding: 0; }
+footer li { margin-bottom: .5rem; list-style: none; }
+footer .copy { margin: 1rem 0 0; border-top: 1px solid rgba(255, 255, 255, .15); padding-top: .9rem; }
+
+.floatbar {
+    position: fixed;
+    left: calc(1.95rem + var(--sal));   /* ~0.5 cm sağa */
+    bottom: calc(4.75rem + var(--sab)); /* ~1.5 cm yukarı */
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    flex-direction: column; gap: .5rem; z-index: 40;
+}
+.floatbar a {
+    width: 3rem; height: 3rem; border-radius: 50%;
+    display: -webkit-box; display: -ms-flexbox; display: flex; align-items: center; justify-content: center;
+    color: #fff; text-decoration: none; font-size: 1.3rem;
+    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, .25); box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+}
+.fb-tel { background: #333; }
+.fb-wa { background: #25d366; }
+
+.toast {
+    position: fixed; left: 50%; bottom: calc(1.25rem + var(--sab));
+    -webkit-transform: translateX(-50%); transform: translateX(-50%);
+    width: calc(100% - 2rem); max-width: 30rem;
+    background: var(--navy2); color: #fff;
+    padding: .8rem 1rem; border-radius: 10px; z-index: 400;
+    display: none; text-align: center;
+    -webkit-box-shadow: var(--shadow-lg); box-shadow: var(--shadow-lg);
+}
+
+/* =====================================================================
+   8) PENCERELER (DETAY / İLETİŞİM / REZERVASYON / YÖNETİM)
+   ===================================================================== */
+.overlay {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(0, 0, 0, .55);
+    display: none; z-index: 100;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+.overlay.open { display: block; }
+.sheet {
+    background: var(--card);
+    min-height: 100%;
+    max-width: 47.5rem;
+    margin: 0 auto;
+    padding: 1rem;
+    padding-bottom: calc(1rem + var(--sab));
+}
+@media (min-width: 48em) {
+    .overlay { padding: 1.5rem 1rem; }
+    .sheet { min-height: 0; border-radius: 16px; padding: 1.5rem; -webkit-box-shadow: var(--shadow-lg); box-shadow: var(--shadow-lg); }
+}
+.ovheader {
+    display: -webkit-box; display: -ms-flexbox; display: flex;
+    align-items: center; justify-content: space-between; gap: .5rem;
+    margin: -1rem -1rem 1rem;
+    padding: .6rem .75rem;
+    padding-top: calc(.6rem + var(--sat));
+    border-bottom: 1px solid var(--line);
+    position: -webkit-sticky; position: sticky; top: 0;
+    background: var(--card); z-index: 5;
+}
+@media (min-width: 48em) { .ovheader { margin: -1.5rem -1.5rem 1rem; padding-top: .6rem; border-radius: 16px 16px 0 0; } }
+.ov-back {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 50%;
+    width: 2.75rem; height: 2.75rem; font-size: 1.3rem; color: var(--text);
+}
+.ov-home {
+    background: var(--navy2); border: none; border-radius: 999px;
+    padding: .6rem .9rem; min-height: 2.75rem; font-size: .88rem; font-weight: 700; color: #fff;
+}
+.ov-title { font-weight: 700; color: var(--navy); }
+
+.info-row { display: -webkit-box; display: -ms-flexbox; display: flex; gap: .6rem; align-items: center; padding: .55rem 0; border-bottom: 1px solid var(--line); }
+.tabs { display: -webkit-box; display: -ms-flexbox; display: flex; gap: .9rem; margin: .9rem 0; border-bottom: 1px solid var(--line); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tab { padding: .6rem .25rem; font-weight: 700; color: var(--muted); border-bottom: 3px solid transparent; white-space: nowrap; cursor: pointer; }
+.tab.active { color: var(--blue); border-color: var(--blue); }
+.tabpane { display: none; }
+.tabpane.active { display: block; }
+
+.formfield { margin-bottom: .8rem; }
+.formfield label { font-size: .88rem; color: var(--muted); display: block; margin-bottom: .25rem; }
+.counter {
+    display: -webkit-box; display: -ms-flexbox; display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: .5rem .75rem; margin-bottom: .7rem;
+}
+.counter > div { display: flex; align-items: center; gap: .6rem; }
+.counter button { width: 2.5rem; height: 2.5rem; border-radius: 50%; border: none; background: var(--blue); color: #fff; font-size: 1.2rem; }
+.counter b { min-width: 1.5rem; text-align: center; }
+.file-btn { position: relative; overflow: hidden; }
+.file-btn input[type=file] { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.stickybar {
+    position: -webkit-sticky; position: sticky; bottom: 0;
+    background: var(--card); border-top: 1px solid var(--line);
+    padding: .75rem 0 calc(.75rem + var(--sab));
+    margin-top: 1rem; display: flex; flex-direction: column; gap: .5rem;
+}
+.stickybar .row { display: flex; gap: .5rem; }
+.stickybar .row > * { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+.note { font-size: .82rem; color: var(--muted); }
+.box { border: 1px solid var(--line); border-radius: 12px; padding: .8rem; margin-bottom: .8rem; }
+
+/* Tur detay - kare dikey slayt */
+.detail-slider-container {
+    position: relative; width: min(100%, 26rem); aspect-ratio: 1 / 1;
+    margin: 1rem auto; border-radius: 16px; overflow: hidden; background: #dde6f0;
+    -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, .12); box-shadow: 0 4px 15px rgba(0, 0, 0, .12);
+    cursor: zoom-in;
+}
+.detail-slider-track { position: relative; width: 100%; height: 100%; }
+.detail-slide {
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    background-size: cover; background-position: center;
+    -webkit-transform: translateY(100%); transform: translateY(100%);
+    -webkit-transition: -webkit-transform .6s cubic-bezier(.25, 1, .5, 1); transition: transform .6s cubic-bezier(.25, 1, .5, 1);
+    z-index: 1;
+    display: flex; align-items: center; justify-content: center; color: var(--muted);
+}
+.detail-slide.active { -webkit-transform: translateY(0); transform: translateY(0); z-index: 2; }
+.detail-slide.exit { -webkit-transform: translateY(-100%); transform: translateY(-100%); z-index: 1; }
+.detail-anim-text-box { max-width: 30rem; margin: .5rem auto 1rem; min-height: 2.5rem; text-align: center; }
+.detail-dynamic-text { font-size: 1.1rem; font-weight: 700; color: var(--blue); letter-spacing: .3px; opacity: 0; }
+.detail-dynamic-text.trigger-fade { -webkit-animation: fadeFromNothing 5s infinite ease-in-out; animation: fadeFromNothing 5s infinite ease-in-out; }
+@-webkit-keyframes fadeFromNothing { 0%{opacity:0;-webkit-transform:scale(.95)} 15%,85%{opacity:1;-webkit-transform:scale(1)} 100%{opacity:0;-webkit-transform:scale(.95)} }
+@keyframes fadeFromNothing { 0%{opacity:0;transform:scale(.95)} 15%,85%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(.95)} }
+
+/* Yakınlaştırma ve lightbox */
+.cardzoom { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0, 0, 0, .7); display: none; align-items: center; justify-content: center; z-index: 250; }
+.cardzoom.open { display: flex; }
+.cardzoom img { max-width: 92vw; max-height: 80vh; border-radius: 12px; }
+.cardzoom-close, .lb-close {
+    position: absolute; top: calc(.9rem + var(--sat)); right: .9rem;
+    background: rgba(255, 255, 255, .2); color: #fff; border: none;
+    width: 2.75rem; height: 2.75rem; border-radius: 50%; font-size: 1.2rem; z-index: 10;
+}
+.lightbox { position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: #000; z-index: 300; display: none; overflow: hidden; touch-action: none; }
+.lightbox.open { display: block; }
+.lightbox img {
+    position: absolute; top: 50%; left: 50%; max-width: 95vw; max-height: 80vh; width: auto; height: auto;
+    -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
+    touch-action: none; -webkit-user-select: none; user-select: none;
+}
+.lb-arrow {
+    position: absolute; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%);
+    background: rgba(255, 255, 255, .18); color: #fff; border: none; width: 3rem; height: 3rem; border-radius: 50%; font-size: 1.4rem; z-index: 10;
+}
+.lb-arrow.prev { left: .6rem; } .lb-arrow.next { right: .6rem; }
+.lb-count { position: absolute; bottom: calc(1rem + var(--sab)); left: 0; right: 0; text-align: center; color: #fff; font-size: .9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { -webkit-animation-duration: .01ms !important; animation-duration: .01ms !important; -webkit-animation-iteration-count: 1 !important; animation-iteration-count: 1 !important; -webkit-transition-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .detail-dynamic-text { opacity: 1; }
+}
+@media print { .site-header, .floatbar, .overlay, .toast { display: none !important; } }
+</style>
+</head>
+
+<body>
+
+<noscript>
+<div style="position:relative;z-index:9999;background:#fff3cd;color:#5c4400;border-bottom:3px solid #f0ad00;padding:16px 18px;font:600 16px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center">
+    ⚠️ Bu ekran dosya önizlemesidir; site burada tam çalışmaz (JavaScript kapalı).<br>
+    <span style="font-weight:500">Test için: sağ alttaki <b>Paylaş (⬆︎)</b> simgesine dokunun → <b>"Safari'de Aç"</b> seçeneğini seçin.</span>
+</div>
+</noscript>
+
+<!-- ÜST BİLGİ ÇUBUĞU + NAVİGASYON -->
+<header class="site-header">
+    <div class="topbar">
+        <div class="wrap">
+            <span class="topbar-title">Hüseyin ALTIER Gezi Kulübü</span>
+            <a class="hamburger" id="menuBtn" href="#menu" role="button" aria-label="Menüyü aç/kapat" aria-controls="menu" aria-expanded="false">☰</a>
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="wrap">
+            <a href="#" class="logo-link" onclick="goHome(); return false;" aria-label="ALTR Turizm ana sayfa">
+                <img src="logo.png" alt="ALTR Turizm" class="brand-logo" width="48" height="48"
+                     onerror="this.outerHTML='&lt;span class=&quot;logo&quot;&gt;ALTR &lt;span&gt;Turizm&lt;/span&gt;&lt;/span&gt;'">
+            </a>
+            <nav class="menu" id="menu" aria-label="Ana menü">
+                <a href="#tours" onclick="closeMenu()">Turlarımız</a>
+                <a href="#search" onclick="closeMenu()">Tur Ara</a>
+                <a href="#" onclick="openContact(); return false;">İletişim</a>
+                <a href="#" onclick="openAdmin(); return false;">Yönetim Paneli</a>
+                <a href="#" id="installLink" hidden onclick="installApp(); return false;">📲 Uygulamayı Yükle</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- TANITIM KUTUSU -->
+    <section class="promo" id="promoContainer" hidden>
+        <div class="wrap">
+            <div class="promo-brand">ALTR<span>TUR</span></div>
+            <div class="promo-flex">
+                <div class="promo-text"><h2 id="promoDynamicTitle">Yükleniyor...</h2></div>
+                <div class="promo-box" id="promoBox" onclick="promoClick()" role="button" tabindex="0" aria-label="Tanıtılan turu aç">
+                    <div id="promoSlides"></div>
+                    <div class="promo-dots" id="promoDots"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARAMA / FİLTRE -->
+    <div class="search-box" id="search">
+        <div class="wrap">
+            <div class="search-content">
+                <select id="qFromCity" onchange="renderTours()" aria-label="Kalkış noktası">
+                    <option value="">🗺️ Kalkış Noktası (Şehir)</option>
+                    <option value="Adana">Adana Kalkışlı</option>
+                    <option value="Hatay">Hatay Kalkışlı</option>
+                    <option value="Gaziantep">Gaziantep Kalkışlı</option>
+                    <option value="Şanlıurfa">Şanlıurfa Kalkışlı</option>
+                    <option value="Kahramanmaraş">Kahramanmaraş Kalkışlı</option>
+                </select>
+                <input id="qText" type="search" placeholder="🔍 Tur / Kategori Ara..." oninput="renderTours()" aria-label="Tur ara" autocomplete="off">
+                <select id="qSort" onchange="renderTours()" aria-label="Sıralama">
+                    <option value="">📊 Sıralama: Öne Çıkanlar</option>
+                    <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
+                    <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <section id="tours" class="wrap">
+        <h2 class="section-title">Turlarımız</h2>
+        <div class="grid" id="toursGrid"><article class="card"><div class="img" aria-hidden="true">🧭</div><div class="body"><h3>Taşların Hikayesi: Afyon &amp; Kütahya Turu</h3><div class="meta">📅 27 Eylül 2026, Pazar<br>📍 Kalkış: <span class="badge">Belirtilmedi</span></div><div class="meta">👶 Çocuk (7 yaş üstü): 2.750 ₺ · 7 yaş altı ücretsiz</div><div class="tags"><span>Günübirlik</span><span>Kahvaltı Dahil</span></div><div class="foot"><span class="btn outline">Turu İncele</span><span class="price">2.750 ₺</span></div></div></article><article class="card"><div class="img" aria-hidden="true">🧭</div><div class="body"><h3>Yedigöller Turu</h3><div class="meta">📅 3 Ekim 2026, Cumartesi<br>📍 Kalkış: <span class="badge">Belirtilmedi</span></div><div class="meta">👶 Çocuk (7 yaş üstü): 2.600 ₺ · 7 yaş altı ücretsiz</div><div class="tags"><span>Açık Büfe Kahvaltı</span><span>AVM</span></div><div class="foot"><span class="btn outline">Turu İncele</span><span class="price">2.600 ₺</span></div></div></article><article class="card"><div class="img" aria-hidden="true">🧭</div><div class="body"><h3>Batum Turu</h3><div class="meta">📅 25-27 Eylül 2026<br>📍 Kalkış: <span class="badge">Belirtilmedi</span></div><div class="meta">👶 Çocuk (7 yaş üstü): 11.500 ₺ · 7 yaş altı ücretsiz</div><div class="tags"><span>2 Gece 3 Gün</span><span>Otobüsle Ulaşım</span></div><div class="foot"><span class="btn outline">Turu İncele</span><span class="price">11.500 ₺</span></div></div></article></div>
+    </section>
+</main>
+
+<div class="floatbar">
+    <a class="fb-tel" href="tel:+905536082982" aria-label="Ara">📞</a>
+    <a class="fb-wa" href="https://wa.me/905536082982?text=Merhaba%2C%20web%20siteniz%20%C3%BCzerinden%20ula%C5%9F%C4%B1yorum.%20Turlar%C4%B1n%C4%B1z%20hakk%C4%B1nda%20bilgi%20alabilir%20miyim%3F" id="waFloat" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</div>
+
+<footer id="contact">
+    <div class="wrap">
+        <div class="cols">
+            <div><h4>Turlarımız</h4><ul><li>Konaklamalı Turlar</li><li>Günübirlik Turlar</li><li>Yurt Dışı Turlar</li></ul></div>
+            <div><h4>Kurumsal</h4><ul><li>Hakkımızda</li><li>Mesafeli Satış Sözleşmesi</li><li><a href="#" onclick="openAdmin(); return false;">Yönetim Paneli</a></li></ul></div>
+        </div>
+        <p class="copy">ALTR TUR &nbsp;|&nbsp; 📞 0553 608 29 82</p>
+    </div>
+</footer>
+
+<!-- TUR DETAY -->
+<div class="overlay" id="tourDetail" role="dialog" aria-modal="true" aria-label="Tur detayı">
+    <div class="sheet" id="tourDetailBody"></div>
+</div>
+
+<!-- İLETİŞİM -->
+<div class="overlay" id="contactOverlay" role="dialog" aria-modal="true" aria-label="İletişim">
+    <div class="sheet">
+        <div class="ovheader">
+            <button class="ov-back" type="button" onclick="closeOverlay('contactOverlay')" aria-label="Geri">‹</button>
+            <span class="ov-title">İletişim</span>
+            <button class="ov-home" type="button" onclick="goHome()">🏠 Ana Sayfa</button>
+        </div>
+        <div style="text-align:center;padding:1rem 0 .5rem">
+            <h2 style="color:var(--navy);margin:0 0 .25rem">Bize Ulaşın</h2>
+            <p style="color:var(--muted);margin:0">Sorularınız veya rezervasyon talepleriniz için bizimle iletişime geçin</p>
+        </div>
+        <div class="info-row"><a href="tel:+905536082982" style="color:var(--text);text-decoration:none">📞&nbsp; 0553 608 29 82</a></div>
+        <div class="info-row"><a href="mailto:sanattarekip@gmail.com" style="color:var(--text);text-decoration:none">📧&nbsp; sanattarekip@gmail.com</a></div>
+        <div style="margin:1.5rem 0"><a class="btn block" href="mailto:sanattarekip@gmail.com">✉️ Bize Mail Gönder</a></div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <a href="#" class="btn outline" style="flex:1">Instagram</a>
+            <a href="#" class="btn outline" style="flex:1">Facebook</a>
+        </div>
+    </div>
+</div>
+
+<!-- REZERVASYON / KATILIM -->
+<div class="overlay" id="resModal" role="dialog" aria-modal="true" aria-label="Rezervasyon">
+    <div class="sheet">
+        <div class="ovheader">
+            <button class="ov-back" type="button" onclick="closeOverlay('resModal')" aria-label="Geri">‹</button>
+            <span class="ov-title" id="resTitle">Rezervasyon</span>
+            <button class="ov-home" type="button" onclick="goHome()">🏠 Ana Sayfa</button>
+        </div>
+        <div id="resBody"></div>
+    </div>
+</div>
+
+<!-- YÖNETİM -->
+<div class="overlay" id="adminOverlay" role="dialog" aria-modal="true" aria-label="Yönetim paneli">
+    <div class="sheet">
+        <div class="ovheader">
+            <button class="ov-back" type="button" onclick="closeOverlay('adminOverlay')" aria-label="Geri">‹</button>
+            <span class="ov-title">Yönetim Paneli</span>
+            <button class="ov-home" type="button" onclick="goHome()">🏠 Ana Sayfa</button>
+        </div>
+        <p class="note">Not: Bu paneldeki veriler yalnızca bu tarayıcıda/cihazda saklanır; başka bir cihazdan görüntülenemez. Rezervasyon talepleri ayrıca WhatsApp/telefonla da size ulaşır.</p>
+        <div class="tabs" role="tablist">
+            <div class="tab active" data-t="pkg" onclick="switchAdminTab('pkg')">Paketler</div>
+            <div class="tab" data-t="ord" onclick="switchAdminTab('ord')">Siparişler</div>
+            <div class="tab" data-t="promo" onclick="switchAdminTab('promo')">Tanıtım Kutusu</div>
+            <div class="tab" data-t="ended" onclick="switchAdminTab('ended')">Sonlandırılanlar</div>
+        </div>
+
+        <div class="tabpane active" id="admin-pkg">
+            <div id="adminPkgList"></div>
+            <h4 style="margin-top:1.2rem;color:var(--navy)">Yeni Paket Ekle</h4>
+            <div class="formfield"><label for="npName">Tur Adı</label><input id="npName"></div>
+            <div class="formfield"><label for="npDate">Tarih (ör: 25-27 Eylül 2026)</label><input id="npDate"></div>
+            <div class="formfield"><label for="npPrice">Kişi Başı Fiyat - Yetişkin (TL)</label><input id="npPrice" type="number" inputmode="numeric" min="0"></div>
+            <div class="formfield"><label for="npChildPrice">Kişi Başı Fiyat - Çocuk, 7 yaş üstü (TL)</label><input id="npChildPrice" type="number" inputmode="numeric" min="0" placeholder="Boş bırakılırsa yetişkin fiyatı uygulanır"></div>
+            <div class="formfield">
+                <label for="npFromCity">Kalkış Şehri (Filtreleme İçin)</label>
+                <select id="npFromCity">
+                    <option value="">Şehir Seçiniz...</option>
+                    <option value="Adana">Adana</option>
+                    <option value="Hatay">Hatay</option>
+                    <option value="Gaziantep">Gaziantep</option>
+                    <option value="Şanlıurfa">Şanlıurfa</option>
+                    <option value="Kahramanmaraş">Kahramanmaraş</option>
+                </select>
+            </div>
+            <div class="formfield"><label for="npDesc">Açıklama</label><input id="npDesc"></div>
+            <div class="formfield"><label for="npTags">Etiketler (virgülle ayırın, opsiyonel)</label><input id="npTags" placeholder="Örn: Günübirlik, Kahvaltı Dahil"></div>
+            <div class="formfield"><label for="npAnimText">Animasyonlu Tanıtım Metni (Detay İçin)</label><input id="npAnimText" placeholder="Örn: Bu harika lezzet turunu kaçırmayın!"></div>
+            <div class="formfield">
+                <label>Fotoğraflar (opsiyonel, birden çok seçilebilir)</label>
+                <label class="btn outline file-btn block">📷 Fotoğraf Seç (Galeri / Dosya)
+                    <input type="file" accept="image/*" multiple onchange="handleNewPhotos(this)">
+                </label>
+                <div id="npPhotoPreview" class="note" style="margin-top:.4rem"></div>
+            </div>
+            <button class="btn block" type="button" onclick="addPackage()">Paketi Yayınla</button>
+        </div>
+
+        <div class="tabpane" id="admin-ord"><div id="adminOrdList"></div></div>
+
+        <div class="tabpane" id="admin-promo">
+            <div id="adminPromoList"></div>
+            <h4 style="margin-top:1.2rem;color:var(--navy)">Yeni Tanıtım Ekle</h4>
+            <div class="formfield"><label>Hangi Turlar Tanıtılsın (birden çok seçilebilir)</label><div id="npPromoTourList"></div></div>
+            <div class="formfield"><label for="npPromoLeftText">Sol Panelde Görünecek Büyük Başlık / Slogan</label><input id="npPromoLeftText" placeholder="Örn: Muhteşem GAP Turunda Büyük Sonbahar Fırsatı!"></div>
+            <div class="formfield"><label for="npPromoCaption">Açıklama (Görsel üzerinde gösterilecek yazı)</label><input id="npPromoCaption"></div>
+            <div class="formfield">
+                <label>Fotoğraf</label>
+                <label class="btn outline file-btn block">📷 Fotoğraf Seç
+                    <input type="file" accept="image/*" onchange="handlePromoPhoto(this)">
+                </label>
+                <div id="npPromoPreview" class="note" style="margin-top:.4rem"></div>
+            </div>
+            <button class="btn block" type="button" onclick="addPromo()">Tanıtımı Ekle</button>
+        </div>
+
+        <div class="tabpane" id="admin-ended"><div id="adminEndedPkgList"></div></div>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="cardzoom" id="cardZoom" onclick="closeCardZoom()">
+    <button class="cardzoom-close" type="button" onclick="event.stopPropagation();closeCardZoom()" aria-label="Kapat">✕</button>
+    <img id="cardZoomImg" src="" alt="Tur fotoğrafı" onclick="event.stopPropagation();closeCardZoom()">
+</div>
+
+<div class="lightbox" id="lightbox">
+    <button class="lb-close" type="button" onclick="lbClose()" aria-label="Kapat">✕</button>
+    <button class="lb-arrow prev" type="button" id="lbPrev" onclick="lbNav(-1)" aria-label="Önceki">‹</button>
+    <img id="lbImg" src="" alt="Tur fotoğrafı">
+    <button class="lb-arrow next" type="button" id="lbNext" onclick="lbNav(1)" aria-label="Sonraki">›</button>
+    <div class="lb-count" id="lbCount"></div>
+</div>
+
+
+<script>
+/* =====================================================================
+   VERİ VE YARDIMCI FONKSİYONLAR
+   ===================================================================== */
+var PHONE = "905536082982";
+
+function load(key, def) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch (e) { return false; } }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function fmtTL(n) { return Number(n).toLocaleString('tr-TR') + ' ₺'; }
+function $(id) { return document.getElementById(id); }
+
+var toastTimer;
+function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.style.display = 'block';
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.style.display = 'none'; }, 3000);
+}
+
+var packages = load('altr_packages', [
+    { id: 1, name: "Taşların Hikayesi: Afyon & Kütahya Turu", date: "27 Eylül 2026, Pazar", price: 2750, desc: "Afyon ve Kütahya'nın tarihi dokusunu keşfedin, termal sularda dinlenin.", tags: ["Günübirlik", "Kahvaltı Dahil"], active: true },
+    { id: 2, name: "Yedigöller Turu", date: "3 Ekim 2026, Cumartesi", price: 2600, desc: "Sonbaharın renklerine bürünen Yedigöller'de doğa yürüyüşü.", tags: ["Açık Büfe Kahvaltı", "AVM"], active: true },
+    { id: 3, name: "Batum Turu", date: "25-27 Eylül 2026", price: 11500, desc: "Piazza Meydanı, Batum Alfabe Kulesi ve daha fazlası. 2 Gece 3 Gün, otobüsle ulaşım.", tags: ["2 Gece 3 Gün", "Otobüsle Ulaşım"], active: true }
+]);
+var orders = load('altr_orders', []);
+var promos = load('altr_promos', []);
+packages.forEach(function (p) {
+    if (p.photo && !p.photos) p.photos = [p.photo];
+    if (!p.photos) p.photos = [];
+    if (!p.tags) p.tags = [];
+});
+
+/* Sayfa kilidi: açık pencere varken arka plan kaymasın */
+function updateScrollLock() {
+    var open = document.querySelector('.overlay.open, .lightbox.open, .cardzoom.open');
+    document.body.classList.toggle('noscroll', !!open);
+}
+
+/* =====================================================================
+   MENÜ
+   ===================================================================== */
+function closeMenu() { if (location.hash === '#menu') { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { } } $('menu').classList.remove('open'); $('menuBtn').setAttribute('aria-expanded', 'false'); }
+$('menuBtn').addEventListener('click', function (e) {
+    e.preventDefault(); e.stopPropagation();
+    if (location.hash === '#menu') history.replaceState(null, '', location.pathname + location.search);
+    var open = $('menu').classList.toggle('open');
+    this.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.addEventListener('click', function (e) {
+    if (!$('menu').contains(e.target) && e.target !== $('menuBtn')) closeMenu();
+});
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+        if ($('lightbox').classList.contains('open')) { lbClose(); return; }
+        if ($('cardZoom').classList.contains('open')) { closeCardZoom(); return; }
+        closeMenu();
+        var ovs = document.querySelectorAll('.overlay.open');
+        if (ovs.length) closeOverlay(ovs[ovs.length - 1].id);
+    } else if ($('lightbox').classList.contains('open')) {
+        if (e.key === 'ArrowLeft') lbNav(-1);
+        if (e.key === 'ArrowRight') lbNav(1);
+    }
+});
+function openContact() { $('contactOverlay').classList.add('open'); closeMenu(); updateScrollLock(); }
+
+/* =====================================================================
+   TUR KARTLARI
+   ===================================================================== */
+function childPriceOf(p) { var v = parseFloat(p.childPrice); return isNaN(v) ? p.price : v; }
+
+function photoGridHTML(photos) {
+    if (!photos.length) return '<div class="img" aria-hidden="true">🧭</div>';
+    if (photos.length === 1) {
+        return '<div class="img" style="background-image:url(\'' + photos[0] + '\');font-size:0" onclick="event.stopPropagation();openCardZoom(this.getAttribute(\'data-u\'))" data-u="' + photos[0] + '" role="img" aria-label="Tur fotoğrafı"></div>';
+    }
+    var shown = photos.slice(0, 6), rest = shown.slice(1);
+    return '<div class="img photo-grid-featured">' +
+        '<div class="photo-cell" style="background-image:url(\'' + shown[0] + '\')" data-u="' + shown[0] + '" onclick="event.stopPropagation();openCardZoom(this.getAttribute(\'data-u\'))"></div>' +
+        '<div class="photo-sub-row" style="grid-template-columns:repeat(' + rest.length + ',1fr)">' +
+        rest.map(function (u) { return '<div class="photo-cell" style="background-image:url(\'' + u + '\')" data-u="' + u + '" onclick="event.stopPropagation();openCardZoom(this.getAttribute(\'data-u\'))"></div>'; }).join('') +
+        '</div></div>';
+}
+function openCardZoom(url) { $('cardZoomImg').src = url; $('cardZoom').classList.add('open'); updateScrollLock(); }
+function closeCardZoom() { $('cardZoom').classList.remove('open'); updateScrollLock(); }
+
+function renderTours() {
+    var q = ($('qText').value || '').toLowerCase();
+    var sort = $('qSort').value;
+    var fromCity = $('qFromCity').value;
+
+    var list = packages.filter(function (p) {
+        return p.active &&
+            (p.name.toLowerCase().indexOf(q) > -1 || (p.desc || '').toLowerCase().indexOf(q) > -1 ||
+                (p.tags || []).join(' ').toLowerCase().indexOf(q) > -1) &&
+            (fromCity === '' || p.fromCity === fromCity);
+    });
+    if (sort === 'price-asc') list.sort(function (a, b) { return a.price - b.price; });
+    if (sort === 'price-desc') list.sort(function (a, b) { return b.price - a.price; });
+
+    $('toursGrid').innerHTML = list.map(function (p) {
+        return '<article class="card">' + photoGridHTML(p.photos) +
+            '<div class="body">' +
+            '<h3>' + esc(p.name) + '</h3>' +
+            '<div class="meta">📅 ' + esc(p.date) + '<br>📍 Kalkış: <span class="badge">' + esc(p.fromCity || 'Belirtilmedi') + '</span></div>' +
+            '<div class="meta">👶 Çocuk (7 yaş üstü): ' + fmtTL(childPriceOf(p)) + ' · 7 yaş altı ücretsiz</div>' +
+            '<div class="tags">' + p.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
+            '<div class="foot"><button class="btn outline" type="button" onclick="openTour(' + p.id + ')">Turu İncele</button>' +
+            '<span class="price">' + fmtTL(p.price) + '</span></div>' +
+            '</div></article>';
+    }).join('') || '<p class="empty">Seçtiğiniz kriterlere veya şehre uygun tur bulunamadı.</p>';
+}
+
+/* =====================================================================
+   TANITIM KUTUSU
+   ===================================================================== */
+function renderPromo() {
+    var container = $('promoContainer');
+    clearInterval(window._promoTimer);
+    if (!promos.length) { container.hidden = true; return; }
+    container.hidden = false;
+    window._promoIndex = 0;
+
+    $('promoSlides').innerHTML = promos.map(function (pr, i) {
+        return '<div class="promo-slide' + (i === 0 ? ' active' : '') + '" style="background-image:url(\'' + pr.photo + '\')"><div class="promo-caption">' + esc(pr.caption || '') + '</div></div>';
+    }).join('');
+    $('promoDynamicTitle').textContent = promos[0].leftText || 'ALTR Turizm Fırsatları';
+    $('promoDots').innerHTML = promos.length > 1 ? promos.map(function (_, i) { return '<span class="' + (i === 0 ? 'active' : '') + '"></span>'; }).join('') : '';
+    if (promos.length > 1) window._promoTimer = setInterval(promoStep, 4000);
+}
+function promoStep() {
+    if (!promos.length || document.hidden) return;
+    window._promoIndex = (window._promoIndex + 1) % promos.length;
+    var next = promos[window._promoIndex], el = $('promoDynamicTitle');
+    el.classList.add('fade-out');
+    setTimeout(function () { el.textContent = next.leftText || 'ALTR Turizm Fırsatları'; el.classList.remove('fade-out'); }, 400);
+    Array.prototype.forEach.call(document.querySelectorAll('.promo-slide'), function (s, i) { s.classList.toggle('active', i === window._promoIndex); });
+    Array.prototype.forEach.call(document.querySelectorAll('#promoDots span'), function (s, i) { s.classList.toggle('active', i === window._promoIndex); });
+}
+function promoClick() {
+    if (!promos.length) return;
+    var pr = promos[window._promoIndex || 0];
+    if (pr && pr.tourId && packages.some(function (p) { return p.id === pr.tourId; })) openTour(pr.tourId);
+}
+$('promoBox').addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); promoClick(); } });
+
+/* =====================================================================
+   TUR DETAYI
+   ===================================================================== */
+function openTour(id) {
+    var p = packages.find(function (x) { return x.id === id; });
+    if (!p) return;
+    var photos = p.photos || [];
+    window._tourPhotos = photos;
+    clearInterval(window._detailSliderTimer);
+
+    var slides = photos.length
+        ? photos.map(function (u, i) { return '<div class="detail-slide' + (i === 0 ? ' active' : '') + '" style="background-image:url(\'' + u + '\')"></div>'; }).join('')
+        : '<div class="detail-slide active">🧭 Görsel Yok</div>';
+
+    var waMsg = 'Merhaba, ' + p.name + ' (' + p.date + ') hakkında bilgi almak istiyorum.\nYetişkin: ' + p.price + ' TL, Çocuk (7 yaş üstü): ' + childPriceOf(p) + ' TL (7 yaş altı ücretsiz)';
+
+    $('tourDetailBody').innerHTML =
+        '<div class="ovheader"><button class="ov-back" type="button" onclick="closeOverlay(\'tourDetail\')" aria-label="Geri">‹</button>' +
+        '<span class="ov-title">Tur Detayı</span><button class="ov-home" type="button" onclick="goHome()">🏠 Ana Sayfa</button></div>' +
+        '<div class="detail-slider-container"' + (photos.length ? ' onclick="openLightbox(window._detailIdx||0)"' : '') + '><div class="detail-slider-track">' + slides + '</div></div>' +
+        '<div class="detail-anim-text-box"><div class="detail-dynamic-text trigger-fade">' + esc(p.animText || p.desc || '') + '</div></div>' +
+        '<h2 style="color:var(--navy);margin:.5rem 0 .25rem">' + esc(p.name) + '</h2>' +
+        '<p style="color:var(--muted);margin:0 0 .75rem">' + esc(p.desc) + '</p>' +
+        '<div class="info-row">📅 <b>' + esc(p.date) + '</b></div>' +
+        '<div class="info-row">📍 Kalkış: <b>' + esc(p.fromCity || 'Belirtilmedi') + '</b></div>' +
+        '<div class="info-row">💰 Yetişkin Kişi Başı <b>' + fmtTL(p.price) + '</b></div>' +
+        '<div class="info-row">👶 Çocuk (7 yaş üstü) Kişi Başı <b>' + fmtTL(childPriceOf(p)) + '</b> · 7 yaş altı ücretsiz</div>' +
+        '<div class="stickybar">' +
+        '<div><div class="note">Yetişkin Kişi Başı</div><div class="price">' + fmtTL(p.price) + '</div><div class="note">Çocuk (7 yaş üstü): ' + fmtTL(childPriceOf(p)) + '</div></div>' +
+        '<button class="btn block" type="button" onclick="openReservation(' + p.id + ')">Rezervasyon Yap</button>' +
+        '<button class="btn outline block" type="button" onclick="openJoin(' + p.id + ')">Tura Katıl</button>' +
+        '<div class="row"><a class="btn outline small" href="tel:+' + PHONE + '">📞 Ara</a>' +
+        '<a class="btn wa small" target="_blank" rel="noopener" href="https://wa.me/' + PHONE + '?text=' + encodeURIComponent(waMsg) + '">💬 WhatsApp</a></div>' +
+        '</div>';
+
+    $('tourDetail').classList.add('open');
+    $('tourDetail').scrollTop = 0;
+    updateScrollLock();
+    window._detailIdx = 0;
+
+    if (photos.length > 1) {
+        var cur = 0;
+        window._detailSliderTimer = setInterval(function () {
+            var els = document.querySelectorAll('.detail-slide');
+            if (!els.length || document.hidden) return;
+            els[cur].classList.remove('active'); els[cur].classList.add('exit');
+            cur = (cur + 1) % els.length;
+            window._detailIdx = cur;
+            els[cur].classList.remove('exit'); els[cur].classList.add('active');
+            setTimeout(function () { Array.prototype.forEach.call(els, function (s) { if (s !== els[cur]) s.classList.remove('exit'); }); }, 650);
+        }, 2500);
+    }
+}
+
+/* =====================================================================
+   LIGHTBOX (yakınlaştırma / kaydırma)
+   ===================================================================== */
+function dist(a, b) { return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); }
+function openLightbox(index) {
+    var ph = window._tourPhotos; if (!ph || !ph.length) return;
+    window._lbIndex = index || 0; window._lbScale = 1; window._lbX = 0; window._lbY = 0;
+    renderLightbox(); $('lightbox').classList.add('open'); updateScrollLock();
+}
+function renderLightbox() {
+    var ph = window._tourPhotos, img = $('lbImg');
+    img.src = ph[window._lbIndex];
+    var t = 'translate(-50%,-50%) translate(' + window._lbX + 'px,' + window._lbY + 'px) scale(' + window._lbScale + ')';
+    img.style.webkitTransform = t; img.style.transform = t;
+    $('lbCount').textContent = (window._lbIndex + 1) + ' / ' + ph.length;
+    var show = ph.length > 1 ? 'block' : 'none';
+    $('lbPrev').style.display = show; $('lbNext').style.display = show;
+}
+function lbClose() { $('lightbox').classList.remove('open'); updateScrollLock(); }
+function lbNav(d) {
+    var ph = window._tourPhotos;
+    window._lbIndex = (window._lbIndex + d + ph.length) % ph.length;
+    window._lbScale = 1; window._lbX = 0; window._lbY = 0; renderLightbox();
+}
+(function () {
+    var el = $('lbImg'), S = { sx: 0, sy: 0, px: 0, py: 0, pd: 0, ps: 1, last: 0, sw: 0 };
+    el.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) { S.pd = dist(e.touches[0], e.touches[1]); S.ps = window._lbScale; }
+        else if (e.touches.length === 1) {
+            S.sx = e.touches[0].clientX; S.sy = e.touches[0].clientY; S.px = window._lbX; S.py = window._lbY;
+            var now = Date.now();
+            if (now - S.last < 300) { window._lbScale = window._lbScale > 1 ? 1 : 2.5; window._lbX = 0; window._lbY = 0; renderLightbox(); S.last = 0; e.preventDefault(); return; }
+            S.last = now;
+        }
+    }, { passive: false });
+    el.addEventListener('touchmove', function (e) {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            window._lbScale = Math.min(4, Math.max(1, S.ps * (dist(e.touches[0], e.touches[1]) / S.pd)));
+            renderLightbox();
+        } else if (e.touches.length === 1) {
+            var dx = e.touches[0].clientX - S.sx, dy = e.touches[0].clientY - S.sy;
+            if (window._lbScale > 1) { e.preventDefault(); window._lbX = S.px + dx; window._lbY = S.py + dy; renderLightbox(); }
+            else S.sw = dx;
+        }
+    }, { passive: false });
+    el.addEventListener('touchend', function () {
+        if (window._lbScale <= 1 && Math.abs(S.sw) > 50) lbNav(S.sw < 0 ? 1 : -1);
+        S.sw = 0;
+        if (window._lbScale < 1.05) { window._lbScale = 1; window._lbX = 0; window._lbY = 0; renderLightbox(); }
+    }, { passive: true });
+})();
+
+/* =====================================================================
+   REZERVASYON / KATILIM
+   ===================================================================== */
+function over7Of(c) { return (c.child > 0 && c.ageMode === 'over') ? Math.min(Math.max(c.over7 || 0, 0), c.child) : 0; }
+function calcTotal(c) { return c.price * c.adult + c.childPrice * over7Of(c); }
+function childText(c) {
+    if (!c.child) return 'Çocuk: 0';
+    var o = over7Of(c);
+    return 'Çocuk: ' + c.child + ' (7 yaş altı: ' + (c.child - o) + ', 7 yaş üstü: ' + o + ')';
+}
+function childBlockHTML() {
+    return '<div class="counter"><span>Çocuk</span><div><button type="button" onclick="chg(\'child\',-1)" aria-label="Azalt">-</button><b id="childN">0</b><button type="button" onclick="chg(\'child\',1)" aria-label="Artır">+</button></div></div>' +
+        '<div class="formfield" id="childAgeBox" style="display:none"><label for="childAge">Çocuğun yaş durumu</label>' +
+        '<select id="childAge" onchange="setChildAge(this.value)"><option value="under">7 yaş altı</option><option value="over">7 yaş üstü</option></select></div>' +
+        '<div class="formfield" id="over7Box" style="display:none"><label for="over7Input">7 yaş üstü kaç çocuk var?</label>' +
+        '<input id="over7Input" type="number" inputmode="numeric" min="1" oninput="setOver7(this.value)" onchange="normOver7()"></div>';
+}
+function totalBlockHTML(p) {
+    return '<div class="box" style="background:var(--bg)">' +
+        '<div class="note">Yetişkin: ' + fmtTL(p.price) + ' · Çocuk (7 yaş üstü): ' + fmtTL(childPriceOf(p)) + ' · 7 yaş altı ücretsiz</div>' +
+        '<div id="totalDetail" class="note" style="margin-top:.4rem"></div>' +
+        '<p style="margin:.5rem 0 0">Toplam: <span class="price" id="totalP">' + fmtTL(p.price) + '</span></p></div>';
+}
+function initRes(p) {
+    window._resCount = { adult: 1, child: 0, price: p.price, childPrice: childPriceOf(p), ageMode: 'under', over7: 0 };
+    refreshRes();
+}
+function refreshRes() {
+    var c = window._resCount; if (!c) return;
+    function set(id, v) { var el = $(id); if (el) el.textContent = v; }
+    set('adultN', c.adult); set('childN', c.child);
+    if (c.child === 0) { c.ageMode = 'under'; c.over7 = 0; var sel = $('childAge'); if (sel) sel.value = 'under'; }
+    var ageBox = $('childAgeBox'); if (ageBox) ageBox.style.display = c.child > 0 ? 'block' : 'none';
+    var ob = $('over7Box'); if (ob) ob.style.display = (c.child > 0 && c.ageMode === 'over') ? 'block' : 'none';
+    var inp = $('over7Input');
+    if (inp) { inp.max = c.child; if (document.activeElement !== inp) inp.value = c.over7 || ''; }
+    var o = over7Of(c);
+    var parts = ['Yetişkin: ' + c.adult + ' × ' + fmtTL(c.price) + ' = ' + fmtTL(c.price * c.adult)];
+    if (o > 0) parts.push('7 yaş üstü çocuk: ' + o + ' × ' + fmtTL(c.childPrice) + ' = ' + fmtTL(c.childPrice * o));
+    if (c.child - o > 0) parts.push('7 yaş altı çocuk: ' + (c.child - o) + ' (ücretsiz)');
+    var det = $('totalDetail'); if (det) det.innerHTML = parts.join('<br>');
+    set('totalP', fmtTL(calcTotal(c)));
+}
+function setChildAge(v) {
+    var c = window._resCount; c.ageMode = v;
+    if (v === 'over' && (!c.over7 || c.over7 > c.child)) c.over7 = c.child;
+    refreshRes();
+}
+function setOver7(v) {
+    var c = window._resCount, n = parseInt(v, 10); if (isNaN(n)) n = 0;
+    c.over7 = Math.min(n, c.child); refreshRes();
+}
+function normOver7() {
+    var c = window._resCount; if (c.over7 < 1) c.over7 = 1;
+    c.over7 = Math.min(c.over7, c.child);
+    var inp = $('over7Input'); if (inp) inp.value = c.over7;
+    refreshRes();
+}
+function childInvalid(c) {
+    if (c.child > 0 && c.ageMode === 'over' && (!(c.over7 >= 1) || c.over7 > c.child)) { toast('Lütfen 7 yaş üstü çocuk sayısını girin.'); return true; }
+    return false;
+}
+function chg(type, d) {
+    var c = window._resCount, prev = c.child;
+    c[type] = Math.max(type === 'adult' ? 1 : 0, c[type] + d);
+    if (type === 'child' && c.ageMode === 'over') { if (c.over7 === prev || c.over7 > c.child) c.over7 = c.child; }
+    refreshRes();
+}
+function personFieldsHTML(p) {
+    return '<p><b>' + esc(p.name) + '</b> — ' + esc(p.date) + '</p>' +
+        '<div class="formfield"><label for="rName">Ad Soyad</label><input id="rName" autocomplete="name" value="' + esc(load('altr_last_name', '')) + '"></div>' +
+        '<div class="formfield"><label for="rPhone">Telefon</label><input id="rPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="05xx xxx xx xx" value="' + esc(load('altr_last_phone', '')) + '"></div>' +
+        '<div class="counter"><span>Yetişkin</span><div><button type="button" onclick="chg(\'adult\',-1)" aria-label="Azalt">-</button><b id="adultN">1</b><button type="button" onclick="chg(\'adult\',1)" aria-label="Artır">+</button></div></div>' +
+        childBlockHTML() + totalBlockHTML(p);
+}
+function openReservation(id) {
+    var p = packages.find(function (x) { return x.id === id; }); if (!p) return;
+    $('resBody').innerHTML = personFieldsHTML(p) +
+        '<button class="btn block" type="button" style="margin-bottom:.5rem" onclick="submitReservation(' + p.id + ')">Rezervasyon Talebini Gönder</button>' +
+        '<p class="note">Gönderince talebiniz WhatsApp veya telefon üzerinden de bize ulaşacak.</p>';
+    initRes(p);
+    $('resTitle').textContent = 'Rezervasyon';
+    $('resModal').classList.add('open'); $('resModal').scrollTop = 0; updateScrollLock();
+}
+function submitReservation(id) {
+    var p = packages.find(function (x) { return x.id === id; });
+    var name = $('rName').value.trim(), phone = $('rPhone').value.trim();
+    if (!name || !phone) { toast('Lütfen ad soyad ve telefon girin.'); return; }
+    var c = window._resCount; if (childInvalid(c)) return;
+    var total = calcTotal(c);
+    save('altr_last_name', name); save('altr_last_phone', phone);
+    orders.unshift({ id: Date.now(), tour: p.name, date: p.date, name: name, phone: phone, adult: c.adult, child: c.child, childOver: over7Of(c), total: total, status: 'beklemede' });
+    save('altr_orders', orders);
+    var msg = encodeURIComponent('Merhaba, ' + p.name + ' (' + p.date + ') için rezervasyon talebim var.\nAd Soyad: ' + name + '\nTelefon: ' + phone + '\nYetişkin: ' + c.adult + ', ' + childText(c) + '\nToplam: ' + total + ' TL');
+    var url = 'https://wa.me/' + PHONE + '?text=' + msg;
+    var w = window.open(url, '_blank');
+    if (w) { closeOverlay('resModal'); closeOverlay('tourDetail'); toast('Talebiniz alındı! WhatsApp üzerinden de iletebilirsiniz.'); }
+    else showWaStep(url, false, decodeURIComponent(msg));
+}
+function openJoin(id) {
+    var p = packages.find(function (x) { return x.id === id; }); if (!p) return;
+    $('resBody').innerHTML = personFieldsHTML(p) +
+        '<div class="formfield"><label>Ödeme Dekontu (isteğe bağlı)</label>' +
+        '<label class="btn outline file-btn block">🧾 Dekont Seç (Galeri / Dosya)<input type="file" id="joinReceipt" accept="image/*,application/pdf" onchange="joinReceiptChosen(this)"></label>' +
+        '<div id="joinReceiptInfo" class="note" style="margin-top:.4rem">Dekont yüklemezseniz yalnızca katılım isteğiniz gönderilir.</div></div>' +
+        '<button class="btn block" type="button" id="joinSendBtn" style="margin-bottom:.5rem" onclick="submitJoin(' + p.id + ')">Katılım İsteği Gönder</button>' +
+        '<p class="note">Dekont seçtiyseniz WhatsApp paylaşım ekranı açılır. Katılımcı bilgileriniz dekont görselinin üstüne otomatik eklenir; işletmenin sohbetini seçip gönderin.</p>';
+    initRes(p); window._joinFile = null;
+    $('resTitle').textContent = 'Tura Katıl';
+    $('resModal').classList.add('open'); $('resModal').scrollTop = 0; updateScrollLock();
+}
+function joinReceiptChosen(input) {
+    var f = input.files && input.files[0];
+    window._joinFile = f || null;
+    $('joinReceiptInfo').textContent = f ? ('Seçildi: ' + f.name) : 'Dekont yüklemezseniz yalnızca katılım isteğiniz gönderilir.';
+    $('joinSendBtn').textContent = f ? 'Dekont ile Katılım İsteği Gönder' : 'Katılım İsteği Gönder';
+}
+function submitJoin(id) {
+    var p = packages.find(function (x) { return x.id === id; });
+    var name = $('rName').value.trim(), phone = $('rPhone').value.trim();
+    if (!name || !phone) { toast('Lütfen ad soyad ve telefon girin.'); return; }
+    var c = window._resCount; if (childInvalid(c)) return;
+    var total = calcTotal(c), file = window._joinFile;
+    save('altr_last_name', name); save('altr_last_phone', phone);
+    orders.unshift({ id: Date.now(), tour: p.name, date: p.date, name: name, phone: phone, adult: c.adult, child: c.child, childOver: over7Of(c), total: total, status: file ? 'dekontlu katılım' : 'katılım isteği' });
+    save('altr_orders', orders);
+    var text = 'Merhaba, ' + p.name + ' (' + p.date + ') turuna katılmak istiyorum.\nAd Soyad: ' + name + '\nTelefon: ' + phone + '\nYetişkin: ' + c.adult + ', ' + childText(c) + '\nToplam: ' + total + ' TL\nÖdeme dekontu: ' + (file ? 'ekte' : 'henüz yüklenmedi');
+    var url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text);
+    var done = function () { closeOverlay('resModal'); closeOverlay('tourDetail'); };
+
+    if (file && navigator.canShare) {
+        var lines = ['ALTR Turizm - Katılım Talebi', p.name + ' (' + p.date + ')', 'Ad Soyad: ' + name, 'Telefon: ' + phone, 'Yetişkin: ' + c.adult + ', ' + childText(c), 'Toplam: ' + total + ' TL'];
+        var base = (name + ' ' + phone + ' ' + p.name + ' ' + c.adult + ' yetiskin ' + c.child + ' cocuk').replace(/[\\\/:*?"<>|\n]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 90);
+        window._pend = { text: text, file: file, lines: lines, url: url, base: base, done: done };
+        showShareStep(); return;
+    }
+    if (file) { showWaStep(url, true, text); return; }
+    var w = window.open(url, '_blank');
+    if (w) { done(); toast("Katılım isteğiniz WhatsApp'a iletildi."); }
+    else showWaStep(url, false, text);
+}
+function showShareStep() {
+    var P = window._pend;
+    $('resBody').innerHTML =
+        '<h3 style="color:var(--navy);margin:.25rem 0 .5rem">İki kısa adım kaldı</h3>' +
+        '<p class="note" style="margin:0 0 .9rem">WhatsApp, dosya gönderirken açıklama satırını dışarıdan doldurmaya izin vermiyor. Bu yüzden bilgileriniz ve dekontunuz art arda gönderilir.</p>' +
+        '<div class="box"><b>1) Bilgilerinizi gönderin</b><p class="note" style="margin:.25rem 0 .6rem">Mesaj hazır gelir, sadece Gönder\'e basın. Sonra bu sayfaya geri dönün.</p>' +
+        '<a class="btn wa block" href="' + esc(P.url) + '" target="_blank" rel="noopener">💬 Bilgileri WhatsApp\'ta Gönder</a></div>' +
+        '<div class="box"><b>2) Dekontunuzu gönderin</b><p class="note" style="margin:.25rem 0 .6rem">Paylaşım ekranında WhatsApp\'ı ve işletmenin sohbetini seçin.</p>' +
+        '<button class="btn block" type="button" onclick="doShare()">🧾 Dekontu Gönder</button></div>' +
+        '<div class="box"><b>Ya da e-posta ile</b><p class="note" style="margin:.25rem 0 .6rem">Bilgiler mesaj olarak hazır gelir. E-postaya dosya otomatik eklenemez; dekontu "Dekontu Gönder" ile Gmail\'i seçerek ya da 📎 ile ekleyin.</p>' +
+        '<a class="btn outline block" href="mailto:sanattarekip@gmail.com?subject=' + encodeURIComponent('Katılım Talebi - ' + P.base) + '&body=' + encodeURIComponent(P.text) + '">✉️ E-posta ile Bilgileri Gönder</a></div>';
+}
+function doShare() {
+    var P = window._pend; if (!P) return;
+    var ext = ((P.file.name.split('.').pop()) || '').toLowerCase();
+    var prep = P.file.type.indexOf('image/') === 0 ? buildReceiptImage(P.file, P.lines).catch(function () { return P.file; }) : Promise.resolve(P.file);
+    prep.then(function (f) {
+        var e2 = (f !== P.file) ? 'jpg' : ((ext && ext.length < 6) ? ext : 'pdf');
+        var nf = new File([f], P.base + '.' + e2, { type: f.type || P.file.type });
+        var data = { files: [nf], title: 'Katılım Talebi - ' + P.base, text: P.text };
+        if (!navigator.canShare(data)) throw new Error('nosupport');
+        return navigator.share(data);
+    }).then(function () { P.done(); toast('Dekont paylaşıldı.'); })
+      .catch(function (err) {
+        if (err && err.name === 'AbortError') { toast('Gönderim iptal edildi. Tekrar deneyebilirsiniz.'); return; }
+        toast("Paylaşım açılamadı. WhatsApp sohbetinde 📎 ile dekontu ekleyin.");
+    });
+}
+function buildReceiptImage(file, lines) {
+    return new Promise(function (resolve, reject) {
+        var objUrl = URL.createObjectURL(file), img = new Image();
+        img.onload = function () {
+            try {
+                var W = 1000, pad = 28, fs = 34, lh = 46;
+                var scale = Math.min(1, W / img.width);
+                var iw = Math.round(img.width * scale), ih = Math.round(img.height * scale);
+                if (iw < W) { ih = Math.round(ih * (W / iw)); iw = W; }
+                ih = Math.min(ih, 2600);
+                var probe = document.createElement('canvas').getContext('2d');
+                probe.font = 'bold ' + fs + 'px sans-serif';
+                var wrapped = [];
+                lines.forEach(function (t) {
+                    var cur = '';
+                    t.split(' ').forEach(function (w) {
+                        var test = cur ? cur + ' ' + w : w;
+                        if (probe.measureText(test).width > W - pad * 2 && cur) { wrapped.push(cur); cur = w; } else cur = test;
+                    });
+                    wrapped.push(cur);
+                });
+                var headH = pad * 2 + wrapped.length * lh;
+                var cv = document.createElement('canvas'); cv.width = W; cv.height = headH + ih;
+                var cx = cv.getContext('2d');
+                cx.fillStyle = '#ffffff'; cx.fillRect(0, 0, W, cv.height);
+                cx.fillStyle = '#0d2b4e'; cx.fillRect(0, 0, W, headH);
+                cx.fillStyle = '#ffffff'; cx.font = 'bold ' + fs + 'px sans-serif'; cx.textBaseline = 'top';
+                wrapped.forEach(function (t, i) { cx.fillText(t, pad, pad + i * lh); });
+                cx.drawImage(img, 0, headH, W, ih);
+                cv.toBlob(function (b) {
+                    URL.revokeObjectURL(objUrl);
+                    if (!b) { reject(new Error('blob')); return; }
+                    resolve(new File([b], 'katilim_dekont.jpg', { type: 'image/jpeg' }));
+                }, 'image/jpeg', 0.9);
+            } catch (e) { reject(e); }
+        };
+        img.onerror = function () { URL.revokeObjectURL(objUrl); reject(new Error('img')); };
+        img.src = objUrl;
+    });
+}
+function showWaStep(url, hasFile, text) {
+    window._waText = text;
+    $('resBody').innerHTML =
+        '<div style="text-align:center;padding:.6rem 0"><div style="font-size:2.2rem">✅</div>' +
+        '<h3 style="color:var(--navy);margin:.4rem 0">Talebiniz kaydedildi</h3>' +
+        '<p style="color:var(--muted)">' + (hasFile
+            ? "Dekont otomatik eklenemedi. 1) Aşağıdaki yeşil butonla WhatsApp'ı açıp mesajı gönderin. 2) Sohbette 📎 ile dekont fotoğrafını ekleyip gönderin."
+            : 'WhatsApp otomatik açılamadı. Aşağıdaki yeşil butona dokunarak mesajı gönderin.') + '</p>' +
+        '<a class="btn wa block" style="margin:.9rem 0" href="' + esc(url) + '" target="_blank" rel="noopener">💬 WhatsApp\'ı Aç ve Mesajı Gönder</a>' +
+        '<button class="btn outline block" type="button" onclick="copyWaText()">📋 Mesajı Kopyala</button></div>';
+}
+function copyWaText() {
+    var t = window._waText || '';
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { toast('Mesaj kopyalandı.'); }, function () { toast('Kopyalanamadı.'); });
+    else toast('Kopyalama desteklenmiyor.');
+}
+
+/* =====================================================================
+   PENCERE YÖNETİMİ
+   ===================================================================== */
+function closeOverlay(id) {
+    $(id).classList.remove('open');
+    if (id === 'tourDetail') clearInterval(window._detailSliderTimer);
+    updateScrollLock();
+}
+function goHome() {
+    ['tourDetail', 'resModal', 'adminOverlay', 'contactOverlay'].forEach(function (id) { $(id).classList.remove('open'); });
+    clearInterval(window._detailSliderTimer);
+    closeMenu(); updateScrollLock();
+    window.scrollTo(0, 0);
+}
+
+/* =====================================================================
+   YÖNETİM PANELİ
+   ===================================================================== */
+function openAdmin() {
+    renderAdminPkg(); renderAdminOrd(); renderAdminPromo();
+    $('adminOverlay').classList.add('open'); $('adminOverlay').scrollTop = 0; closeMenu(); updateScrollLock();
+}
+function switchAdminTab(t) {
+    Array.prototype.forEach.call(document.querySelectorAll('#adminOverlay .tab'), function (x) { x.classList.toggle('active', x.getAttribute('data-t') === t); });
+    ['pkg', 'ord', 'promo', 'ended'].forEach(function (k) { $('admin-' + k).classList.toggle('active', k === t); });
+}
+
+function renderAdminPkg() {
+    var active = packages.filter(function (p) { return p.active; });
+    var ended = packages.filter(function (p) { return !p.active; });
+
+    function row(p) {
+        return '<div class="info-row" style="gap:.75rem;padding:.75rem 0;align-items:flex-start">' +
+            '<input type="checkbox" class="pkg-select-chk" value="' + p.id + '" style="width:1.15rem;height:1.15rem;margin-top:.3rem" aria-label="Seç">' +
+            '<div style="flex:1;min-width:0"><b>' + esc(p.name) + '</b><br>' +
+            '<span class="note">' + esc(p.date) + ' · Yetişkin ' + fmtTL(p.price) + ' · Çocuk ' + fmtTL(childPriceOf(p)) + ' · 📍 ' + esc(p.fromCity || 'Belirtilmedi') + '</span>' +
+            (!p.active ? '<br><span class="badge">Sonlandırıldı</span>' : '') +
+            '<div class="note" style="margin-top:.4rem">' + (p.photos && p.photos.length ? '📷 ' + p.photos.length + ' fotoğraf — ' : '') +
+            '<span class="file-btn" style="color:var(--blue);text-decoration:underline;cursor:pointer;display:inline-block">Fotoğraf Ekle' +
+            '<input type="file" accept="image/*" multiple onchange="handleExistingPhotos(' + p.id + ', this)"></span></div></div>' +
+            '<div style="flex-shrink:0">' + (p.active
+                ? '<button class="btn outline small" type="button" onclick="endPackage(' + p.id + ')">Sonlandır</button>'
+                : '<button class="btn outline small" type="button" onclick="reactivatePackage(' + p.id + ')">Yeniden Aç</button>') + '</div></div>';
+    }
+    function header(target) {
+        return '<div style="margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px dashed var(--line);display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap">' +
+            '<label style="font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;cursor:pointer"><input type="checkbox" data-target="' + target + '" onclick="toggleAll(this,\'pkg-select-chk\')" style="width:1.05rem;height:1.05rem"> Tümünü Seç</label>' +
+            '<button class="btn danger small" type="button" onclick="deleteSelectedPackages()">🗑️ Seçilenleri Kalıcı Olarak Sil</button></div>';
+    }
+    $('adminPkgList').innerHTML = header('activeAdminList') +
+        '<h4 style="margin:0 0 .4rem;color:var(--navy)">Aktif Turlar (' + active.length + ')</h4>' +
+        '<div id="activeAdminList">' + (active.map(row).join('') || '<p class="note">Aktif tur bulunmuyor.</p>') + '</div>';
+    $('adminEndedPkgList').innerHTML = header('endedAdminList') +
+        '<h4 style="margin:0 0 .4rem;color:#7a5b00">Sonlandırılmış Turlar (' + ended.length + ')</h4>' +
+        '<div id="endedAdminList">' + (ended.map(row).join('') || '<p class="note">Sonlandırılmış tur bulunmuyor.</p>') + '</div>';
+}
+function toggleAll(master, cls) {
+    var box = master.getAttribute('data-target') ? $(master.getAttribute('data-target')) : master.closest('.tabpane');
+    if (!box) return;
+    Array.prototype.forEach.call(box.querySelectorAll('.' + cls), function (c) { c.checked = master.checked; });
+}
+function deleteSelectedPackages() {
+    var pane = document.querySelector('#adminOverlay .tabpane.active');
+    var checked = pane.querySelectorAll('.pkg-select-chk:checked');
+    if (!checked.length) { toast('Lütfen silmek istediğiniz turları kutucuklardan seçin.'); return; }
+    if (confirm(checked.length + ' adet tur paketini kalıcı olarak silmek istediğinize emin misiniz? Bu işlem geri alınamaz.')) {
+        var ids = Array.prototype.map.call(checked, function (c) { return parseInt(c.value, 10); });
+        packages = packages.filter(function (p) { return ids.indexOf(p.id) === -1; });
+        promos = promos.filter(function (pr) { return ids.indexOf(pr.tourId) === -1; });
+        save('altr_packages', packages); save('altr_promos', promos);
+        renderAdminPkg(); renderAdminPromo(); renderTours(); renderPromo();
+        toast('Seçilen tur paketleri kalıcı olarak silindi.');
+    }
+}
+function endPackage(id) {
+    var p = packages.find(function (x) { return x.id === id; }); if (!p) return;
+    p.active = false; save('altr_packages', packages);
+    renderAdminPkg(); renderAdminPromo(); renderTours(); toast('Paket sonlandırıldı ve ilgili sekmeye taşındı.');
+}
+function reactivatePackage(id) {
+    var p = packages.find(function (x) { return x.id === id; }); if (!p) return;
+    p.active = true; save('altr_packages', packages);
+    renderAdminPkg(); renderAdminPromo(); renderTours(); toast('Paket yeniden yayına alındı.');
+}
+
+function resizeImage(file, maxW, quality) {
+    return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var img = new Image();
+            img.onload = function () {
+                var scale = Math.min(1, maxW / img.width);
+                var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+                var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+                cv.getContext('2d').drawImage(img, 0, 0, w, h);
+                resolve(cv.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = reject; img.src = e.target.result;
+        };
+        reader.onerror = reject; reader.readAsDataURL(file);
+    });
+}
+var npPhotosBuffer = [];
+async function resizeAll(files) {
+    var out = [];
+    for (var i = 0; i < files.length; i++) { try { out.push(await resizeImage(files[i], 700, 0.6)); } catch (e) { } }
+    return out;
+}
+async function handleNewPhotos(input) {
+    var files = Array.prototype.slice.call(input.files || []); if (!files.length) return;
+    var r = await resizeAll(files);
+    if (!r.length) { toast('Fotoğraflar işlenemedi.'); return; }
+    npPhotosBuffer = npPhotosBuffer.concat(r);
+    $('npPhotoPreview').textContent = npPhotosBuffer.length + ' fotoğraf seçildi';
+    input.value = '';
+}
+async function handleExistingPhotos(id, input) {
+    var files = Array.prototype.slice.call(input.files || []); if (!files.length) return;
+    var r = await resizeAll(files);
+    if (!r.length) { toast('Fotoğraflar işlenemedi.'); return; }
+    var p = packages.find(function (x) { return x.id === id; });
+    p.photos = (p.photos || []).concat(r);
+    if (!save('altr_packages', packages)) toast('Depolama alanı doldu.');
+    else toast('Fotoğraflar eklendi.');
+    renderAdminPkg(); renderTours(); input.value = '';
+}
+function addPackage() {
+    var name = $('npName').value.trim(), date = $('npDate').value.trim();
+    var price = parseFloat($('npPrice').value), childRaw = parseFloat($('npChildPrice').value);
+    var desc = $('npDesc').value.trim(), animText = $('npAnimText').value.trim(), fromCity = $('npFromCity').value;
+    var tags = $('npTags').value.split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+    if (!name || !date || !price || !fromCity) { toast('Lütfen şehir dahil tüm temel alanları doldurun.'); return; }
+    packages.unshift({ id: Date.now(), name: name, date: date, price: price, childPrice: isNaN(childRaw) ? price : childRaw, desc: desc, animText: animText, fromCity: fromCity, tags: tags, active: true, photos: npPhotosBuffer.slice() });
+    if (!save('altr_packages', packages)) toast('Depolama alanı doldu, daha az/küçük fotoğraf deneyin.');
+    else toast('Yeni paket başarıyla yayınlandı.');
+    ['npName', 'npDate', 'npDesc', 'npPrice', 'npChildPrice', 'npAnimText', 'npTags', 'npFromCity'].forEach(function (i) { $(i).value = ''; });
+    npPhotosBuffer = []; $('npPhotoPreview').textContent = '';
+    renderAdminPkg(); renderAdminPromo(); renderTours();
+}
+
+function renderAdminOrd() {
+    var box = $('adminOrdList');
+    if (!orders.length) { box.innerHTML = '<p class="note" style="padding:.6rem 0">Henüz rezervasyon talebi yok.</p>'; return; }
+    box.innerHTML =
+        '<div style="margin-bottom:1rem;padding-bottom:.75rem;border-bottom:2px dashed var(--line);display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap">' +
+        '<label style="font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;cursor:pointer"><input type="checkbox" data-target="ordersAdminItemsList" onclick="toggleAll(this,\'order-select-chk\')" style="width:1.05rem;height:1.05rem"> Tümünü Seç</label>' +
+        '<button class="btn danger small" type="button" onclick="deleteSelectedOrders()">🗑️ Seçili Siparişleri Sil</button></div>' +
+        '<div id="ordersAdminItemsList">' + orders.map(function (o) {
+            return '<div class="info-row" style="gap:.75rem;padding:.75rem 0;align-items:flex-start">' +
+                '<input type="checkbox" class="order-select-chk" value="' + o.id + '" style="width:1.15rem;height:1.15rem;margin-top:.3rem" aria-label="Seç">' +
+                '<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:.6rem"><b>' + esc(o.tour) + '</b>' +
+                '<span class="badge ' + (o.status === 'tamamlandı' ? 'done' : '') + '">' + esc(o.status) + '</span></div>' +
+                '<span class="note" style="display:block;margin-top:.25rem">📅 ' + esc(o.date) + ' · 👤 ' + esc(o.name) + ' · 📞 <a href="tel:' + esc(o.phone) + '">' + esc(o.phone) + '</a><br>' +
+                '👥 ' + o.adult + ' yetişkin, ' + o.child + ' çocuk' + (o.childOver != null ? ' (7 yaş üstü: ' + o.childOver + ')' : '') + ' · 💰 <b>' + fmtTL(o.total) + '</b></span>' +
+                (o.status !== 'tamamlandı' ? '<button class="btn outline small" type="button" style="margin-top:.5rem" onclick="completeOrder(' + o.id + ')">✓ Tamamlandı Olarak İşaretle</button>' : '') +
+                '</div></div>';
+        }).join('') + '</div>';
+}
+function completeOrder(id) {
+    var o = orders.find(function (x) { return x.id === id; }); if (!o) return;
+    o.status = 'tamamlandı'; save('altr_orders', orders); renderAdminOrd();
+}
+function deleteSelectedOrders() {
+    var checked = document.querySelectorAll('.order-select-chk:checked');
+    if (!checked.length) { toast('Lütfen silmek istediğiniz rezervasyon taleplerini kutucuklardan seçin.'); return; }
+    if (confirm('Seçtiğiniz ' + checked.length + ' adet rezervasyon talebini kalıcı olarak silmek istediğinize emin misiniz?')) {
+        var ids = Array.prototype.map.call(checked, function (c) { return parseInt(c.value, 10); });
+        orders = orders.filter(function (o) { return ids.indexOf(o.id) === -1; });
+        save('altr_orders', orders); renderAdminOrd(); toast('Seçilen rezervasyon talepleri kalıcı olarak silindi.');
+    }
+}
+
+var npPromoPhoto = null;
+async function handlePromoPhoto(input) {
+    var file = input.files[0]; if (!file) return;
+    try { npPromoPhoto = await resizeImage(file, 1000, 0.65); $('npPromoPreview').textContent = 'Fotoğraf seçildi'; }
+    catch (e) { toast('Fotoğraf işlenemedi.'); }
+    input.value = '';
+}
+function addPromo() {
+    var checked = Array.prototype.map.call(document.querySelectorAll('.promoTourChk:checked'), function (c) { return parseInt(c.value, 10); });
+    var caption = $('npPromoCaption').value.trim(), leftText = $('npPromoLeftText').value.trim();
+    if (!npPromoPhoto || !checked.length || !leftText) { toast('Lütfen fotoğraf seçin, sol panel başlığını girin ve en az bir tur işaretleyin.'); return; }
+    checked.forEach(function (tourId, i) { promos.unshift({ id: Date.now() + i, photo: npPromoPhoto, caption: caption, leftText: leftText, tourId: tourId }); });
+    if (!save('altr_promos', promos)) toast('Depolama alanı doldu.'); else toast('Tanıtım eklendi.');
+    npPromoPhoto = null;
+    $('npPromoCaption').value = ''; $('npPromoLeftText').value = ''; $('npPromoPreview').textContent = '';
+    renderAdminPromo(); renderPromo();
+}
+function removePromo(id) {
+    promos = promos.filter(function (x) { return x.id !== id; });
+    save('altr_promos', promos); renderAdminPromo(); renderPromo(); toast('Tanıtım kaldırıldı.');
+}
+function renderAdminPromo() {
+    var active = packages.filter(function (p) { return p.active; });
+    $('npPromoTourList').innerHTML = active.length ? active.map(function (p) {
+        return '<label style="display:flex;align-items:center;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--line);cursor:pointer"><input type="checkbox" class="promoTourChk" value="' + p.id + '" style="width:1.1rem;height:1.1rem"> ' + esc(p.name) + '</label>';
+    }).join('') : '<p class="note">Aktif tur yok</p>';
+    $('adminPromoList').innerHTML = promos.length ? promos.map(function (pr) {
+        var tour = packages.find(function (x) { return x.id === pr.tourId; });
+        return '<div class="info-row" style="gap:.75rem;padding:.6rem 0">' +
+            '<div style="width:3.5rem;height:3.5rem;border-radius:8px;background:url(\'' + pr.photo + '\') center/cover;flex-shrink:0"></div>' +
+            '<div style="flex:1;min-width:0"><b>' + esc(pr.leftText || '(Slogan Yok)') + '</b><br><span class="note">' + (tour ? esc(tour.name) : 'Tur bulunamadı') + '</span></div>' +
+            '<button class="btn outline small" type="button" onclick="removePromo(' + pr.id + ')">Kaldır</button></div>';
+    }).join('') : '<p class="note">Henüz tanıtım eklenmedi.</p>';
+}
+
+/* WhatsApp yüzen butonu */
+$('waFloat').href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent('Merhaba, web siteniz üzerinden ulaşıyorum. Turlarınız hakkında bilgi alabilir miyim?');
+
+/* İlk çizim */
+renderTours();
+renderPromo();
+
+/* =====================================================================
+   PWA: simge üretimi, manifest, service worker, yükleme
+   ===================================================================== */
+function makeIcon(size) {
+    try {
+        var cv = document.createElement('canvas'); cv.width = cv.height = size;
+        var x = cv.getContext('2d');
+        x.fillStyle = '#0d2b4e'; x.fillRect(0, 0, size, size);
+        var g = x.createLinearGradient(0, 0, size, size); g.addColorStop(0, '#1f6fb2'); g.addColorStop(1, '#0d2b4e');
+        x.fillStyle = g; x.fillRect(0, 0, size, size);
+        x.fillStyle = '#ffffff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+        x.font = '800 ' + Math.round(size * 0.3) + 'px Arial, sans-serif'; x.fillText('ALTR', size / 2, size * 0.45);
+        x.font = '600 ' + Math.round(size * 0.14) + 'px Arial, sans-serif'; x.fillText('TURİZM', size / 2, size * 0.68);
+        return cv.toDataURL('image/png');
+    } catch (e) { return ''; }
+}
+(function initPWA() {
+    var icon180 = makeIcon(180);
+    if (icon180) $('appleIcon').href = icon180;
+
+    var isWeb = /^https?:$/.test(location.protocol);
+    if (isWeb) {
+        try {
+            var base = location.href.split('#')[0].split('?')[0];
+            var dir = base.substring(0, base.lastIndexOf('/') + 1);
+            var manifest = {
+                name: 'ALTR Turizm', short_name: 'ALTR Turizm',
+                description: 'Hüseyin ALTIER Gezi Kulübü - ALTR Turizm tur paketleri',
+                start_url: base, scope: dir, id: base,
+                display: 'standalone', orientation: 'portrait-primary', lang: 'tr',
+                background_color: '#0d2b4e', theme_color: '#0d2b4e',
+                icons: [
+                    { src: makeIcon(192), sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+                    { src: makeIcon(512), sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+                ]
+            };
+            var blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+            var link = document.createElement('link'); link.rel = 'manifest'; link.href = URL.createObjectURL(blob);
+            document.head.appendChild(link);
+        } catch (e) { }
+
+        /* Çevrimdışı çalışma: sw.js dosyası aynı klasörde ise etkinleşir (yoksa sessizce atlanır) */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () { }); });
+        }
+    }
+
+    /* Ana ekrana ekleme */
+    var deferred = null;
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; if (!standalone) $('installLink').hidden = false; });
+    window.addEventListener('appinstalled', function () { deferred = null; $('installLink').hidden = true; toast('Uygulama yüklendi.'); });
+    if (isIOS && !standalone) $('installLink').hidden = false;
+    window.installApp = function () {
+        closeMenu();
+        if (deferred) { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; $('installLink').hidden = true; }); }
+        else if (isIOS) toast('Safari\'de Paylaş (⬆︎) simgesine dokunup "Ana Ekrana Ekle"yi seçin.');
+        else toast('Tarayıcı menüsünden "Uygulamayı yükle" / "Ana ekrana ekle" seçeneğini kullanın.');
+    };
+})();
+
+window.addEventListener('offline', function () { toast('Çevrimdışısınız. Kayıtlı içerik gösteriliyor.'); });
+window.addEventListener('online', function () { toast('Tekrar çevrimiçisiniz.'); });
+</script>
+</body>
+</html>
