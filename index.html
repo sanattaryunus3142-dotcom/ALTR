@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d2b4e"><meta name="color-scheme" content="light dark">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="ALTER">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png">
+<title>ALTER Aracılık - Güvenli Lojistik Pazaryeri</title>
+<style>
+:root{color-scheme:light dark;--navy:#0d2b4e;--blue:#1f6fb2;--teal:#14b8c4;--bg:#f4f7fb;--card:#fff;--text:#16233a;--muted:#5b6b82;--line:#e2e8f0;--ok:#0f9d58;--bad:#ea4335;--bn:4.2rem}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1420;--card:#101c2c;--text:#eaf1fb;--muted:#93a4bd;--line:#22314a;--navy:#4fa3e0}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;scrollbar-width:thin}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:5rem}
+body{margin:0;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);padding:0 env(safe-area-inset-right) 0 env(safe-area-inset-left);overscroll-behavior-y:contain;touch-action:manipulation}
+header{display:block;padding:calc(.5rem + env(safe-area-inset-top)) 1rem .45rem;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:25}header #tabs{margin:.45rem 0 0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:.15rem}#tabs .btn{flex:none;white-space:nowrap}
+header .row{flex-wrap:nowrap}#who{max-width:9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logo{font-weight:850;font-size:1.3rem;color:var(--navy);white-space:nowrap}.logo em{font-style:normal;color:var(--teal)}
+main{max-width:72rem;margin:0 auto;padding:1rem 1rem calc(var(--bn) + env(safe-area-inset-bottom) + 1rem)}
+nav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+#atabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem}#atabs .btn{white-space:nowrap;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.3rem;min-height:48px;padding:.45rem 1.1rem;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer;text-decoration:none;-webkit-appearance:none}
+.btn:active{transform:scale(.97)}.btn.o{background:transparent;color:var(--blue)}.btn.t{background:var(--teal);border-color:var(--teal)}.btn.r{background:var(--bad);border-color:var(--bad)}.btn.g{background:var(--ok);border-color:var(--ok)}.btn.s{min-height:42px;padding:.3rem .85rem;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr));gap:.9rem}
+.card,.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;box-shadow:0 4px 15px rgba(0,0,0,.05)}
+.card{display:flex;flex-direction:column;gap:.5rem;font-size:.95rem}.row{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.badge{background:#e1f2fd;color:#0d4f86;padding:.15rem .6rem;border-radius:99px;font-size:.78rem;font-weight:700}.badge.ok{background:#e3f4ea;color:#1b7a45}
+.muted{color:var(--muted);font-size:.85rem}.price{font-size:1.2rem;font-weight:800;color:var(--ok)}
+label{display:block;font-size:.88rem;color:var(--muted);margin:.6rem 0 .25rem}
+input,select,textarea{width:100%;min-height:48px;padding:.55rem .75rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font-size:16px;font-family:inherit}
+textarea{resize:vertical;min-height:5rem}input[type=checkbox]{width:1.3rem;height:1.3rem;min-height:0;flex:none}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.sec{display:none}.sec.on{display:block}.ap{display:none}.ap.on{display:block}
+.chip{display:inline-flex;gap:.4rem;align-items:center;background:#e1f2fd;color:#0d4f86;padding:.35rem .7rem;border-radius:99px;font-size:.85rem;font-weight:600;margin:.3rem .3rem 0 0}.chip b{cursor:pointer;color:var(--bad);padding:0 .2rem}
+summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}details[open]>summary{margin-bottom:.4rem}
+.seg{display:flex;gap:.5rem;margin-bottom:.8rem}.seg button{flex:1;min-height:50px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--text);font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer}.seg button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+#inb{display:none;margin-bottom:.8rem;background:linear-gradient(135deg,#0d2b4e,#1f6fb2);color:#fff;border-radius:14px;padding:.8rem 1rem}
+dialog{border:none;border-radius:18px;padding:1.2rem;width:min(92vw,28rem);max-height:90vh;max-height:90dvh;overflow:auto;background:var(--card);color:var(--text);margin:auto}
+dialog::backdrop{background:rgba(5,12,24,.55)}dialog ol{padding-left:1.2rem;line-height:1.7}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--bn) + env(safe-area-inset-bottom) + .8rem);background:#16233a;color:#fff;padding:.75rem 1.1rem;border-radius:12px;display:none;z-index:99;max-width:92%;text-align:center}
+#alm{display:none;position:fixed;top:calc(.6rem + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(94%,26rem);background:#b3261e;color:#fff;border-radius:14px;padding:1rem;z-index:120;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:blink 1s infinite}
+@keyframes blink{50%{background:#e8453c}}#alm .btn{background:#fff;color:#b3261e;border-color:#fff}
+.fe{color:var(--bad);font-size:.78rem;line-height:1.3;margin-top:.2rem}.fe:empty{display:none}input.bad,select.bad{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.seg.s button{min-height:42px;font-size:.82rem;padding:0 .3rem}#toast.top{bottom:auto;top:calc(.8rem + env(safe-area-inset-top))}
+.alr{background:rgba(234,67,53,.1);border:2px solid var(--bad)}.alg{background:rgba(15,157,88,.1);border:2px solid var(--ok)}.alr .card{border-color:var(--bad);background:rgba(234,67,53,.06)}.pgreen .card{border-color:var(--ok);background:rgba(15,157,88,.07)}
+
+.cp summary{border:1px solid var(--line);border-radius:10px;padding:0 .75rem;background:var(--bg)}.cps{margin:.5rem 0}.cpl{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));max-height:15rem;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:.2rem;margin-bottom:.5rem}.ck{display:flex;gap:.5rem;align-items:center;margin:0;padding:.5rem .4rem;color:var(--text);font-size:.95rem;cursor:pointer}
+.fl{position:sticky;top:calc(var(--hh,3.5rem) + .4rem);z-index:20;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:.55rem;margin-bottom:.8rem}
+.fl-bar{display:flex;gap:.5rem;align-items:center}.fl-bar input{flex:1;min-width:0;min-height:44px}.fl-bar .btn{flex:none}
+.fl-body{max-height:62vh;max-height:62dvh;overflow:auto;margin-top:.6rem;padding-top:.3rem;border-top:1px solid var(--line)}
+#fbody,#abtn{display:none!important}.ov2{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:1rem;background:rgba(8,20,32,.5);}.ov2.on{display:flex}
+.pcard{width:100%;max-width:420px;max-height:92vh;overflow:auto;background:var(--card);color:var(--text);border-radius:22px;padding:1.4rem 1.2rem 1.1rem;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;animation:pop .22s ease-out}
+@keyframes pop{from{transform:translateY(14px) scale(.96);opacity:0}}
+.pcard .pic{width:58px;height:58px;margin:0 auto .6rem;border-radius:50%;background:rgba(20,184,196,.16);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+.pcard h3{margin:.1rem 0 .5rem;font-size:1.25rem}.pcard p{margin:.2rem 0 .8rem;line-height:1.55}
+.payamt{color:var(--teal);font-size:1.15em;white-space:nowrap}
+.payib{display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:rgba(127,127,127,.1);border:1px dashed var(--line);border-radius:12px;padding:.5rem .7rem;margin:.4rem 0 .9rem;font-weight:700;letter-spacing:.03em;word-break:break-all;text-align:left}
+.payacts{display:flex;gap:.6rem;align-items:stretch}.payacts .btn{flex:1}
+.wab{display:inline-flex;align-items:center;justify-content:center;flex:none;width:52px;min-height:48px;border-radius:12px;background:#25D366;border:2px solid #25D366;text-decoration:none}.wab svg{width:26px;height:26px;fill:#fff}.wab.s{width:44px;min-height:38px}
+.payx{background:none;border:0;color:var(--muted);margin-top:.7rem;padding:.4rem;font:inherit;cursor:pointer}
+.rerr{color:var(--bad);font-weight:600;min-height:1.3rem;margin:.3rem 0;font-size:.9rem}
+.card.pulse{animation:pls 1.1s 4}@keyframes pls{50%{box-shadow:0 0 0 4px var(--teal)}}.ctl{font-size:.8rem;font-weight:800;letter-spacing:.02em;padding:.3rem .6rem;border-radius:8px;margin:-.2rem 0 .1rem}.ctl.tw{background:rgba(31,111,178,.14);color:var(--blue)}.ctl.ld{background:rgba(20,184,196,.16);color:#0b8a94}header{background:rgba(255,255,255,0.9);background:color-mix(in srgb,var(--card) 90%,transparent);box-shadow:0 2px 16px rgba(13,43,78,.09);padding:calc(.3rem + env(safe-area-inset-top)) .7rem .35rem}
+.topnav{display:flex;align-items:center;gap:.25rem;min-height:54px}
+.topnav .logo{margin-right:auto;padding-left:.2rem}
+.nbtn{position:relative;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:46px;min-height:48px;padding:.2rem .5rem;border-radius:14px;border:0;background:transparent;color:var(--text);font:inherit;font-size:.62rem;font-weight:700;line-height:1.1;cursor:pointer;white-space:nowrap;transition:background .15s,transform .1s}
+.nbtn .ni{font-size:1.28rem;line-height:1}
+.nbtn:hover{background:rgba(31,111,178,.1)}.nbtn:active{transform:scale(.95)}
+.nbtn.on{background:rgba(31,111,178,.15);color:var(--blue)}
+#bb:not(.o){background:rgba(234,67,53,.12)}
+#bb .bcn{position:absolute;top:1px;right:1px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--bad);color:#fff;font-size:.66rem;display:flex;align-items:center;justify-content:center}
+#bb.o .bcn{display:none}
+.wholn{font-size:.74rem;color:var(--muted);padding:0 .25rem .1rem}.wholn:empty{display:none}
+@media(min-width:700px){.nbtn{flex-direction:row;gap:.4rem;font-size:.85rem;padding:.3rem .85rem;min-height:44px}.nbtn .ni{font-size:1.1rem}}
+@media(max-width:430px){.logo em{display:none}.nbtn{padding:.2rem .3rem;font-size:.58rem;min-width:42px}.topnav{gap:.1rem}}#tabs .alb{background:#ff8a1f;border-color:#ff8a1f;color:#fff}
+body:not([data-v=list]) #fcard{display:none}body[data-v=list] #pb,body[data-v=list] #inb{display:none!important}
+.fc{position:fixed;left:calc(.8rem + env(safe-area-inset-left));bottom:calc(.9rem + env(safe-area-inset-bottom));z-index:60;display:flex;flex-direction:column;gap:.6rem}
+.fcb{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35);text-decoration:none}.fcb svg{width:30px;height:30px;fill:#fff}.fcb.wa{background:#25D366}.fcb.ph{background:#1f6fb2}.fcb:active{transform:scale(.94)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+@media(max-width:600px){dialog{width:100%;max-width:100%;margin:auto 0 0;border-radius:20px 20px 0 0;padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));max-height:92vh;max-height:92dvh}}
+@media(max-width:480px){.f2{grid-template-columns:1fr}#who{display:none}.logo{font-size:1.15rem}}
+@media(min-width:769px){#toast{bottom:1.2rem}main{padding-bottom:2rem}.btn.s{min-height:38px}input,select,textarea{min-height:44px}.btn{min-height:44px}}
+@media(hover:hover){.btn:hover{filter:brightness(1.1)}.card:hover{box-shadow:0 8px 24px rgba(0,0,0,.12)}.seg button:hover{border-color:var(--blue)}}
+@media(display-mode:standalone){#inb,#ib{display:none!important}}
+@media(prefers-reduced-motion:reduce){#alm{animation:none}*{scroll-behavior:auto!important}}
+
+/* ============ ÇAĞDAŞ TASARIM KATMANI (yalnızca görünüm) ============ */
+:root{--ink:#0b1b2e;--navy:#0b1b2e;--blue:#1d5fd1;--teal:#0e9aa7;--amber:#f59e0b;--bg:#f2f5f9;--card:#fff;--text:#0f1d30;--muted:#62718a;--line:#e3e8f0;--ok:#0c8f55;--bad:#d93a2f;--r:18px;--sh:0 1px 2px rgba(11,27,46,.05),0 8px 24px -12px rgba(11,27,46,.18)}
+@media(prefers-color-scheme:dark){:root{--ink:#e8f0fb;--navy:#8dbbff;--blue:#4b87ee;--teal:#2cc3cf;--bg:#08111d;--card:#0f1c2d;--text:#e8f0fb;--muted:#8fa2bd;--line:#1e2e45;--ok:#31c283;--sh:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.7)}}
+body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.005em;-webkit-font-smoothing:antialiased;background:var(--bg)}
+h3{letter-spacing:-.02em;font-weight:800}
+/* üst çubuk */
+header{background:rgba(255,255,255,0.82);background:color-mix(in srgb,var(--card) 82%,transparent);border-bottom:1px solid rgba(226,232,240,0.7);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);box-shadow:none;}
+.logo{display:flex;align-items:center;gap:.5rem;font-weight:850;letter-spacing:-.03em;color:var(--ink)}
+.logo::before{content:"";width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--teal));box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 4px 10px -3px rgba(29,95,209,.55);flex:none}
+.logo em{color:var(--teal);font-weight:750}
+.nbtn{border-radius:12px;color:var(--text);font-weight:650}.nbtn:hover{background:rgba(31,111,178,0.09);background:color-mix(in srgb,var(--blue) 9%,transparent)}
+.nbtn.on{background:rgba(31,111,178,0.13);background:color-mix(in srgb,var(--blue) 13%,transparent);color:var(--blue)}
+#bb:not(.o){background:rgba(245,158,11,0.22);background:color-mix(in srgb,var(--amber) 22%,transparent)}
+#bb .bcn{background:var(--bad);box-shadow:0 0 0 2px var(--card)}
+/* sayfa sekmeleri: hap şeklinde segment */
+#tabs{gap:.4rem;padding:.15rem 0 .2rem}
+#tabs .btn,#atabs .btn{min-height:40px;padding:.3rem 1rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-weight:650;font-size:.9rem;box-shadow:none}
+#tabs .btn:not(.o),#atabs .btn:not(.o){background:var(--ink);border-color:var(--ink);color:var(--card)}
+#tabs .btn.alb{background:rgba(245,158,11,0.18);background:color-mix(in srgb,var(--amber) 18%,var(--card));border-color:rgba(245,158,11,0.55);border-color:color-mix(in srgb,var(--amber) 55%,var(--line));color:#8a4b00}
+@media(prefers-color-scheme:dark){#tabs .btn.alb{color:#ffc766}}
+.card .ctl.ld{background:rgba(31,111,178,0.11);background:color-mix(in srgb,var(--blue) 11%,transparent);color:var(--blue)}.card .ctl.tw{background:rgba(20,184,196,0.13);background:color-mix(in srgb,var(--teal) 13%,transparent);color:var(--teal)}
+/* butonlar */
+.btn{border-radius:14px;border:1.5px solid var(--blue);background:var(--blue);font-weight:700;letter-spacing:-.005em;box-shadow:0 6px 14px -8px rgba(31,111,178,0.85);box-shadow:0 6px 14px -8px color-mix(in srgb,var(--blue) 85%,transparent);transition:transform .12s,filter .15s,box-shadow .15s}
+.btn.o{background:rgba(31,111,178,0.06);background:color-mix(in srgb,var(--blue) 6%,transparent);color:var(--blue);border-color:rgba(31,111,178,0.28);border-color:color-mix(in srgb,var(--blue) 28%,var(--line));box-shadow:none}
+.btn.t{background:var(--teal);border-color:var(--teal);box-shadow:0 6px 14px -8px var(--teal)}
+.btn.g{background:var(--ok);border-color:var(--ok);box-shadow:0 6px 14px -8px var(--ok)}
+.btn.r{background:var(--bad);border-color:var(--bad);box-shadow:0 6px 14px -8px var(--bad)}
+.btn:active{transform:scale(.97)}
+/* arama çubuğu */
+.fl{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+#fq{min-height:54px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);box-shadow:var(--sh);padding:.6rem 1rem;font-size:1rem}
+/* formlar */
+input,select,textarea{border-radius:12px;border:1.5px solid var(--line);background:rgba(255,255,255,0.6);background:color-mix(in srgb,var(--card) 60%,var(--bg));transition:border-color .15s,box-shadow .15s,background .15s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);background:var(--card);box-shadow:0 0 0 4px rgba(31,111,178,0.18);box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 18%,transparent)}
+label{font-weight:600;color:var(--muted);font-size:.84rem}
+.box{border-radius:var(--r);border:1px solid var(--line);box-shadow:var(--sh);padding:1.1rem}
+.seg button{border-radius:14px;border:1.5px solid var(--line);font-weight:700}.seg button.on{background:var(--ink);border-color:var(--ink);color:var(--card)}
+.chip{background:rgba(31,111,178,0.1);background:color-mix(in srgb,var(--blue) 10%,transparent);color:var(--blue);border:1px solid rgba(31,111,178,0.22);border:1px solid color-mix(in srgb,var(--blue) 22%,transparent)}
+.badge{background:rgba(31,111,178,0.11);background:color-mix(in srgb,var(--blue) 11%,transparent);color:var(--blue);font-weight:700;padding:.2rem .65rem;font-size:.76rem}
+.badge.ok{background:rgba(15,157,88,0.12);background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok)}
+/* === İLAN KARTI: sevk irsaliyesi === */
+.grid{gap:1rem}
+.card{--ac:var(--blue);position:relative;border-radius:var(--r);padding:1.2rem 1.1rem 1.05rem;border:1px solid var(--line);box-shadow:var(--sh);gap:.6rem;overflow:visible;transition:box-shadow .2s,transform .2s}
+.card.tow{--ac:var(--teal)}
+.card::before{content:"";position:absolute;top:-1px;left:1.1rem;right:1.1rem;height:4px;border-radius:0 0 6px 6px;background:var(--ac)}
+.card .idb{background:rgba(31,111,178,.12);background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac);font-variant-numeric:tabular-nums}
+.card .tyb{background:var(--bg);color:var(--text);border:1px solid var(--line);font-weight:650}
+.card .ctl{border-radius:10px;font-weight:750;letter-spacing:0;margin:0}
+.card .muted{line-height:1.5}
+.card b{font-weight:700}
+/* kopartma bölümü */
+.card>.row[style*="margin-top:auto"]{position:relative;margin-top:auto!important;padding-top:1rem;border-top:2px dashed var(--line);align-items:flex-end}
+.card>.row[style*="margin-top:auto"]::before,.card>.row[style*="margin-top:auto"]::after{content:"";position:absolute;top:-8px;width:14px;height:14px;border-radius:50%;background:var(--bg)}
+.card>.row[style*="margin-top:auto"]::before{left:calc(-1.1rem - 8px)}
+.card>.row[style*="margin-top:auto"]::after{right:calc(-1.1rem - 8px)}
+.price{font-size:1.55rem;font-weight:850;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.card .price+*,.card .muted+.price{margin-top:.1rem}
+.card>div[style*="dashed"]{border-top:1px dashed var(--line)!important}
+.card>div[style*="var(--bg)"]{background:rgba(31,111,178,.07)!important;background:color-mix(in srgb,var(--ac) 7%,var(--bg))!important;border-radius:12px!important;border-left:3px solid var(--ac)}
+@media(hover:hover){.card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(11,27,46,.06),0 18px 36px -16px rgba(11,27,46,.28)}.btn:hover{filter:none;transform:translateY(-1px)}.seg button:hover{border-color:var(--ink)}}
+.card.pulse{animation:pls 1.1s 4}@keyframes pls{50%{box-shadow:0 0 0 5px rgba(20,184,196,0.45);box-shadow:0 0 0 5px color-mix(in srgb,var(--teal) 45%,transparent)}}
+/* iletişim kutusu, bottom sheet */
+dialog{border-radius:26px;box-shadow:0 30px 80px -20px rgba(5,12,24,.55);padding:1.4rem 1.3rem}
+dialog::backdrop{background:rgba(6,14,26,.5);}
+@media(max-width:600px){dialog{border-radius:26px 26px 0 0}dialog::before{content:"";display:block;width:42px;height:5px;border-radius:3px;background:var(--line);margin:-.5rem auto .9rem}}
+/* ödeme kartı, toast, alarm */
+.pcard{border-radius:28px;box-shadow:0 30px 80px -20px rgba(5,12,24,.55);border:1px solid var(--line)}
+.pcard .pic{background:linear-gradient(135deg,rgba(31,111,178,0.18),rgba(20,184,196,0.22));background:linear-gradient(135deg,color-mix(in srgb,var(--blue) 18%,transparent),color-mix(in srgb,var(--teal) 22%,transparent))}
+.payib{border-radius:14px;border:1.5px dashed rgba(31,111,178,0.35);border:1.5px dashed color-mix(in srgb,var(--blue) 35%,var(--line));background:rgba(31,111,178,0.05);background:color-mix(in srgb,var(--blue) 5%,transparent)}
+.payamt{color:var(--blue)}
+#toast{background:var(--ink);color:var(--card);border-radius:14px;box-shadow:0 14px 32px -10px rgba(0,0,0,.5);font-weight:600}
+#alm{border-radius:20px;background:linear-gradient(135deg,#c7261d,#e8453c)}
+.fcb{box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}.fcb.ph{background:var(--ink)}
+@media(prefers-color-scheme:dark){.fcb.ph{background:var(--blue)}}
+:focus-visible{outline:3px solid rgba(20,184,196,0.7);outline:3px solid color-mix(in srgb,var(--teal) 70%,transparent);outline-offset:2px;border-radius:10px}
+@media(prefers-reduced-motion:reduce){.card,.btn{transition:none}.card:hover{transform:none}}
+/* ödeme doğrulama kutusu (yönetici) */
+.vbox{border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:.55rem .7rem;font-size:.85rem;background:rgba(245,158,11,0.08);background:color-mix(in srgb,var(--amber) 8%,var(--card))}
+.vbox.vg{border-left-color:var(--ok);background:rgba(15,157,88,0.09);background:color-mix(in srgb,var(--ok) 9%,var(--card))}
+.vbox.vr{border-left-color:var(--bad);background:rgba(234,67,53,0.08);background:color-mix(in srgb,var(--bad) 8%,var(--card))}
+.vr2{display:flex;justify-content:space-between;gap:.6rem;padding:.3rem 0;border-top:1px dashed var(--line);margin-top:.3rem;word-break:break-all}.vr2>span:last-child{text-align:right}
+/* ana sayfa hızlı işlem paneli */
+.hq{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:1rem;margin-bottom:1rem}
+.hq-h{display:flex;flex-direction:column;gap:.15rem;margin-bottom:.7rem}.hq-h b{font-size:1.1rem;letter-spacing:-.02em}
+.hq-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem}
+.hq-c{display:flex;flex-direction:column;gap:.5rem}.hq-t{font-weight:800;font-size:.92rem;color:var(--muted)}
+.hq-b{display:grid;grid-template-columns:auto 1fr;column-gap:.7rem;align-items:center;text-align:left;min-height:58px;padding:.45rem .8rem;border:1.5px solid var(--line);border-radius:14px;background:var(--bg);color:var(--text);font:inherit;cursor:pointer;width:100%}
+.hq-b span{grid-row:1/3;font-size:1.5rem}.hq-b b{font-weight:750}.hq-b small{color:var(--muted);font-size:.78rem}
+.hq-b:active{transform:scale(.98)}.hq-b.al{background:rgba(245,158,11,0.14);background:color-mix(in srgb,var(--amber) 14%,var(--card));border-color:rgba(245,158,11,0.5);border-color:color-mix(in srgb,var(--amber) 50%,var(--line))}
+@media(hover:hover){.hq-b:hover{border-color:var(--blue)}}
+.hq-f{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-top:.8rem;padding-top:.7rem;border-top:1px dashed var(--line);font-size:.88rem}
+.rnote{background:rgba(20,184,196,0.12);background:color-mix(in srgb,var(--teal) 12%,var(--card));border:1px solid rgba(20,184,196,0.35);border:1px solid color-mix(in srgb,var(--teal) 35%,var(--line));border-radius:12px;padding:.6rem .75rem;font-size:.88rem;line-height:1.45;margin:.3rem 0}
+body:not([data-v=list]) #hq,body:not([data-v=list]) #hqf,body:not([data-v=list]) #hqsp{display:none!important}
+/* yüzen "İlan ver · Alarm kur" butonu ve açılır menü */
+.hqf{position:fixed;z-index:58;top:calc(var(--hh,5rem) + .45rem);left:calc(.8rem + env(safe-area-inset-left));align-items:center;gap:.35rem;min-height:42px;padding:.35rem .95rem;border-radius:999px;border:1.5px solid rgba(31,111,178,0.3);border:1.5px solid color-mix(in srgb,var(--blue) 30%,var(--line));background:rgba(255,255,255,0.92);background:color-mix(in srgb,var(--card) 92%,transparent);color:var(--text);font:inherit;font-size:.86rem;font-weight:750;box-shadow:0 8px 22px -10px rgba(11,27,46,.45);cursor:pointer;white-space:nowrap}
+.hqf[aria-expanded=true]{background:var(--ink);border-color:var(--ink);color:var(--card)}.hqf:active{transform:scale(.97)}
+.hq{position:fixed;z-index:59;top:calc(var(--hh,5rem) + 3.4rem);left:calc(.8rem + env(safe-area-inset-left));width:min(calc(100vw - 1.6rem),21rem);max-height:calc(100vh - var(--hh,5rem) - 5rem);max-height:calc(100dvh - var(--hh,5rem) - 5rem);overflow:auto;margin:0;box-shadow:0 22px 50px -16px rgba(5,12,24,.55);animation:pop .18s ease-out}
+.hq .hq-g{grid-template-columns:1fr}
+header{background:rgba(255,255,255,0.96);background:color-mix(in srgb,var(--card) 96%,transparent)}.hqf{background:var(--card)}
+@media(min-width:900px){header{background:rgba(255,255,255,0.82);background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(14px);backdrop-filter:saturate(1.6) blur(14px)}}
+.capr{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}.capr .ctl{margin:0}.capr .ts{font-size:.78rem;font-variant-numeric:tabular-nums}
+body.hqon .fl{top:calc(var(--hh,3.5rem) + 3.3rem)}
+.ri{width:1.3em;height:1.3em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.28em}
+.ri .w{fill:var(--card,#fff)}
+.ctl{display:inline-flex;align-items:center;gap:.4rem}
+.hq-t{display:flex;align-items:center;gap:.45rem}
+.hq-b{display:block;grid-template-columns:none}.hq-b b,.hq-b small{display:block}
+.btn .ri{margin-right:.15rem}
+button,a,input,select,textarea,label,summary{touch-action:manipulation}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+input[type=search]{-webkit-appearance:none;appearance:none}
+.hq{z-index:70}.hqf{z-index:69}
+.hq-b{min-height:52px}
+
+#tabs{display:flex;align-items:center;gap:.4rem;overflow:visible!important}
+#tabs .tl{display:flex;gap:.4rem;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}#tabs .tl::-webkit-scrollbar{display:none}
+#tabs .btn.home{flex:none;margin-left:auto;background:#e3f1d2;border-color:#bfe09b;color:#2d5418}
+#tabs .btn.home.act{background:#c8e6a5;border-color:#9fcf6e}
+.acct{display:flex;flex-direction:column;align-items:stretch}
+@media(prefers-color-scheme:dark){#tabs .btn.home{background:rgba(147,197,114,.18);border-color:rgba(147,197,114,.45);color:#bfe3a0}#tabs .btn.home.act{background:rgba(147,197,114,.32)}}
+
+#tabs .btn.home{display:none}
+.nbtn.home{background:#e3f1d2;border:1px solid #bfe09b;color:#2d5418;border-radius:12px;margin-left:.2rem}
+.nbtn.home.act{background:#c8e6a5;border-color:#9fcf6e}
+.nbtn.home .ri{width:1.3rem;height:1.3rem}
+@media(prefers-color-scheme:dark){.nbtn.home{background:rgba(147,197,114,.18);border-color:rgba(147,197,114,.45);color:#bfe3a0}.nbtn.home.act{background:rgba(147,197,114,.32)}}
+@media(max-width:430px){.nbtn.home{min-width:46px;padding:.2rem .25rem}.topnav .nbtn{min-width:38px}.topnav .logo{font-size:1rem}}
+.pedit{float:right;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:.3rem .75rem;font-size:.78rem;font-weight:650;cursor:pointer;margin:-.2rem 0 0 .5rem}.acct .nbtn{flex-direction:column}
+</style></head>
+<body data-v="list">
+<header><div class="topnav">
+<button id="bb" class="nbtn o" style="display:none" onclick="openNotes()" aria-label="Bildirimler ve alarmlar"><span class="ni">🔔</span><span class="nl">Bildirimler</span><span class="bcn" id="bc">0</span></button>
+<div class="logo" style="cursor:pointer" onclick="show('list')">ALTER <em>Aracılık</em></div>
+<button id="ib" class="nbtn" onclick="installApp()" aria-label="Uygulamayı telefona indir"><span class="ni">📲</span><span class="nl">Telefona indir</span></button>
+<div id="acct" class="acct">
+<button id="lb" class="nbtn" onclick="authBtn()"><span class="ni" id="lbi">🔑</span><span class="nl" id="lbt">Giriş Yap</span></button></div>
+<button id="hmb" class="nbtn home" style="display:none" onclick="show('list')" aria-label="Ana Sayfa"><span class="ni"></span><span class="nl">Ana Sayfa</span></button>
+</div><div id="who" class="wholn"></div><nav id="tabs"></nav></header>
+<main>
+<div id="hqsp" style="display:none;height:2.5rem"></div>
+<div id="fcard" class="fl">
+ <div class="fl-bar"><input id="fq" type="search" placeholder="Ara: şehir, cins, kasa, açıklama..." oninput="loadListD()" enterkeyhint="search" autocomplete="off"><span id="fcn" hidden></span></div>
+ <div class="fl-body" id="fbody" style="display:none">
+  <div class="f2"><div><label>Tür</label><select id="fk"><option value="">Hepsi</option><option value="load">Yük ilanları</option><option value="tow">Boş araçlar</option></select></div><div><label>Sıralama</label><select id="fs"><option value="">Yeniden eskiye</option><option value="pa">Bedel ↑ (düşükten)</option><option value="pd">Bedel ↓ (yüksekten)</option><option value="wa">Ağırlık ↑</option><option value="wd">Ağırlık ↓</option></select></div></div>
+  <div id="cp_f"></div><div id="cp_v"></div>
+  <div class="f2"><div><label>Yük cinsi</label><select id="ft"></select></div><div><label>Kasa (dorse) tipi</label><select id="fv"></select></div></div>
+  <div class="f2"><div><label>Çekici tipi <span class="muted">(boş araç)</span></label><select id="fx"></select></div><div><label>Ödeme tercihi <span class="muted">(yük)</span></label><select id="fpt"></select></div></div>
+  <div class="f2"><div><label>Min. bedel (₺)</label><input id="fm" type="number" inputmode="numeric"></div><div><label>Max. bedel (₺)</label><input id="fM" type="number" inputmode="numeric"></div></div>
+  <div class="f2"><div><label>Yük ağırlığı min (ton)</label><input id="fw1" type="number" inputmode="decimal"></div><div><label>Yük ağırlığı max (ton)</label><input id="fw2" type="number" inputmode="decimal"></div></div>
+  <label>Araç kapasitesi min (ton) <span class="muted">(boş araç)</span></label><input id="fcap" type="number" inputmode="decimal">
+  <div class="f2"><div><label>Palet adedi min</label><input id="fp1" type="number" inputmode="numeric"></div><div><label>Palet adedi max</label><input id="fp2" type="number" inputmode="numeric"></div></div>
+  <div class="f2"><div><label>Yükleme tarihi: başlangıç</label><input id="fd1" type="date"></div><div><label>Yükleme tarihi: bitiş</label><input id="fd2" type="date"></div></div>
+  <label class="ck" style="padding-left:0"><input type="checkbox" id="fa"> Sadece ADR (tehlikeli madde)</label>
+  <div class="row" style="margin-top:.4rem"><button class="btn o s" onclick="clearF()">Temizle</button><button class="btn s" id="abtn" style="background:#ff8a1f;border-color:#ff8a1f" onclick="openAlarm()">🔔 Alarm kur</button><button class="btn o s" onclick="closeF()" aria-label="Kapat">✕ Kapat</button></div>
+ </div>
+</div>
+<button id="hqf" class="hqf" style="display:none" onclick="hqToggle()" aria-haspopup="true" aria-expanded="false" aria-controls="hq">İlan ver · 🔔 Alarm kur</button>
+<div id="hq" class="hq" style="display:none" role="menu">
+ <div class="hq-h"><b>Ne yapmak istiyorsunuz?</b><span class="muted">Üyelik ücretsiz: ilan verin, yük veya boş araç arayın, alarm kurun.</span></div>
+ <div class="hq-g">
+  <div class="hq-c"><div class="hq-t"><svg class="ri" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5v3.5h-7z"/><circle class="w" cx="7" cy="17.5" r="1.9"/><circle class="w" cx="17" cy="17.5" r="1.9"/></svg> Taşıyıcıyım</div>
+   <button class="hq-b" onclick="hqGo('find')"><b>Yük arıyorum</b><small>Açık yükleri görün, uygun olanı alın</small></button>
+   <button class="hq-b" onclick="hqGo('tow')"><b>Boş araç ilanı ver</b><small>Aracınızın bulunduğu yeri bildirin</small></button>
+   <button class="hq-b al" onclick="hqGo('aload')"><b>🔔 Yük arama alarmı kur</b><small>Uygun yük girince sesli uyarı alın</small></button></div>
+  <div class="hq-c"><div class="hq-t"><svg class="ri" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="6" width="19" height="12" rx="1.5"/><path d="M6.5 6v12M10.5 6v12M14.5 6v12M18.5 6v12"/></svg> Yük verenim</div>
+   <button class="hq-b" onclick="hqGo('post')"><b>Yük ilanı ver</b><small>Yükünüzü havuza ekleyin</small></button>
+   <button class="hq-b" onclick="hqGo('seek')"><b>Boş araç arıyorum</b><small>Boştaki araçları görün, talep edin</small></button>
+   <button class="hq-b al" onclick="hqGo('atow')"><b>🔔 Boş araç arama alarmı kur</b><small>Uygun araç girince sesli uyarı alın</small></button></div>
+ </div>
+ <div class="hq-f"><span>Üyelik ücretsiz ve 1 dakika sürer.</span><button class="btn s" onclick="hqClose();openReg()">Ücretsiz Üye Ol</button></div>
+</div>
+<div id="gb" class="box" style="display:none;margin-bottom:.8rem"><div class="row"><span><b>Ücretsiz üye olun</b><br><small class="muted">Yük bulun veya boş aracınızı bildirin.</small></span><button class="btn s" onclick="authBtn();regMode(true)">Ücretsiz Üye Ol</button></div></div>
+<div id="pb" class="box" style="display:none;cursor:pointer;margin-bottom:.8rem" onclick="show(this.dataset.t||'profile')"></div>
+<div id="inb"><div class="row"><span><b>Uygulamayı telefonuna ekle</b><br><small>Ana ekrandan tek dokunuşla aç.</small></span><span><button class="btn s" style="background:#fff;color:#0d2b4e;border-color:#fff" onclick="installApp()">İndir</button> <button class="btn s" style="background:transparent;border-color:#fff" onclick="hideInb()" aria-label="Kapat">✕</button></span></div></div>
+<div class="muted" style="margin-bottom:.6rem">Demo sürüm: veriler bu tarayıcıda saklanır, sunucu gerekmez.</div>
+<section id="v-list" class="sec on"><div id="fchip" style="margin-bottom:.5rem"></div><div class="grid" id="gridL"></div></section>
+
+
+
+<section id="v-new" class="sec"><div class="box" style="max-width:38rem">
+ <h3 style="margin:0">Yeni Yük İlanı</h3>
+ <div class="f2"><div><label>Kalkış İli</label><select id="nf"></select></div><div><label>Kalkış İlçe</label><input id="nfd"></div>
+ <div><label>Varış İli</label><select id="nt"></select></div><div><label>Varış İlçe</label><input id="ntd"></div></div>
+ <div class="f2"><div><label>En geç yükleme</label><input id="np" type="datetime-local"></div><div><label>En geç teslim</label><input id="nd" type="datetime-local"></div></div>
+ <label>Yükün özelliği (cins)</label><select id="ny"></select>
+ <label>Yük açıklaması / özellikleri <span style="color:var(--bad)">*</span></label><textarea id="nds" maxlength="500" rows="3" placeholder="Örn: 24 palet, toplam 18 ton, kırılabilir, istiflenemez, rampa yüklemesi var..."></textarea>
+ <div class="muted" style="font-size:.8rem">Telefon, e-posta, Instagram/Facebook adı ve link yazılamaz; otomatik ***** yapılır.</div>
+ <div class="f2"><div><label>Maksimum ağırlık (ton) *</label><input id="nw" type="number" step="0.1" inputmode="decimal"></div><div><label>Palet adedi</label><input id="npl" type="number" inputmode="numeric"></div></div>
+ <div class="f2"><div><label>Hacim (m³)</label><input id="nvl" type="number" inputmode="decimal"></div><div><label>Aranan kasa (dorse) tipi *</label><select id="nvh"></select></div></div>
+ <div class="f2"><div><label>Ödeme tercihi</label><select id="npt"></select></div><label style="display:flex;gap:.4rem;align-items:center;margin-top:1.6rem"><input type="checkbox" id="nadr"> ADR (tehlikeli madde)</label></div>
+ <div class="f2"><div><label>Navlun bedeli (₺)</label><input id="npr" type="number" inputmode="numeric" oninput="comm()"></div><div><label>Aracılık bedeli</label><div id="ncm" class="box" style="padding:.6rem;color:var(--teal);font-weight:700">0 ₺</div></div></div>
+ <div class="f2"><div><label>Telefon (onaya kadar gizli)</label><input id="nph" type="tel" placeholder="05xx xxx xx xx"></div><div><label>Açık adres (onaya kadar gizli)</label><input id="nad"></div></div>
+ <div class="muted" style="font-size:.8rem">İletişim bilgileri yalnızca yönetim onayından sonra karşı tarafa açılır.</div>
+ <button class="btn" style="width:100%;margin-top:1rem" onclick="submitLoad()">İlanı Havuzda Yayınla</button>
+</div></section>
+
+<section id="v-tow" class="sec"><div class="box" style="max-width:38rem">
+ <h3 style="margin:0">Boş Araç Bildirimi</h3>
+ <p class="muted">Aracınızın boşta beklediği yeri bildirin; yük verenler sizi görüp talep edebilir. Seçtiğiniz illerden birinde, kasa tipinize ve tonajınıza uygun yük girince (veya giriş yaptığınızda) alarm çalar.</p>
+ <label>Bulunduğu iller <span style="color:var(--bad)">*</span> <span class="muted">(birden fazla seçebilirsiniz)</span></label><div id="cp_t"></div>
+ <label>İlçe <span class="muted">(isteğe bağlı)</span></label><input id="tfd">
+ <label>Dorse (kasa) tipi <span style="color:var(--bad)">*</span></label><select id="ty"></select>
+ <label>Çekici tipi</label><select id="tx"></select>
+ <label>Kabul edebileceğim maksimum tonaj (ton) *</label><input id="ttn" type="number" step="0.1" inputmode="decimal">
+ <div class="f2"><div><label>Teklif bedeli (₺)</label><input id="tpr" type="number" inputmode="numeric" oninput="commT()"></div><div><label>Aracılık bedeli</label><div id="tcm" class="box" style="padding:.6rem;color:var(--teal);font-weight:700">0 ₺</div></div></div>
+ <div class="f2"><div><label>Telefon (onaya kadar gizli)</label><input id="tph" type="tel" placeholder="05xx xxx xx xx"></div><div><label>Açık adres (onaya kadar gizli)</label><input id="tad"></div></div>
+ <div class="muted" style="font-size:.8rem">İletişim bilgileri yalnızca yönetim onayından sonra karşı tarafa açılır.</div>
+ <button class="btn" style="width:100%;margin-top:1rem" onclick="submitTow()">Boş Araç Konumunu Yayınla</button>
+</div></section>
+
+<section id="v-profile" class="sec"><div style="max-width:38rem">
+ <div id="pst" class="box" style="margin-bottom:1rem"></div>
+ <div class="box" style="margin-bottom:1rem"><h3 style="margin:0">Üyelik bilgilerim</h3>
+  <div class="f2"><div><label>Ad</label><input id="pfn"><div class="fe" id="e_pfn"></div></div><div><label>Soyad</label><input id="pln"><div class="fe" id="e_pln"></div></div></div>
+  <label>Cep telefonu</label><input id="pph" type="tel" inputmode="tel" onblur="chkDup('p')"><div class="fe" id="e_pph"></div>
+  <label>E-posta adresi</label><input id="pem" type="email" inputmode="email" autocapitalize="none" onblur="chkDup('p')"><div class="fe" id="e_pem"></div>
+  <button class="btn" style="width:100%;margin-top:1rem" onclick="savePersonal()">Bilgilerimi Kaydet</button></div>
+ <div class="box" style="margin-bottom:1rem"><h3 style="margin:0">Firma bilgileri <span class="badge">isteğe bağlı</span></h3>
+  <label>Firma ünvanı</label><input id="pc" autocomplete="organization"><div class="fe" id="e_pc"></div>
+  <label>Vergi numarası (10 hane)</label><input id="pv" inputmode="numeric" maxlength="10" oninput="chkTax()"><div id="pvh" class="muted"></div><div class="fe" id="e_pv"></div>
+  <button class="btn" style="width:100%;margin-top:1rem" onclick="saveFirm()">Firma Bilgilerimi Kaydet</button></div>
+ <div class="box" id="tcbox" style="display:none;margin-bottom:1rem;border:2px solid #ff8a1f"><h3 style="margin:0">T.C. kimlik numarası <span class="badge">yönetici zorunlu kıldı</span></h3>
+  <label>T.C. kimlik no (11 hane)</label><input id="ptc" inputmode="numeric" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'')"><div class="fe" id="e_ptc"></div>
+  <button class="btn" style="width:100%;margin-top:.8rem" onclick="saveTC()">Kaydet</button></div>
+ <div class="box" id="dcbox" style="display:none;border:2px solid #ff8a1f"><h3 style="margin:0">Evrak menüsü <span class="badge">yönetici zorunlu kıldı</span></h3><div id="dcst" class="muted" style="margin:.4rem 0"></div><button class="btn o s" onclick="show('docs')">Belgelerim'e git</button></div>
+</div></section>
+
+
+<section id="v-mine" class="sec"><div class="seg"><button id="mt1" class="on" onclick="mineTab(0)">Devam eden işlemler</button><button id="mt2" onclick="mineTab(1)">Bitirilmiş operasyonlar <span id="mcn"></span></button></div>
+<div id="mtool" class="row" style="display:none;margin-bottom:.8rem"><label class="ck" style="padding-left:0"><input type="checkbox" id="mall" onchange="mineAll(this.checked)"> Tümünü seç</label><button id="mdel" class="btn r s" onclick="mineDel()">Seçilenleri sil</button></div>
+<div class="grid" id="mine"></div></section>
+
+<section id="v-docs" class="sec"><div class="box" style="max-width:32rem"><h3 style="margin:0">Belgelerim</h3><p class="muted">Yönetici evrak yüklemenizi zorunlu kıldı. Evraklarınızı yükleyin (jpg, png, pdf · en çok 5 MB).</p><div id="docs"></div></div></section>
+
+<section id="v-admin" class="sec">
+ <nav id="atabs"></nav>
+ <div class="ap on" id="a-g">
+  <div id="aPend" class="box" style="margin-bottom:1rem"></div>
+  <div class="grid" style="margin-bottom:1rem">
+   <div class="box"><div class="muted">Güvenli havuzdaki para</div><div id="aE" class="price" style="color:var(--navy)">0 ₺</div></div>
+   <div class="box"><div class="muted">Kazanılan komisyon</div><div id="aK" class="price" style="color:var(--teal)">0 ₺</div></div>
+   <div class="box"><div class="muted">Güncel komisyon oranı</div><div id="aRv" class="price">%10</div><button class="btn s" style="margin-top:.5rem" onclick="rateOpen()">Komisyonu belirle</button></div>
+  </div>
+  <div class="grid" style="margin-bottom:1rem" id="aSC"></div>
+  <h3>Alınan Ödemeler</h3><div class="grid pgreen" id="aPaid"></div>
+ </div>
+ <div class="ap" id="a-f"><div class="seg s" id="sf-f"></div><div id="aF" class="grid"></div></div>
+ <div class="ap" id="a-y"><h3>Yük İlanları</h3><div class="seg s" id="sf-y"></div><div id="afc-y"></div><div id="atool-y" class="row" style="display:none;margin:.2rem 0 .8rem"><label class="ck" style="padding-left:0"><input type="checkbox" id="aall-y" onchange="aSelAll('y',this.checked)"> Tümünü seç</label><button id="adel-y" class="btn r s" onclick="aDel('y')">Seçilenleri sil</button></div><div id="aY" class="grid"></div></div>
+ <div class="ap" id="a-t"><h3>Boş Araç İlanları</h3><div class="seg s" id="sf-t"></div><div id="afc-t"></div><div id="atool-t" class="row" style="display:none;margin:.2rem 0 .8rem"><label class="ck" style="padding-left:0"><input type="checkbox" id="aall-t" onchange="aSelAll('t',this.checked)"> Tümünü seç</label><button id="adel-t" class="btn r s" onclick="aDel('t')">Seçilenleri sil</button></div><div id="aT" class="grid"></div></div>
+ <div class="ap" id="a-d"><h3>Taşıyıcı Evrakları</h3><div id="aD" class="grid"></div></div>
+ <div class="ap" id="a-k"><h3>Ödeme Kontrolü</h3><p class="muted">Her işlem için özel kod, IBAN ve komisyon tutarı dekonttan otomatik okunur. Üçü eşleşirse ödeme otomatik onaylanır; eşleşmezse burada manuel kontrolünüzü bekler.</p><div class="box" id="bkb" style="margin:.5rem 0"><b>Banka bağlantısı (Google Sheets)</b><div class="muted" style="font-size:.8rem">Banka bildirimleriniz sayfadan okunur; kod + tutar eşleşirse ödeme otomatik onaylanır. Bilgiler yalnızca bu cihazda saklanır.</div>
+<label for="bkU">Apps Script web uygulaması adresi</label><input id="bkU" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="https://script.google.com/macros/s/.../exec">
+<label for="bkT">Gizli anahtar (TOKEN)</label><input id="bkT" type="password" autocomplete="off">
+<div class="row" style="margin-top:.4rem"><button class="btn s" onclick="bankSave()">Kaydet ve kontrol et</button><button class="btn o s" onclick="bankSync(true)">Şimdi kontrol et</button></div><div id="bkS" class="muted" style="margin-top:.3rem"></div></div>
+<div class="grid" id="aV"></div></div>
+</section>
+</main>
+<div class="fc"><a class="fcb wa" href="https://wa.me/905536082982?text=Merhaba%2C%20ALTER%20Arac%C4%B1l%C4%B1k%27tan%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener" aria-label="WhatsApp ile mesaj gönder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a><a class="fcb ph" href="tel:+905536082982" aria-label="Ara: 0553 608 29 82"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a></div>
+
+<div id="pay" class="ov2" onclick="if(event.target===this)payDismiss()"><div class="pcard" role="dialog" aria-modal="true" aria-labelledby="payT">
+ <h3 id="payT"></h3><p id="payP"></p>
+ <div class="payib"><span id="payIb"></span><button class="btn s o" onclick="copyIban()">Kopyala</button></div>
+ <div class="payib" style="margin-top:-.4rem"><span>Size özel kod: <b id="payRef" style="font-size:1.35rem;letter-spacing:.18em"></b></span><button class="btn s o" onclick="copyRef()">Kopyala</button></div>
+ <p style="margin:-.3rem 0 .8rem;font-size:.85rem;font-weight:600;color:var(--bad)">Lütfen size özel bu sayıyı havale açıklamasına, başka bir açıklama eklemeden yazın. Dekontunuz ve banka kaydı bu kod, tutar ve ad soyadınız üzerinden otomatik doğrulanır; biri uymazsa yönetici elle onaylar.</p>
+ <label for="payNm" style="text-align:left">Havaleyi yapan kişinin ad soyadı</label><input id="payNm" autocomplete="name" placeholder="Ad Soyad (bankadaki gibi)" style="margin-bottom:.2rem"><div id="payNe" class="rerr"></div>
+ <div class="payacts"><button class="btn t" onclick="payUp()">Dekont Yükle</button><a id="payW" class="wab" target="_blank" rel="noopener" aria-label="WhatsApp ile mesaj gönder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a></div>
+ <p id="payH" class="muted" style="font-size:.8rem;margin:.7rem 0 0"></p><button class="payx" onclick="payDismiss()">Vazgeç</button></div></div>
+<div id="rate" class="ov2" onclick="if(event.target===this)rateClose()"><div class="pcard" style="text-align:left" role="dialog" aria-modal="true">
+ <h3>Komisyonu belirle</h3>
+ <p class="muted" style="margin:.1rem 0 .7rem">Yeni kabul edilen işlerde uygulanacak komisyon oranı (%).</p>
+ <label for="rIn">Komisyon oranı (%)</label><input id="rIn" inputmode="decimal" autocomplete="off" oninput="rateChk()">
+ <div id="rPv" class="muted" style="margin-top:.3rem"></div><div id="rEr" class="rerr"></div>
+ <div id="rBt" class="payacts"><button class="btn o" onclick="rateClose()">Vazgeç</button><button id="rBtn" class="btn" onclick="rateAsk()">Kaydet</button></div>
+ <div id="rCf" style="display:none"><p id="rCt" style="text-align:center"></p><div class="payacts"><button class="btn o" onclick="rateBack()">Geri</button><button class="btn g" onclick="rateSave()">Evet, kaydet</button></div></div>
+</div></div>
+<dialog id="dlg">
+ <div id="acp" style="display:none"><button class="pedit" onclick="profGo()">Profilimi düzenle</button><h3 style="margin:0 0 .3rem">Hesabım</h3><div id="acw" class="muted" style="margin-bottom:.8rem"></div><button class="btn" style="width:100%" onclick="dlg.close();doLogout()">Çıkış Yap</button></div>
+ <div id="lgf"><button class="pedit" onclick="profGo()">Profilimi düzenle</button><h3 style="margin:0 0 .5rem">Sisteme Giriş</h3>
+ <div id="lnote" class="rnote" style="display:none"><b>İlan vermek veya alarm kurmak için üye olmanız gerekir.</b><br>Üye değilseniz aşağıdaki <b>“Ücretsiz Üye Ol”</b> ile hemen üye olun.</div>
+ <label>Kullanıcı adı, e-posta veya telefon</label><input id="u" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next"><label>Şifre</label><input id="p" type="password" autocomplete="current-password" enterkeyhint="go" onkeydown="if(event.key==='Enter')login()">
+ <label style="display:flex;gap:.5rem;align-items:center;color:var(--text)"><input type="checkbox" id="rm" checked> Oturumu açık tut</label>
+ <div id="lerr" style="color:var(--bad);font-weight:600;min-height:1.3rem;margin-top:.6rem"></div>
+ <button class="btn" style="width:100%;margin-top:.3rem" onclick="login()">Güvenli Giriş</button>
+ <div class="muted" style="margin-top:.6rem">Test: admin / 1 · shipper / 1 · carrier / 1</div>
+ <button class="btn o" style="width:100%;margin-top:.5rem" onclick="regMode(true)">Ücretsiz Üye Ol</button></div>
+ <div id="rgf" style="display:none"><h3 style="margin:0 0 .3rem">Ücretsiz Üye Ol</h3>
+ <p class="muted" style="margin:0 0 .3rem">Üyelik 1 dakika sürer. Kimlik numarası ve evrak istenmez; yönetici onayından sonra kullanmaya başlarsınız.</p>
+ <div id="rnote" class="rnote" style="display:none"></div>
+ <label>Hesap türü</label><select id="rr"><option value="shipper">Yük verenim</option><option value="carrier">Taşıyıcıyım</option></select><div class="fe" id="e_rr"></div>
+ <label>Ad</label><input id="rfn" autocomplete="given-name" oninput="autoUser()"><div class="fe" id="e_rfn"></div>
+ <label>Soyad</label><input id="rln" autocomplete="family-name" oninput="autoUser()"><div class="fe" id="e_rln"></div>
+ <label>Cep telefonu</label><input id="rph" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xx xxx xx xx" onblur="chkDup('r')"><div class="fe" id="e_rph"></div>
+ <label>E-posta adresi</label><input id="rem" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" onblur="chkDup('r')"><div class="fe" id="e_rem"></div>
+ <label>Kullanıcı adı (otomatik oluşturulur)</label><input id="ru" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" oninput="ruTouched=true;chkUser()"><div class="fe" id="e_ru"></div><div id="ruh" class="muted"></div>
+ <label>Şifre (en az 8, harf + rakam)</label><input id="rp" type="password" autocomplete="new-password" enterkeyhint="go" onkeydown="if(event.key==='Enter')register()"><div class="fe" id="e_rp"></div>
+ <div id="rerr" class="fe" style="font-size:.85rem;font-weight:600;margin-top:.5rem"></div>
+ <button class="btn" style="width:100%;margin-top:.6rem" onclick="register()">Ücretsiz Üye Ol</button>
+ <button class="btn o" style="width:100%;margin-top:.5rem" onclick="regMode(false)">Girişe dön</button></div>
+ <button class="btn o s" style="width:100%;margin-top:.5rem" onclick="dlg.close()">Kapat</button></dialog>
+<dialog id="adlg"><h3 id="at" style="margin:0 0 .3rem">🔔 Alarm Kur</h3><p class="muted" id="ahint" style="margin:0 0 .4rem"></p>
+ <div id="cp_a"></div>
+ <label>Kasa (dorse) tipi</label><select id="avh"></select>
+ <label id="alw">Maksimum tonaj (ton)</label><input id="aw" type="number" step="0.1" inputmode="decimal">
+ <label>Min. bedel (₺) <span class="muted">(isteğe bağlı)</span></label><input id="am" type="number" inputmode="numeric">
+ <label class="ck" id="aadrl" style="padding-left:0"><input type="checkbox" id="aadr"> Sadece ADR</label>
+ <button class="btn" style="width:100%;margin-top:.8rem" onclick="saveAlert()">🔔 Alarmı Kaydet</button>
+ <button class="btn o" style="width:100%;margin-top:.5rem" onclick="adlg.close()">Vazgeç</button></dialog>
+<dialog id="ins"><h3 style="margin:0 0 .5rem">Uygulamayı Yükle</h3><div id="inbody"></div><button class="btn o" style="width:100%;margin-top:.8rem" onclick="copyText(location.href).then(k=>toast(k?'Bağlantı kopyalandı':location.href))">Bağlantıyı kopyala</button><button class="btn" style="width:100%;margin-top:.5rem" onclick="ins.close()">Tamam</button></dialog>
+<dialog id="nts"><h3 style="margin:0 0 .5rem">🔔 Bildirimler</h3><div id="ntool" class="row" style="display:none;margin:.2rem 0 .4rem"><label class="ck" style="padding-left:0"><input type="checkbox" id="nall" onchange="nAll(this.checked)"> Tümünü seç</label><button id="ndel" class="btn r s" onclick="nDel()">Seçilenleri sil</button></div><div id="nl"></div><button class="btn o s" style="margin-top:.5rem" onclick="readAll()">Tümünü okundu yap</button>
+ <label style="display:flex;gap:.4rem;align-items:center;margin-top:.6rem;color:var(--text)"><input type="checkbox" id="snd" checked onchange="soundOn=this.checked"> 🔊 Alarm sesi açık</label><button class="btn o s" style="margin-top:.4rem" onclick="siren()">Sesi dene</button>
+ <h3 style="margin:1rem 0 .3rem">Alarmlarım</h3><div id="al"></div><button class="btn o" style="width:100%;margin-top:.8rem" onclick="nts.close()">Kapat</button></dialog>
+<div id="alm"><div id="alt" style="font-size:1.1rem;font-weight:800"></div><div id="ald" style="margin:.4rem 0 .7rem;font-size:.9rem"></div>
+ <div class="row"><button class="btn s" onclick="almClose(true)">👁️ İlanı Gör</button><button class="btn s" onclick="almClose(false)">Kapat</button></div></div>
+<div id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const IC_HOME='<svg class="ri" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5.5h4v5.5"/></svg>',IC_LD='<svg class="ri" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="6" width="19" height="12" rx="1.5"/><path d="M6.5 6v12M10.5 6v12M14.5 6v12M18.5 6v12"/></svg>',IC_TW='<svg class="ri" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5v3.5h-7z"/><circle class="w" cx="7" cy="17.5" r="1.9"/><circle class="w" cx="17" cy="17.5" r="1.9"/></svg>';
+if(window.HTMLDialogElement&&!HTMLDialogElement.prototype.showModal){HTMLDialogElement.prototype.showModal=function(){this.setAttribute('open','')};HTMLDialogElement.prototype.close=function(){this.removeAttribute('open');this.dispatchEvent(new Event('close'))}}
+function dbg(e){if(e)try{console.warn('[ALTER]',e)}catch(_x){}}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LT=['Paletli','Frigo / Soğuk Zincir','Dökme Yük'],TT=['Tenteli / Standart Dorse','Frigo / Soğuk Hava Dorsesi','Sal / Açık Kasa Dorse','Damper / Hafriyat Dorsesi'],TF=['4x2 Standart Çekici','6x2 Ağır Nakliye Çekici','6x4 ADR Donanımlı Çekici'];
+const PT=['Teslimde (havuzdan)','7 gün vade','15 gün vade','30 gün vade'];
+const CITIES="Adana,Adıyaman,Afyonkarahisar,Ağrı,Aksaray,Amasya,Ankara,Antalya,Ardahan,Artvin,Aydın,Balıkesir,Bartın,Batman,Bayburt,Bilecik,Bingöl,Bitlis,Bolu,Burdur,Bursa,Çanakkale,Çankırı,Çorum,Denizli,Diyarbakır,Düzce,Edirne,Elazığ,Erzincan,Erzurum,Eskişehir,Gaziantep,Giresun,Gümüşhane,Hakkari,Hatay,Iğdır,Isparta,İstanbul,İzmir,Kahramanmaraş,Karabük,Karaman,Kars,Kastamonu,Kayseri,Kilis,Kırıkkale,Kırklareli,Kırşehir,Kocaeli,Konya,Kütahya,Malatya,Manisa,Mardin,Mersin,Muğla,Muş,Nevşehir,Niğde,Ordu,Osmaniye,Rize,Sakarya,Samsun,Siirt,Sinop,Sivas,Şanlıurfa,Şırnak,Tekirdağ,Tokat,Trabzon,Tunceli,Uşak,Van,Yalova,Yozgat,Zonguldak".split(',');
+const ST={aktif:'Havuzda','taahhüt edildi':'Kabul edildi',yolda:'Yolda','teslim edildi':'Teslim edildi','tamamlandı':'Tamamlandı','onay bekliyor':'Üyelik onayı bekliyor',reddedildi:'Reddedildi'};
+let me=null,cfg={commission:10,whatsapp:'',iban:'TR1234567891011136544'},view='list',tm;
+const money=n=>Math.round(n).toLocaleString('tr-TR')+' ₺';
+const tl2=n=>(+n||0).toLocaleString('tr-TR',{maximumFractionDigits:2});
+const fdt=s=>s?new Date(s).toLocaleString('tr-TR',{dateStyle:'short',timeStyle:'short'}):'';
+const opts=(a,first)=>(first?`<option value="">${first}</option>`:'')+a.map(x=>`<option>${esc(x)}</option>`).join('');
+let LASTMSG='';
+function lift(el){const d=document.querySelector('dialog[open]');(d||document.body).appendChild(el);el.classList.toggle('top',!!d)}
+function toast(m){LASTMSG=m;const t=$('toast');lift(t);t.textContent=m;t.style.display='block';clearTimeout(tm);tm=setTimeout(()=>t.style.display='none',m.length>60?6500:3800)}
+const IBAN='TR1234567891011136544';
+const WHATSAPP='905536082982'; // iletişim hattı (05536082982)
+const FILES={};let fileN=0,DB=null;
+try{me=JSON.parse(sessionStorage.getItem('alter_me')||localStorage.getItem('alter_me'))}catch(_e){dbg(_e)}
+try{DB=JSON.parse(localStorage.getItem('alter_db3'))}catch(_e){dbg(_e)}
+if(!DB){const d=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,16);
+ DB={rate:10,nid:3,docs:[],loads:[
+ {id:1,from:'İstanbul',fromDistrict:'Tuzla',to:'Ankara',toDistrict:'Çankaya',pickup:d(3),delivery:d(4),type:'Paletli',desc:'24 palet, toplam yaklaşık 18 ton. Kuru gıda, istiflenebilir, rampadan yükleme.',price:26000,isTow:false,status:'aktif',shipperUser:'shipper',shipper:'Yılmaz Lojistik',phone:'0500 000 00 01',address:'Tuzla Sanayi',rate:0,paid:false,released:false},
+ {id:2,from:'Kocaeli',fromDistrict:'Gebze',to:'Gaziantep',toDistrict:'Nizip',pickup:d(5),delivery:d(7),type:'Frigo / Soğuk Zincir',desc:'Süt ürünleri, 22 palet, +4°C sabit sıcaklık gerekir. Teslimde sıcaklık kaydı istenir.',price:48000,isTow:false,status:'aktif',shipperUser:'shipper',shipper:'Özdağ Gıda',phone:'0500 000 00 02',address:'Gebze OSB',rate:0,paid:false,released:false}]};
+ Object.assign(DB.loads[0],{weight:18,pallets:24,vol:0,adr:false,vehicle:TT[0],payTerm:PT[0]});Object.assign(DB.loads[1],{weight:15,pallets:22,vol:0,adr:false,vehicle:TT[1],payTerm:PT[1]})}
+let SYNC=false,REV=-1,DIRTY=false,LP=0,rsT=0;const UPQ=[];
+let svT=0;const flushSave=()=>{clearTimeout(svT);svT=0;try{localStorage.setItem('alter_db3',JSON.stringify(DB))}catch(e){console.warn('[ALTER] localStorage yazılamadı',e)}};
+const save=()=>{DIRTY=true;if(!svT)svT=setTimeout(flushSave,400)};
+addEventListener('pagehide',flushSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)flushSave()});
+function sha256js(str){const b=new TextEncoder().encode(str),l=b.length,n=((l+9+63)>>6)<<6,a=new Uint8Array(n);a.set(b);a[l]=128;const dv=new DataView(a.buffer);dv.setUint32(n-4,(l*8)>>>0);dv.setUint32(n-8,Math.floor(l/536870912));
+ const K=new Uint32Array(64),H=new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]),w=new Uint32Array(64),R=(x,k)=>(x>>>k)|(x<<(32-k));
+ for(let c=0,p=2;c<64;p++){let q=1;for(let d=2;d*d<=p;d++)if(p%d===0){q=0;break}if(q)K[c++]=Math.floor((Math.cbrt(p)%1)*4294967296)>>>0}
+ for(let o=0;o<n;o+=64){for(let i=0;i<16;i++)w[i]=dv.getUint32(o+i*4);
+  for(let i=16;i<64;i++){const s0=R(w[i-15],7)^R(w[i-15],18)^(w[i-15]>>>3),s1=R(w[i-2],17)^R(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)>>>0}
+  let a0=H[0],b0=H[1],c0=H[2],d0=H[3],e0=H[4],f0=H[5],g0=H[6],h0=H[7];
+  for(let i=0;i<64;i++){const S1=R(e0,6)^R(e0,11)^R(e0,25),ch=(e0&f0)^(~e0&g0),t1=(h0+S1+ch+K[i]+w[i])>>>0,S0=R(a0,2)^R(a0,13)^R(a0,22),mj=(a0&b0)^(a0&c0)^(b0&c0),t2=(S0+mj)>>>0;h0=g0;g0=f0;f0=e0;e0=(d0+t1)>>>0;d0=c0;c0=b0;b0=a0;a0=(t1+t2)>>>0}
+  H[0]+=a0;H[1]+=b0;H[2]+=c0;H[3]+=d0;H[4]+=e0;H[5]+=f0;H[6]+=g0;H[7]+=h0}
+ return[...H].map(x=>x.toString(16).padStart(8,'0')).join('')}
+async function hp(s){const t='alter|'+s;try{const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(_e){return sha256js(t)}}
+const TEST_PW='1'; // GEÇİCİ TEST ŞİFRESİ: canlıya almadan önce kaldırın
+const ready=(async()=>{await syncInit();if(!DB.users){const mk=async(name,pw,role,company,tax)=>({name,pw:await hp(pw),role,company,taxNo:tax,phone:'0500000000'+(['admin','shipper','carrier'].indexOf(name)+1),email:name+'@alter.test',first:name[0].toUpperCase()+name.slice(1),last:'Demo',status:'onaylı',taxFile:null});
+ DB.users=[await mk('admin',TEST_PW,'admin','ALTER Yönetim',''),await mk('shipper',TEST_PW,'shipper','Yılmaz Lojistik','DEMO-0001'),await mk('carrier',TEST_PW,'carrier','Demo Taşımacılık','DEMO-0002')]}
+ for(const x of DB.users)if(['admin','shipper','carrier'].includes(x.name))x.pw=await hp(TEST_PW);
+ DB.users.forEach(x=>{if(/^\d{11}$/.test(x.taxNo||''))x.taxNo=''});
+ 
+ DB.loads.forEach(l=>{if(!l.created)l.created=new Date(Date.now()-Math.max(1,(DB.nid-l.id))*6e4).toISOString()});
+ DB.users.forEach(x=>{if(x.status==='eksik')x.status='beklemede';x.reqTC=!!x.reqTC;x.reqDocs=!!x.reqDocs});
+ DB.notes=DB.notes||[];DB.alerts=DB.alerts||[];DB.aid=DB.aid||1;save();if(SYNC&&SEEDPUSH){try{if(!(await push())){await pull()}}catch(_e){dbg(_e)}}})();
+const note=(to,text,x={})=>{DB.notes.push({...x,id:Math.random().toString(36).slice(2),to,text,ts:new Date().toISOString(),read:false})};
+const notifyAdmins=(t,x)=>DB.users.filter(u=>u.role==='admin').forEach(a=>note(a.name,t,x));
+const lbl=a=>{const k=a.kasa??(a.tow?a.type:a.vehicle);return[a.tow?'Boş araç':'Yük',a.cities.length?a.cities.join('/'):'tüm şehirler',k||'tüm kasa tipleri',a.maxTon?(a.tow?'yük ':'maks ')+a.maxTon+' ton':'',a.min?'min '+a.min+' ₺':'',a.adr?'ADR':''].filter(Boolean).join(' · ')};
+const hit=(a,l,u)=>{if(l.status!=='aktif'||l.shipperUser===u||a.tow!==l.isTow)return false;
+ const kasa=a.kasa??(a.tow?a.type:a.vehicle)??'',lk=l.isTow?l.type:l.vehicle,mt=+a.maxTon||0;
+ const lc=l.isTow?(l.cities&&l.cities.length?l.cities:[l.from]):(a.fromOnly?[l.from]:[l.from,l.to]);
+ if(a.cities.length&&!lc.some(c=>a.cities.includes(c)))return false;
+ if(kasa&&kasa!==lk)return false;
+ if(mt>0){if(l.isTow){if(l.capacity>0&&mt>l.capacity)return false}else if((l.weight||0)>mt)return false}
+ if(l.price<(a.min||0)||(a.adr&&!l.adr))return false;return true};
+function scan(user){let n=0;const U=DB.users.find(x=>x.name===user),al=DB.alerts.filter(a=>a.user===user).slice();
+ if(U&&U.role==='carrier'){DB.tseen=DB.tseen||{};DB.loads.filter(t=>t.isTow&&t.shipperUser===user&&t.status==='aktif').forEach(t=>al.push({tow:false,fromOnly:true,cities:t.cities&&t.cities.length?t.cities:[t.from],kasa:t.type,maxTon:t.capacity||0,min:0,adr:false,seen:(DB.tseen[t.id]=DB.tseen[t.id]||[])}))}
+ al.forEach(a=>{a.seen=a.seen||[];DB.loads.forEach(l=>{if(hit(a,l,user)&&!a.seen.includes(l.id)){a.seen.push(l.id);
+ note(user,`🔔 Alarm eşleşti: #${l.id} ${l.isTow?(l.cities&&l.cities.length?l.cities:[l.from]).join(', '):l.from+(l.to?' → '+l.to:'')} · ${l.isTow?l.type+(l.capacity?' · maks '+l.capacity+' ton':''):(l.vehicle||l.type)+' · '+(l.weight||0)+' ton'} · ${Math.round(l.price)} ₺`,{alarm:l.isTow?'tow':'load',lid:l.id});n++}})});if(n)save();return n}
+const matchAlerts=()=>DB.users.filter(u=>u.role!=='admin').forEach(u=>scan(u.name));
+addEventListener('storage',e=>{if(!SYNC&&e.key==='alter_db3'&&e.newValue){try{DB=JSON.parse(e.newValue);refresh();bell()}catch(_e){dbg(_e)}}});
+let FERR=null;
+const normPhone=p=>{const s=String(p||'');if(/[^\d\s().\-]/.test(s))return'';const d=s.replace(/\D/g,'');return d.length===11?d:''};
+const dn=u=>u.company||((u.first||'')+' '+(u.last||'')).trim()||u.name;
+const NAMER=/^[\p{L}][\p{L} .'-]{1,29}$/u,MAILR=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function vm(v,self){const e={};
+ if('role' in v&&!['shipper','carrier'].includes(v.role))e.role='Hesap türünü seçin.';
+ if('first' in v&&!NAMER.test((v.first||'').trim()))e.first='Adınızı yazın (en az 2 harf).';
+ if('last' in v&&!NAMER.test((v.last||'').trim()))e.last='Soyadınızı yazın (en az 2 harf).';
+ if('phone' in v){const p=normPhone(v.phone);if(!p)e.phone='Cep telefonu 11 haneli olmalı (örn: 05xx xxx xx xx).';else if(DB.users.some(x=>x!==self&&normPhone(x.phone)===p))e.phone='Bu cep telefonu numarasıyla daha önce üyelik oluşturulmuş. Lütfen farklı bir numara girin.'}
+ if('email' in v){const m=(v.email||'').trim().toLowerCase();
+  if(m.length>254||!MAIL2.test(m)||/^\.|\.\.|\.@/.test(m))e.email='Geçerli bir e-posta adresi girin (örn: ad@ornek.com).';
+  else if(mailTypo(m))e.email='Bu adres hatalı olabilir. Bunu mu demek istediniz: '+mailTypo(m)+'?';
+  else if(DB.users.some(x=>x!==self&&(x.email||'').toLowerCase()===m))e.email='Bu e-posta adresiyle daha önce üyelik oluşturulmuş. Lütfen farklı bir adres girin.'}
+ if('username' in v){const n=(v.username||'').trim().toLowerCase();if(!/^[a-z0-9_]{3,20}$/.test(n))e.username='3-20 karakter; yalnız harf, rakam ve _ kullanın.';else if(DB.users.some(x=>x!==self&&x.name===n)){let s=n,i=1;while(DB.users.some(x=>x.name===s))s=n.slice(0,17)+(++i);e.username='Bu kullanıcı adı alınmış. Öneri: '+s}}
+ if('password' in v&&(!v.password||v.password.length<8||!/[A-Za-z]/.test(v.password)||!/\d/.test(v.password)))e.password='En az 8 karakter; harf ve rakam içermeli.';
+ if('company' in v&&(!v.company||v.company.trim().length<3||v.company.length>80))e.company='Firma ünvanı 3-80 karakter olmalı.';
+ if('taxNo' in v){const t=(v.taxNo||'').trim();if(!/^\d{10}$/.test(t))e.taxNo='Vergi numarası 10 haneli rakamlardan oluşmalı.';else if(DB.users.some(x=>x!==self&&x.taxNo===t))e.taxNo='Bu vergi numarasıyla daha önce kayıt oluşturulmuş. Lütfen kontrol edin.'}
+ return e}
+const MAIL2=/^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
+const POPD=['gmail.com','hotmail.com','outlook.com','yahoo.com','icloud.com','yandex.com'],OKD=['mail.com','email.com','msn.com','live.com','me.com','ymail.com','gmx.com','aol.com','proton.me','protonmail.com','ttmail.com','mynet.com','superonline.com','turk.net','windowslive.com'];
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i,...Array(b.length).fill(0)]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++){d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1)}return d[a.length][b.length]}
+const mailTypo=m=>{const[l,dm]=m.split('@');if(POPD.includes(dm)||OKD.includes(dm))return'';const s=POPD.find(p=>lev(dm,p)<=1);return s?l+'@'+s:''};
+const docsOf=x=>DB.docs.find(d=>d.username===x.name)||{};
+const docsOk=x=>{const d=docsOf(x);return!!x.taxFile&&(x.role!=='carrier'||(!!d.srcFile&&!!d.k1File))};
+const meObj=x=>({name:x.name,role:x.role,status:x.status,company:dn(x),reqTC:!!x.reqTC,reqDocs:!!x.reqDocs,tcOk:!!x.tcNo,docsOk:docsOk(x)});
+const mask=s=>s.split(' ').filter(Boolean).map(w=>w[0]+'*'.repeat(Math.max(1,w.length-1))).join(' ');
+const fail=(m,s=400)=>{if(s===401){me=null;renderNav()}toast(m);throw 0};
+const ok=m=>{save();return{message:m}};
+const openF=n=>{FILES[n]?window.open(FILES[n],'_blank'):SYNC?window.open('api/file/'+n,'_blank'):toast('Demo: dosya yalnızca yüklendiği oturumda görüntülenebilir.');return false};
+function dto(l){const u=me?.name,a=me?.role==='admin',party=a||(u&&(l.shipperUser===u||l.carrierUser===u)),open=a||(l.paid&&party),r=l.rate>0?l.rate:DB.rate,c=Math.round(l.price*r)/100;
+ return{adel:!!l.adel,id:l.id,cities:l.isTow?(l.cities&&l.cities.length?l.cities:[l.from]):null,from:l.from,fromDistrict:l.fromDistrict,to:l.to,toDistrict:l.toDistrict,pickup:l.pickup,delivery:l.delivery,type:l.type,towFeature:l.towFeature,desc:l.desc||'',capacity:l.capacity||0,weight:l.weight||0,pallets:l.pallets||0,vol:l.vol||0,adr:!!l.adr,vehicle:l.vehicle||'',payTerm:l.payTerm||'',created:l.created||null,poster:a?l.shipperUser:null,verified:(DB.users.find(x=>x.name===l.shipperUser)||{}).status==='onaylı',price:l.price,isTow:l.isTow,status:(u&&u===l.shipperUser&&l.status==='taahhüt edildi'&&!l.receipt&&!l.paid)?'aktif':l.status,paid:l.paid,released:l.released,commission:c,net:l.price-c,mine:!!party,arch:!!(u&&l.arch&&l.arch[u]),isTaker:!!u&&l.carrierUser===u,isDriver:!!u&&(l.isTow?l.shipperUser:l.carrierUser)===u,
+ shipper:open?l.shipper:mask(l.shipper),phone:open?l.phone:null,address:open?l.address:null,carrier:open?l.carrierUser:null,hasReceipt:!!party&&!!l.receipt,hasProof:!!party&&!!l.proof,receipt:a?l.receipt:null,proof:a?l.proof:null,refCode:(party&&l.refCode)||null,ocr:a?(l.ocr||null):null}}
+const doc=n=>DB.docs.find(d=>d.username===n)||(DB.docs.push({username:n,srcFile:null,k1File:null,frigoFile:null,srcOk:false,k1Ok:false,frigoOk:false}),DB.docs[DB.docs.length-1]);
+/* ===== Sunucu senkronizasyonu (server.js varsa tüm cihazlar aynı veriyi görür) ===== */
+async function syncInit(){if(!/^https?:$/.test(location.protocol))return;try{const r=await fetch('api/db?rev=-1',{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(!j||typeof j.rev!=='number')return;SYNC=true;REV=j.rev;if(j.db&&j.db.users)DB=j.db;else SEEDPUSH=true}catch(_e){dbg(_e)}}
+let SEEDPUSH=false;
+async function pull(){LP=Date.now();try{const r=await fetch('api/db?rev='+REV,{cache:'no-store'});if(!r.ok)return;const j=await r.json();if(!j.same&&j.db){DB=j.db;REV=j.rev;if(['list','mine','admin'].includes(view))setTimeout(()=>{try{refresh()}catch(_e){dbg(_e)}},0)}}catch(_e){dbg(_e)}}
+async function push(){let r;try{r=await fetch('api/db',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({rev:REV,db:DB})})}catch{toast('Sunucuya ulaşılamadı. Bağlantınızı kontrol edin.');throw new Error('net')}
+ if(r.status===409)return false;if(!r.ok){toast('Kayıt sunucuya yazılamadı.');throw new Error('srv')}REV=(await r.json()).rev;return true}
+async function api(p,o={}){await ready;if(!SYNC)return api0(p,o);
+ for(let i=0;i<6;i++){if(i||(o.method&&o.method!=='GET')||Date.now()-LP>2500)await pull();DIRTY=false;let r,err;
+  try{r=await api0(p,o)}catch(e){err=e}
+  if(DIRTY){try{await Promise.all(UPQ.splice(0))}catch{toast('Dosya sunucuya yüklenemedi.')}if(!(await push()))continue}
+  if(err!==undefined)throw err;return r}
+ toast('İşlem yoğunluk nedeniyle tamamlanamadı, tekrar deneyin.');throw 0}
+const revertL=l=>{l.status='aktif';delete l.carrierUser;l.rate=0;delete l.acceptedAt;delete l.refCode;delete l.ocr};
+/* ===== Havale referans kodu + dekont OCR doğrulaması ===== */
+const genRef=()=>{let c;do{c=String(10000+(crypto.getRandomValues(new Uint32Array(1))[0]%90000))}while(DB.loads.some(x=>x.refCode===c));return c};
+function ocrAmts(t){const o=[];(String(t).match(/\d[\d.,]*/g)||[]).forEach(s=>{s=s.replace(/[.,]+$/,'');const m=s.match(/^(.*?)[.,](\d{1,2})$/);let i=s,d='0';if(m){i=m[1];d=m[2]}i=i.replace(/[.,]/g,'');const v=parseFloat(i+'.'+d);if(isFinite(v))o.push(v)});return o}
+const nrmN=x=>String(x||'').replace(/İ/g,'i').replace(/I/g,'ı').toLowerCase().replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z\s]/g,' ');
+const nameIn=(nm,txt)=>{const tk=nrmN(nm).split(/\s+/).filter(x=>x.length>1);if(tk.length<2)return false;const T=nrmN(txt);return tk.every(k=>T.includes(k))};
+const doApprove=(l,auto)=>{l.paid=true;[l.shipperUser,l.carrierUser].forEach(x=>note(x,`#${l.id} ödemesi ${auto?'otomatik doğrulandı ve ':''}onaylandı; iletişim bilgileri açıldı. İşlem artık “İşlerim” sayfanızda.`,{go:'mine'}));if(auto)notifyAdmins(`#${l.id} dekontu otomatik doğrulandı (kod + IBAN + tutar) ve ödeme onaylandı.`,{go:'adm:g'})};
+function releaseStale(maxAge,user){let n=0;DB.loads.forEach(l=>{if(l.status==='taahhüt edildi'&&!l.paid&&!l.receipt&&(!user||l.carrierUser===user)&&Date.now()-(l.acceptedAt||0)>maxAge){revertL(l);n++}});if(n)save();return n}
+async function api0(p,o={}){
+ await ready;if(Date.now()-rsT>15000){rsT=Date.now();releaseStale(30*60e3)}FERR=null;
+ const m=o.method||'GET',[path,qs]=p.split('?'),q=new URLSearchParams(qs||''),u=me?.name,role=me?.role,U=DB.users.find(x=>x.name===u);
+ let b=o.body;const file=b instanceof FormData?b.get('file'):null;if(typeof b==='string')b=JSON.parse(b);if(b instanceof FormData&&b.get('data'))b=JSON.parse(b.get('data'));
+ const auth=()=>{if(!me)fail('Oturum gerekli, lütfen giriş yapın.',401)};
+ const need=r=>{auth();if(role!==r)fail('Bu işlem için yetkiniz yok.',403);
+  if(!U||U.status!=='onaylı')fail(U&&U.status==='reddedildi'?'Üyelik başvurunuz reddedildi. Yönetici ile iletişime geçin.':'Üyeliğiniz yönetici onayında; onaylanınca bu işlemi yapabilirsiniz.',403);
+  const a=U.reqTC&&!U.tcNo,c=U.reqDocs&&!docsOk(U);
+  if(a||c)fail('Yeni durum: yönetici '+[a?'T.C. kimlik no':'',c?'evrak yükleme':''].filter(Boolean).join(' ve ')+' zorunlu kıldı. Devam etmek için '+[a?'Profilim sayfasından T.C. kimlik numaranızı ekleyin':'',c?'Belgelerim menüsünden evraklarınızı yükleyin':''].filter(Boolean).join(' ve ')+'.',403)};
+ const route=m+' '+path.replace(/\/\d+(?=\/|$)/,'/:id'),id=+(path.match(/\d+/)||[0])[0],L=DB.loads.find(l=>l.id===id);
+ const sv=f=>{if(!f||f.size>5e6||!/\.(jpe?g|png|pdf)$/i.test(f.name))fail('Dosya geçersiz (jpg/png/pdf, en çok 5 MB).');const n='f'+(++fileN)+Date.now().toString(36)+f.name.slice(f.name.lastIndexOf('.')).toLowerCase();FILES[n]=URL.createObjectURL(f);{const ks=Object.keys(FILES);if(ks.length>40){try{URL.revokeObjectURL(FILES[ks[0]])}catch(_x){}delete FILES[ks[0]]}}if(SYNC)UPQ.push(fetch('api/file/'+n,{method:'PUT',body:f}).then(r=>{if(!r.ok)throw 0}));return n};
+ const taker=()=>{if(!me)fail('Oturum gerekli, lütfen giriş yapın.',401);if(!L||L.carrierUser!==u)fail('İlan bulunamadı.',404);return L};
+ const drv=()=>{need('carrier');if(!L||(L.isTow?L.shipperUser:L.carrierUser)!==u)fail('İlan bulunamadı.',404);return L};
+ const adm=()=>{need('admin');if(!L)fail('İlan bulunamadı.',404);return L};
+ if(route==='GET config')return{whatsapp:WHATSAPP,commission:DB.rate,iban:IBAN};
+ if(route==='GET me')return U?meObj(U):{name:null,role:null};
+ if(route==='GET username/check'){const raw=(q.get('name')||'').trim().toLowerCase();let base=raw.replace(/[^a-z0-9_]/g,'').slice(0,17);if(base.length<3)base+='uye';let s=base,i=1;while(DB.users.some(x=>x.name===s))s=base+(++i);
+  return{ok:/^[a-z0-9_]{3,20}$/.test(raw)&&s===raw,valid:/^[a-z0-9_]{3,20}$/.test(raw),suggest:s}}
+ if(route==='GET member/check'){const v={};['phone','email','username'].forEach(k=>{if(q.get(k))v[k]=q.get(k)});return vm(v,U||null)}
+ if(route==='POST register'){const e=vm(b,null);if(Object.keys(e).length){FERR=e;throw 0}
+  const nm=b.username.trim().toLowerCase();
+  DB.users.push({name:nm,pw:await hp(b.password),role:b.role,first:b.first.trim(),last:b.last.trim(),phone:normPhone(b.phone),email:b.email.trim().toLowerCase(),company:'',taxNo:'',status:'beklemede',reqTC:false,reqDocs:false,tcNo:'',created:new Date().toISOString(),taxFile:null});
+  notifyAdmins(`Yeni üye: ${b.first.trim()} ${b.last.trim()} (@${nm}) · ${b.role==='shipper'?'yük veren':'taşıyıcı'}`,{go:'adm:f'});return ok('Üyeliğiniz oluşturuldu.')}
+ if(route==='GET profile'){auth();return{name:U.name,role:U.role,first:U.first||'',last:U.last||'',phone:U.phone||'',email:U.email||'',company:U.company||'',taxNo:U.taxNo||'',tcNo:U.tcNo||'',reqTC:!!U.reqTC,reqDocs:!!U.reqDocs,docsOk:docsOk(U),status:U.status}}
+ if(route==='POST profile/personal'){auth();const e=vm({first:b.first,last:b.last,phone:b.phone,email:b.email},U);if(Object.keys(e).length){FERR=e;throw 0}
+  Object.assign(U,{first:b.first.trim(),last:b.last.trim(),phone:normPhone(b.phone),email:b.email.trim().toLowerCase()});return ok('Bilgileriniz güncellendi.')}
+ if(route==='POST profile/firm'){auth();const co=(b.company||'').trim(),tx=(b.taxNo||'').trim(),v={};if(co)v.company=co;if(tx)v.taxNo=tx;const e=vm(v,U);if(Object.keys(e).length){FERR=e;throw 0}
+  U.company=co;U.taxNo=tx;return ok('Firma bilgileriniz kaydedildi.')}
+ if(route==='POST profile/tc'){auth();const t=String(b.tc||'').trim(),e={};
+  if(!/^\d{11}$/.test(t))e.tc='T.C. kimlik numarası 11 haneli olmalı (şu an '+t.replace(/\D/g,'').length+' hane).';
+  else if(DB.users.some(x=>x!==U&&x.tcNo===t))e.tc='Bu T.C. kimlik numarasıyla daha önce kayıt oluşturulmuş. Lütfen kontrol edin.';
+  if(Object.keys(e).length){FERR=e;throw 0}U.tcNo=t;notifyAdmins(`${dn(U)} T.C. kimlik numarasını girdi (@${U.name})`,{go:'adm:f'});return ok('T.C. kimlik numaranız kaydedildi.')}
+ if(route==='POST profile/resubmit'){auth();if(U.status!=='reddedildi')fail('Bu işlem şu an gerekmiyor.');U.status='beklemede';notifyAdmins(`${dn(U)} yeniden onaya gönderdi (@${U.name})`,{go:'adm:f'});return ok('Yeniden onaya gönderildi.')}
+ if(route==='POST login'){const x=DB.users.find(z=>{const i=(b.username||'').trim().toLowerCase(),np=normPhone(i);return z.name===i||(z.email&&z.email===i)||(np&&normPhone(z.phone)===np)});if(!x||x.pw!==await hp(b.password||''))fail('Hatalı kullanıcı adı veya şifre!',401);
+  me=meObj(x);try{(b.remember?localStorage:sessionStorage).setItem('alter_me',JSON.stringify(me))}catch(_e){dbg(_e)}return me}
+ if(route==='POST logout'){me=null;try{sessionStorage.removeItem('alter_me');localStorage.removeItem('alter_me')}catch(_e){dbg(_e)}return{}}
+ if(route==='GET loads'){let a=DB.loads.slice().reverse();const sc=q.get('scope');
+  if(sc==='all')need('admin');else if(sc==='mine'){if(!me)fail('Oturum gerekli.',401);a=a.filter(l=>(l.shipperUser===u||l.carrierUser===u)&&!(l.arch&&l.arch[u])&&!(l.gone&&l.gone[u]))}
+  else if(sc==='archive'){if(!me)fail('Oturum gerekli.',401);a=a.filter(l=>(l.shipperUser===u||l.carrierUser===u)&&l.arch&&l.arch[u]&&!(l.gone&&l.gone[u]))}else a=a.filter(l=>l.status==='aktif');
+  const g=k=>q.get(k)||'',csv=k=>g(k).split(',').filter(Boolean),kd=g('kind')||(q.get('tow')!==null?(q.get('tow')==='true'?'tow':'load'):'');
+  if(kd==='tow')a=a.filter(l=>l.isTow);else if(kd==='load')a=a.filter(l=>!l.isTow);
+  const qq=g('q').trim().toLocaleLowerCase('tr');if(qq)a=a.filter(l=>[l.from,(l.cities||[]).join(' '),l.fromDistrict,l.to,l.toDistrict,l.type,l.vehicle,l.towFeature,l.desc,l.payTerm].join(' ').toLocaleLowerCase('tr').includes(qq));
+  const fr=csv('from'),to=csv('to'),cs=csv('cities');
+  const lcs=l=>l.isTow&&l.cities&&l.cities.length?l.cities:[l.from];
+  if(fr.length)a=a.filter(l=>lcs(l).some(c=>fr.includes(c)));if(to.length)a=a.filter(l=>l.isTow||to.includes(l.to));if(cs.length)a=a.filter(l=>lcs(l).some(c=>cs.includes(c))||cs.includes(l.to));
+  if(g('type'))a=a.filter(l=>!l.isTow&&l.type===g('type'));
+  if(g('vehicle'))a=a.filter(l=>(l.isTow?l.type:l.vehicle)===g('vehicle'));
+  if(g('feat'))a=a.filter(l=>l.isTow&&l.towFeature===g('feat'));
+  if(g('pt'))a=a.filter(l=>!l.isTow&&l.payTerm===g('pt'));
+  if(g('min'))a=a.filter(l=>l.price>=+g('min'));if(g('max'))a=a.filter(l=>l.price<=+g('max'));
+  if(g('w1'))a=a.filter(l=>!l.isTow&&(l.weight||0)>=+g('w1'));if(g('w2'))a=a.filter(l=>!l.isTow&&(l.weight||0)<=+g('w2'));
+  if(g('cap'))a=a.filter(l=>l.isTow&&(l.capacity||0)>=+g('cap'));
+  if(g('p1'))a=a.filter(l=>!l.isTow&&(l.pallets||0)>=+g('p1'));if(g('p2'))a=a.filter(l=>!l.isTow&&(l.pallets||0)<=+g('p2'));
+  if(g('d1'))a=a.filter(l=>!l.isTow&&String(l.pickup).slice(0,10)>=g('d1'));if(g('d2'))a=a.filter(l=>!l.isTow&&String(l.pickup).slice(0,10)<=g('d2'));
+  if(g('adr'))a=a.filter(l=>!l.isTow&&l.adr);
+  const s=g('sort'),W=l=>l.isTow?(l.capacity||0):(l.weight||0);if(s==='pa')a.sort((x,y)=>x.price-y.price);else if(s==='pd')a.sort((x,y)=>y.price-x.price);else if(s==='wa')a.sort((x,y)=>W(x)-W(y));else if(s==='wd')a.sort((x,y)=>W(y)-W(x));else a.sort((x,y)=>(tsOf(y)-tsOf(x))||(y.id-x.id));
+  return a.map(dto)}
+ if(route==='POST loads'){auth();const pend=!!U&&(U.status==='beklemede'||U.status==='eksik');if(pend){if(role!==(b.isTow?'carrier':'shipper'))fail('Bu işlem için yetkiniz yok.',403)}else need(b.isTow?'carrier':'shipper');b.desc=censorText(b.desc);b.address=censorText(b.address);
+  if(!(b.isTow?TT:LT).includes(b.type))fail(b.isTow?'Dorse (kasa) tipini seçin.':'Geçersiz tür.');
+  if(b.isTow){if(!Array.isArray(b.cities)||!b.cities.length||b.cities.some(c=>!CITIES.includes(c)))fail('En az bir il seçin.');b.cities=[...new Set(b.cities)];b.from=b.cities[0]}
+  if(b.isTow&&!TF.includes(b.towFeature||''))fail('Çekici tipini seçin.');
+  if(b.isTow&&!(+b.capacity>0&&+b.capacity<=60))fail('Kabul edebileceğiniz maksimum tonajı girin (0-60 ton).');
+  if(!b.from||(!b.isTow&&!b.to))fail('İl bilgileri zorunlu.');
+  if(!b.isTow&&(typeof b.desc!=='string'||b.desc.trim().length<5||b.desc.length>500))fail('Yük açıklamasını girin (en az 5, en çok 500 karakter).');
+  if(!b.isTow){if(!(+b.weight>0&&+b.weight<=60))fail('Tonaj 0-60 ton arasında olmalı.');if(!TT.includes(b.vehicle))fail('Aranan kasa (dorse) tipini seçin.');if(!PT.includes(b.payTerm))fail('Ödeme tercihini seçin.');if(+b.pallets<0||+b.pallets>60||+b.vol<0||+b.vol>200)fail('Palet veya hacim değeri geçersiz.')}
+  if(!(b.price>0&&b.price<=1e7))fail('Geçerli bir bedel girin.');
+  if(!/^\+?[0-9 ]{10,15}$/.test(b.phone||''))fail('Geçerli bir telefon girin.');
+  if(!b.address||b.address.trim().length<5||b.address.length>300)fail('Açık adres girin (5-300 karakter).');
+  const now=new Date().toISOString().slice(0,16);
+  if(!b.isTow&&(!b.pickup||!b.delivery||b.delivery<=b.pickup))fail('Teslim zamanı yükleme zamanından sonra olmalı.');
+  DB.loads.push({id:DB.nid++,cities:b.isTow?b.cities:null,from:b.from,fromDistrict:(b.fromDistrict||'').trim(),to:b.to,toDistrict:(b.toDistrict||'').trim(),pickup:b.isTow?now:b.pickup,delivery:b.isTow?now:b.delivery,type:b.type,towFeature:b.isTow?b.towFeature:null,desc:b.isTow?'':b.desc.trim(),weight:b.isTow?0:+b.weight,capacity:b.isTow?+b.capacity:0,pallets:b.isTow?0:(+b.pallets||0),vol:b.isTow?0:(+b.vol||0),adr:!b.isTow&&!!b.adr,vehicle:b.isTow?'':b.vehicle,payTerm:b.isTow?'':b.payTerm,price:b.price,isTow:!!b.isTow,status:pend?'onay bekliyor':'aktif',created:new Date().toISOString(),shipperUser:u,shipper:dn(U),phone:b.phone.trim(),address:b.address.trim(),rate:0,paid:false,released:false});
+  const nl=DB.loads[DB.loads.length-1];
+  if(pend){notifyAdmins(`Onay bekleyen üyenin ${nl.isTow?'boş araç':'yük'} ilanı kaydedildi: #${nl.id} ${dn(U)} (@${U.name}). Üyeyi onaylayınca otomatik yayınlanır.`,{go:'adm:f'});return ok('İlanınız kaydedildi. Üyeliğiniz yönetici tarafından onaylanınca otomatik yayınlanacak ve ana sayfada görünecek.')}
+  notifyAdmins(`Yeni ${nl.isTow?'boş araç':'yük'} ilanı yayınlandı: #${nl.id} ${dn(U)}`,{go:nl.isTow?'adm:t:n':'adm:y:n'});matchAlerts();return ok('İlanınız yayınlandı ve ana sayfada görünüyor.')}
+ if(route==='POST loads/:id/accept'){if(!L)fail('İlan bulunamadı.',404);need(L.isTow?'shipper':'carrier');if(L.status!=='aktif')fail('İlan artık müsait değil.');
+  if(L.shipperUser===u)fail('Kendi ilanınızı kabul edemezsiniz.');
+    L.status='taahhüt edildi';L.carrierUser=u;L.rate=DB.rate;L.acceptedAt=Date.now();L.refCode=genRef();delete L.ocr;return Object.assign(ok(L.isTow?'Aracı kabul ettiniz. Ödeme dekontunuzu yükleyin.':'Yükü aldınız. Ödeme dekontunuzu yükleyin.'),{id:L.id,isTow:!!L.isTow,refCode:L.refCode,commission:Math.round(L.price*L.rate)/100})}
+ if(route==='POST loads/:id/payer'){const l=taker();if(l.status!=='taahhüt edildi'||l.paid)fail('Bu aşamada ad soyad girilemez.');const n=String(b.name||'').trim().replace(/\s+/g,' ').slice(0,80);if(n.split(' ').filter(x=>x.length>1).length<2)fail('Lütfen havaleyi yapan kişinin ad ve soyadını yazın.');l.payer=n;return ok('Ad soyad kaydedildi.')}
+ if(route==='POST loads/:id/receipt'){const l=taker();if(l.status!=='taahhüt edildi'||l.paid)fail('Bu aşamada dekont yüklenemez.');l.receipt=sv(file);note(l.shipperUser,`#${l.id} ilanınız ${dn(U)} tarafından ${l.isTow?'talep edildi':'kabul edildi'}. Ödeme onayı bekleniyor.`);notifyAdmins(`#${l.id} için dekont yüklendi, onay bekliyor.`);return ok('Dekont yüklendi. Yönetici onayı bekleniyor.')}
+ if(route==='POST loads/:id/verify'){const l=taker();if(l.status!=='taahhüt edildi'||l.paid||!l.receipt||!l.refCode)fail('Bu aşamada doğrulama yapılamaz.');
+  const t=String(b.text||'').slice(0,20000),exp=Math.round(l.price*l.rate)/100,ib=cfg.iban||IBAN,fo=s=>s.toUpperCase().replace(/\s/g,'').replace(/O/g,'0').replace(/[IL]/g,'1');
+  const codes=(t.match(/\d+/g)||[]).filter(x=>x.length===5),av=ocrAmts(t),ibOk=fo(t).includes(fo(ib)),cOk=codes.includes(l.refCode),aOk=av.some(v=>Math.abs(v-exp)<0.005),nOk=nameIn(l.payer,t);
+  l.ocr={at:new Date().toISOString(),len:t.trim().length,codes:[...new Set(codes)].slice(0,6),amts:[...new Set(av.filter(v=>v>=1))].slice(0,8),codeOk:cOk,ibanOk:ibOk,amtOk:aOk,nameOk:nOk,auto:cOk&&ibOk&&aOk&&nOk};
+  if(l.ocr.auto){doApprove(l,true);return ok('Dekont doğrulandı: kod, IBAN, tutar ve ad soyad eşleşti. Ödemeniz otomatik onaylandı, iletişim bilgileri açıldı.')}
+  notifyAdmins(`#${l.id} dekontu otomatik doğrulanamadı (kod ${cOk?'tamam':'uyumsuz'} · IBAN ${ibOk?'tamam':'uyumsuz'} · tutar ${aOk?'tamam':'uyumsuz'} · ad soyad ${nOk?'tamam':'uyumsuz'}). Manuel kontrol bekliyor.`,{go:'adm:g'});
+  return ok('Dekont yüklendi ancak otomatik doğrulanamadı. Yönetici manuel kontrol edecek.')}
+ if(route==='POST admin/loads/:id/bank-verify'){const l=adm();if(l.status!=='taahhüt edildi'||l.paid||!l.refCode)fail('Bu ilan için banka eşleştirmesi uygun değil.');
+  const r=b.row||{},t=String(r.text||'').slice(0,800),exp=Math.round(l.price*l.rate)/100,key=String(r.t)+'|'+t.slice(0,60);
+  const codes=[],cr=/(^|[^\d.,])(\d{5})(?!\d|[.,]\d)/g;let cm;const tt=t.replace(/(\d)[.,](\d{3})(?!\d)/g,'$1$2');while((cm=cr.exec(tt))){codes.push(cm[2]);cr.lastIndex=cm.index+cm[0].length-1}
+  const cOk=codes.includes(l.refCode),aOk=ocrAmts(t).some(v=>Math.abs(v-exp)<0.005),nOk=nameIn(l.payer,t);
+  if(!cOk)return{matched:false};
+  if(DB.loads.some(x=>x.id!==l.id&&x.bank&&x.bank.key===key&&x.bank.auto))return{matched:false};
+  const auto=cOk&&aOk&&nOk;
+  l.bank={at:new Date().toISOString(),key,t:r.t,from:String(r.from||'').slice(0,60),text:t.slice(0,200),codeOk:cOk,amtOk:aOk,nameOk:nOk,auto};
+  if(auto){doApprove(l,true);save();return{matched:true,message:'Banka bildirimi eşleşti: kod, tutar ve ad soyad tamam. Ödeme otomatik onaylandı.'}}
+  const bad=[aOk?'':'tutar',nOk?'':'ad soyad'].filter(Boolean).join(' ve ');
+  notifyAdmins(`⚠️ #${l.id}: banka bildirimi geldi, kod eşleşti ancak ${bad} UYUMSUZ (beklenen ${tl2(exp)} TL · ${l.payer||'ad soyad girilmemiş'}). Manuel kontrol ve onayınız bekleniyor.`,{go:'adm:g'});save();return{matched:false,partial:true}}
+ if(route==='POST admin/loads/:id/reject-receipt'){const l=adm();if(l.status!=='taahhüt edildi'||l.paid||!l.receipt)fail('Reddedilecek bir dekont yok.');
+  const why=String(b.reason||'').trim().slice(0,200),tk=l.carrierUser;l.receipt=null;revertL(l);
+  note(tk,`#${l.id} için yüklediğiniz dekont reddedildi${why?': '+why:''}. İşlem iptal edildi, ilan yeniden yayında. İsterseniz tekrar ${l.isTow?'“Aracı Kabul Et”':'“Yükü Al”'} diyebilirsiniz.`,{go:'list'});
+  note(l.shipperUser,`#${l.id} için ödeme tamamlanmadığından işlem iptal edildi; ilanınız yeniden yayında.`,{go:'list'});
+  return ok('Dekont reddedildi; işlem iptal edildi ve ilan yeniden yayına alındı.')}
+ if(route==='POST loads/:id/cancel'){const l=taker();if(l.status!=='taahhüt edildi'||l.paid||l.receipt)fail('Bu işlem iptal edilemez.');revertL(l);save();return ok('İşlem iptal edildi; ilan yeniden yayında.')}
+ if(route==='POST loads/release-mine'){auth();return ok(String(releaseStale(10e3,u)))}
+ if(route==='POST loads/:id/archive'){auth();if(!L||!(L.shipperUser===u||L.carrierUser===u))fail('İlan bulunamadı.',404);L.arch=L.arch||{};
+  if(b.on===false){delete L.arch[u];return ok('İşlem geri alındı.')}
+  if(!(L.paid||L.status==='reddedildi'))fail('Yalnızca ödemesi onaylanmış veya reddedilmiş işlemler silinebilir.');L.arch[u]=true;return ok('Silindi. “Bitirilmiş operasyonlar” altında bulabilirsiniz.')}
+ if(route==='POST loads/archive-delete'){auth();const ids=(b.ids||[]).map(Number);let n=0;DB.loads.forEach(l=>{if(ids.includes(l.id)&&(l.shipperUser===u||l.carrierUser===u)&&l.arch&&l.arch[u]&&!(l.gone&&l.gone[u])){l.gone=l.gone||{};l.gone[u]=true;n++}});return ok(n+' kayıt kalıcı olarak silindi.')}
+ if(route==='POST loads/:id/ontheway'){const l=drv();if(l.status!=='taahhüt edildi'||!l.paid)fail('Ödeme onaylanmadan yola çıkılamaz.');l.status='yolda';note(l.isTow?l.carrierUser:l.shipperUser,`#${l.id} yola çıktı.`);return ok('Yolda olarak işaretlendi.')}
+ if(route==='POST loads/:id/deliver'){const l=drv();if(l.status!=='yolda')fail('Yük yolda değil.');l.proof=sv(file);l.status='teslim edildi';note(l.isTow?l.carrierUser:l.shipperUser,`#${l.id} teslim edildi.`);notifyAdmins(`#${l.id} teslim kanıtı yüklendi, ödeme çözümü bekliyor.`);return ok('Teslimat kanıtı kaydedildi. Yönetici ödemeyi serbest bırakacak.')}
+ if(route==='GET docs/mine'){auth();const d=doc(u);save();return{tax:!!U.taxFile,src:!!d.srcFile,k1:!!d.k1File,frigo:!!d.frigoFile,srcOk:d.srcOk,k1Ok:d.k1Ok,frigoOk:d.frigoOk}}
+ if(m==='POST'&&/^docs\/(src|k1|frigo|tax)$/.test(path)){auth();const k=path.split('/')[1],d=doc(u);if(k==='tax')U.taxFile=sv(file);else{d[k+'File']=sv(file);d[k+'Ok']=false}notifyAdmins(`${dn(U)} yeni belge yükledi (${k.toUpperCase()}).`);return ok('Belge yüklendi, yönetici incelemesine sunuldu.')}
+ if(route==='GET admin/stats'){need('admin');return{escrow:DB.loads.filter(l=>l.paid&&!l.released).reduce((s,l)=>s+l.price,0),earnings:DB.loads.filter(l=>l.released).reduce((s,l)=>s+l.price*l.rate/100,0),rate:DB.rate}}
+ if(route==='POST admin/commission'){need('admin');if(typeof b!=='number'||!isFinite(b)||b<0||b>100||Math.round(b*100)/100!==b)fail('Oran 0 ile 100 arasında, en fazla 2 ondalıklı bir sayı olmalı.');DB.rate=b;return ok(`Komisyon oranı %${b} olarak güncellendi (yalnız yeni kabul edilen işlere uygulanır).`)}
+ if(route==='POST admin/loads/:id/approve-payment'){const l=adm();if(l.status!=='taahhüt edildi'||l.paid)fail('Bu ilan için ödeme onayı uygun değil.');if(!l.receipt)fail('Taşıyıcı henüz dekont yüklemedi.');l.paid=true;[l.shipperUser,l.carrierUser].forEach(x=>note(x,`#${l.id} ödemesi onaylandı; iletişim bilgileri açıldı. İşlem artık “İşlerim” sayfanızda.`,{go:'mine'}));return ok('Ödeme onaylandı, havuza alındı, bilgiler taraflara açıldı.')}
+ if(route==='POST admin/loads/:id/release'){const l=adm();if(l.status!=='teslim edildi'||!l.proof||l.released)fail('Teslimat kanıtı olmadan ödeme serbest bırakılamaz.');l.released=true;l.status='tamamlandı';[l.shipperUser,l.carrierUser].forEach(x=>note(x,`#${l.id} tamamlandı, ödeme serbest bırakıldı.`));return ok('Ödeme serbest bırakıldı, komisyon kasaya aktarıldı.')}
+ if(route==='POST admin/loads/bulk-delete'){need('admin');const ids=new Set((b.ids||[]).map(Number));let n=0;DB.loads.forEach(l=>{if(ids.has(l.id)&&l.status!=='aktif'&&l.status!=='onay bekliyor'&&!l.adel){l.adel=true;n++}});save();return ok(n+' ilan silindi.')}
+ if(route==='DELETE admin/loads/:id'){const l=adm();if(l.status!=='aktif'&&l.status!=='onay bekliyor')fail('Kabul edilmiş ilan kaldırılamaz.');DB.loads=DB.loads.filter(x=>x!==l);return ok('İlan kaldırıldı.')}
+ if(route==='GET admin/carriers'){need('admin');return DB.docs}
+ if(m==='POST'&&path.startsWith('admin/carriers/')){need('admin');const d=DB.docs.find(x=>x.username===decodeURIComponent(path.split('/')[2]));if(!d)fail('Bulunamadı.',404);
+  d.srcOk=b.src&&!!d.srcFile;d.k1Ok=b.k1&&!!d.k1File;d.frigoOk=b.frigo&&!!d.frigoFile;note(d.username,'Belge durumlarınız güncellendi.');return ok(d.username+' belge durumları güncellendi.')}
+ if(route==='GET admin/counts'){need('admin');return{f:DB.users.filter(x=>x.status==='beklemede').length,p:DB.loads.filter(x=>x.status==='onay bekliyor').length}}
+ if(route==='GET admin/firms'){need('admin');return DB.users.filter(x=>x.role!=='admin').map(({pw,...r})=>r).sort((a,b)=>(a.status==='beklemede'?0:1)-(b.status==='beklemede'?0:1))}
+ if(m==='POST'&&path.startsWith('admin/firms/')){need('admin');const x=DB.users.find(z=>z.name===decodeURIComponent(path.split('/')[2]));if(!x||x.role==='admin')fail('Bulunamadı.',404);
+  x.status=b.back?'beklemede':b.approve?'onaylı':'reddedildi';
+  let pub=0;if(!b.back){DB.loads.forEach(l=>{if(l.status==='onay bekliyor'&&l.shipperUser===x.name){if(b.approve){l.status='aktif';l.submitted=l.created;l.created=new Date().toISOString();pub++}else l.status='reddedildi'}})}
+  if(pub){note(x.name,`${pub} ilanınız onaylandı ve yayına alındı; ana sayfada görünüyor.`,{go:'list'});matchAlerts()}
+  note(x.name,b.back?'Üyelik onayınız yönetici tarafından kaldırıldı; yeniden onay bekleniyor.':b.approve?'Üyeliğiniz onaylandı. Artık ilan verebilir ve işlem yapabilirsiniz.':'Üyelik başvurunuz reddedildi.',{go:'profile'});
+  return ok(`${dn(x)}: ${x.status==='onaylı'?'üyeler listesine alındı':x.status==='beklemede'?'onay bekleyenlere alındı':'reddedildi'}.${pub?' '+pub+' ilan yayına alındı.':''}`)}
+ if(m==='POST'&&/^admin\/members\/[^/]+\/flags$/.test(path)){need('admin');const x=DB.users.find(z=>z.name===decodeURIComponent(path.split('/')[2]));if(!x||x.role==='admin')fail('Bulunamadı.',404);
+  const a=!!b.reqTC,c=!!b.reqDocs,ms=[];
+  if(a!==!!x.reqTC){x.reqTC=a;ms.push(a?'T.C. kimlik no zorunlu':'T.C. kimlik no zorunluluğu kaldırıldı')}
+  if(c!==!!x.reqDocs){x.reqDocs=c;ms.push(c?'evrak menüsü zorunlu':'evrak zorunluluğu kaldırıldı')}
+  if(ms.length)note(x.name,'Yeni durum: '+ms.join('; ')+'.',{go:x.reqDocs&&!docsOk(x)?'docs':'profile'});
+  return ok(dn(x)+': '+(ms.join('; ')||'değişiklik yok')+'.')}
+ if(route==='GET notes'){auth();scan(u);return DB.notes.filter(n=>n.to===u).reverse()}
+ if(route==='POST notes/delete'){auth();const ids=new Set((b.ids||[]).map(String)),n0=DB.notes.length;DB.notes=DB.notes.filter(n=>!(n.to===u&&ids.has(n.id)));save();return ok((n0-DB.notes.length)+' bildirim silindi.')}
+ if(route==='POST notes/read'){auth();DB.notes.forEach(n=>{if(n.to===u)n.read=true});return ok('')}
+ if(route==='GET alerts'){auth();return DB.alerts.filter(a=>a.user===u).map(a=>({id:a.id,label:lbl(a)}))}
+ if(route==='POST alerts'){auth();if(role==='admin')fail('Yönetici alarm kuramaz.');if((role==='shipper')!==!!b.tow)fail(role==='shipper'?'Yük verenler boş araç ilanları için alarm kurabilir.':'Taşıyıcılar yük ilanları için alarm kurabilir.');if(DB.alerts.filter(a=>a.user===u).length>=10)fail('En fazla 10 alarm kaydedebilirsiniz.');
+  if(b.kasa&&!TT.includes(b.kasa))fail('Geçersiz kasa tipi.');if(!(+b.maxTon>=0&&+b.maxTon<=60))fail('Tonaj 0-60 ton arasında olmalı.');
+  DB.alerts.push({id:DB.aid++,user:u,tow:!!b.tow,cities:(b.cities||[]).slice(0,81),kasa:b.kasa||'',maxTon:+b.maxTon||0,min:+b.min||0,adr:!!b.adr});return ok('Alarm kaydedildi: şehir, kasa tipi ve tonaj uyan ilan girince uyarı ve sesli alarm alacaksınız.')}
+ if(route==='DELETE alerts/:id'){auth();DB.alerts=DB.alerts.filter(a=>!(a.id===id&&a.user===u));return ok('Alarm silindi.')}
+ fail('Bilinmeyen istek.',404)}
+const post=(p,b)=>{if(p==='login'||p==='logout'){LU='';const k=$('fk');if(k)k.value=''}return api(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b??{})})};
+const upload=(p,f)=>{const fd=new FormData();fd.append('file',f);return api(p,{method:'POST',body:fd})};
+const pick=cb=>{const i=document.createElement('input');i.type='file';i.accept='image/*,.pdf';i.style.cssText='position:fixed;left:-9999px;opacity:0';(document.querySelector('dialog[open]')||document.body).appendChild(i);i.onchange=()=>{const f=i.files[0];i.remove();f&&cb(f)};i.addEventListener('cancel',()=>i.remove());i.click()};
+const done=async(p)=>{const r=await p;toast(r.message);refresh();bell()};
+
+async function init(){
+ pwaInit();
+ $('nf').innerHTML=$('nt').innerHTML=opts(CITIES);$('ny').innerHTML=opts(LT);$('ty').innerHTML=opts(TT,'Seçiniz…');$('tx').innerHTML=opts(TF);$('fv').innerHTML=opts(TT,'Tümü');$('nvh').innerHTML=opts(TT,'Seçiniz…');$('npt').innerHTML=opts(PT);
+ try{cfg=await api('config')}catch(_e){dbg(_e)}
+ try{const m=await api('me');me=m.name?m:null}catch(_e){dbg(_e)}
+ fillTypes();renderNav();show('list')}
+function renderNav(){
+ $('who').textContent=me?`${me.name} (${me.role})${me.role==='admin'?'':me.status==='onaylı'?' (onaylı)':me.status==='eksik'?' (profil eksik)':' (onay bekliyor)'}`:'';$('lbi').textContent=me?(me.role==='admin'?'🚪':'👤'):'🔑';$('lbt').textContent=me?(me.role==='admin'?'Çıkış':'Hesabım'):'Giriş Yap';$('bb').style.display=me?'inline-flex':'none';
+ $('gb').style.display='none';$('hqf').style.display=me?'none':'flex';document.body.classList.toggle('hqon',!me);$('hqsp').style.display=me?'none':'block';if(me)hqClose();const pb=$('pb');
+ {let bt='',bs='profile';if(me&&me.role!=='admin'){
+  if(me.status==='beklemede'||me.status==='eksik')bt='<b>Üyeliğiniz yönetici onayında.</b> Onaylanınca bildirim alacaksınız.';
+  else if(me.status==='reddedildi')bt='<b>Üyelik başvurunuz reddedildi.</b> <u>Profili düzenle →</u>';
+  else if(me.reqTC&&!me.tcOk)bt='<b>Yönetici T.C. kimlik numaranızı zorunlu kıldı.</b> <u>Profili düzenle\'den ekleyin →</u>';
+  else if(me.reqDocs&&!me.docsOk){bt='<b>Yönetici evrak yüklemenizi zorunlu kıldı.</b> <u>Belgelerim →</u>';bs='docs'}}
+  pb.style.display=bt?'block':'none';pb.innerHTML=bt;pb.dataset.t=bs}
+ $('abtn').style.display=me&&me.role==='admin'?'none':'';document.body.dataset.role=me?.role||'';
+ if(me&&me.role!=='admin'&&relFor!==me.name){relFor=me.name;post('loads/release-mine').then(()=>refresh()).catch(()=>{})}
+ if(me&&me.role!=='admin'&&DB)try{scan(me.name)}catch(_e){dbg(_e)}
+ bell();
+ const sh=me?.role==='shipper',pin=!!me&&me.role!=='admin',t=[['list',IC_HOME+' Ana Sayfa']];
+ if(sh)t.push(['new',IC_LD+' Yük İlanı Ver'],['mine',IC_LD+' İşlerim']);
+ if(me?.role==='carrier')t.push(['tow',IC_TW+' Boş Araç Bildir'],['mine',IC_TW+' İşlerim']);
+ if(me?.role==='admin')t.push(['admin','⚙️ Yönetim'+(ADM?` (${ADM})`:'')]);
+ if(pin&&me.reqDocs)t.push(['docs','📑 Belgelerim']);
+ t.shift();$('tabs').innerHTML='<div class="tl">'+t.map(([k,n])=>`<button class="btn ${k===view?'':'o'} s" onclick="show('${k}')">${n}</button>`).join('')+(sh?`<button class="btn s alb" onclick="openAlarm()">🔔 Boş araç talebi oluştur</button>`:'')+(me?.role==='carrier'?`<button class="btn s alb" onclick="openAlarm()">🔔 Yük arıyorum</button>`:'')+`</div>`;$('hmb').style.display=me?'inline-flex':'none';$('hmb').classList.toggle('act',view==='list');$('hmb').firstChild.innerHTML=IC_HOME;
+ $('tabs').style.display=t.length>0||sh?'':'none';hh()}
+function show(v,pop){if(v==='new'||v==='tow'){const k=$('fk');if(k)k.value=''}if(v==='tow')cpEnsure('t','Şehirleri seç',true);view=v;document.body.dataset&&(document.body.dataset.v=v);if(!pop)try{history.pushState({v},'')}catch(_e){dbg(_e)}window.scrollTo(0,0);document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));renderNav();refresh()}
+function refresh(){({list:loadList,mine:loadMine,docs:loadDocs,profile:loadProfile,admin:loadAdmin,new:()=>{}})[view]?.()}
+let wantProf=false;function doLogout(){post('logout').then(()=>{me=null;renderNav();show('list')})}
+function profGo(){if(me){dlg.close();show('profile')}else{wantProf=true;toast('Profilinizi düzenlemek için önce giriş yapın.');$('u').focus()}}
+function authBtn(){if(me&&me.role==='admin'){doLogout()}else if(me){$('acw').textContent=$('who').textContent;$('acp').style.display='';$('lgf').style.display='none';$('rgf').style.display='none';dlg.showModal()}else{wantProf=false;$('lnote').style.display='none';$('acp').style.display='none';let l='';try{l=localStorage.getItem('alter_last_user')||''}catch(_e){dbg(_e)}$('u').value=l;$('p').value='';regMode(false);dlg.showModal();($('u').value?$('p'):$('u')).focus()}}
+async function login(){$('lerr').textContent='';try{me=await post('login',{username:$('u').value,password:$('p').value,remember:$('rm').checked});try{localStorage.setItem('alter_last_user',me.name)}catch(_e){dbg(_e)}dlg.close();toast(me.status==='onaylı'?'Giriş başarılı.':'Giriş başarılı. Üyeliğiniz yönetici onayında.');show(me.role==='admin'?'admin':wantProf?'profile':'list');wantProf=false;
+ if(pendAcc){const p=pendAcc;pendAcc=null;if(p.tow?me.role!=='shipper':me.role!=='carrier')toast(p.tow?'Boş araçları yalnızca yük veren hesapları kabul edebilir.':'Yükleri yalnızca taşıyıcı hesapları alabilir.');else if(me.status==='onaylı')setTimeout(()=>acc(p.id,p.tow),350)}if(pendHq){const p=pendHq;pendHq=null;setTimeout(()=>hqGo(p),350)}}catch{$('lerr').style.color='var(--bad)';$('lerr').textContent=LASTMSG}}
+
+function fillTypes(){$('ft').innerHTML=opts(LT,'Hepsi');$('fv').innerHTML=opts(TT,'Hepsi');$('fx').innerHTML=opts(TF,'Hepsi');$('fpt').innerHTML=opts(PT,'Hepsi')}
+const hh=()=>{const e=document.querySelector('header');e&&document.documentElement.style.setProperty('--hh',e.offsetHeight+'px')};
+const CP={f:[],v:[],a:[],t:[]};
+function cpInit(id,t){$('cp_'+id).innerHTML=`<details class="cp"><summary>${t||'Şehirler'} <span id="cpn_${id}" class="muted">(tümü)</span></summary><input type="search" class="cps" placeholder="Şehir ara..." oninput="cpFind('${id}',this.value)"><div class="cpl" id="cpl_${id}">${CITIES.map(c=>`<label class="ck"><input type="checkbox" value="${c}" onchange="cpTog('${id}',this)"> ${c}</label>`).join('')}</div><button class="btn o s" type="button" onclick="cpClr('${id}')">Seçimi temizle</button></details>`}
+const cpN=id=>{const e=$('cpn_'+id);if(e)e.textContent=CP[id].length?`(${CP[id].length} seçili)`:'(tümü)'};
+function cpEnsure(id,t,open){if($('cpl_'+id))return;cpInit(id,t);if(open){const d=document.querySelector('#cp_'+id+' details');if(d)d.open=true}}
+function cpTog(id,el){const a=CP[id],i=a.indexOf(el.value);if(el.checked&&i<0)a.push(el.value);if(!el.checked&&i>=0)a.splice(i,1);cpN(id);if(id!=='a'&&id!=='t')loadList()}
+function cpSync(id){document.querySelectorAll('#cpl_'+id+' input').forEach(x=>x.checked=CP[id].includes(x.value));cpN(id)}
+function cpClr(id){CP[id].length=0;cpSync(id);if(id!=='a'&&id!=='t')loadList()}
+function cpFind(id,q){q=q.toLocaleLowerCase('tr');document.querySelectorAll('#cpl_'+id+' label').forEach(l=>l.style.display=l.textContent.toLocaleLowerCase('tr').includes(q)?'':'none')}
+const closeF=()=>{$('fbody').style.display='none'};
+const FPAR={fq:'q',fk:'kind',fs:'sort',ft:'type',fv:'vehicle',fx:'feat',fpt:'pt',fm:'min',fM:'max',fw1:'w1',fw2:'w2',fcap:'cap',fp1:'p1',fp2:'p2',fd1:'d1',fd2:'d2'};
+function clearF(){CP.f.length=0;CP.v.length=0;cpSync('f');cpSync('v');Object.keys(FPAR).forEach(i=>{$(i).value=''});$('fa').checked=false;loadList()}
+let ldT;const loadListD=()=>{clearTimeout(ldT);ldT=setTimeout(loadList,220)};
+
+const btn=(t,f,c='')=>`<button class="btn s ${c}" onclick="${f}">${t}</button>`;
+const fl=n=>`#" onclick="return openF('${n}')`;
+function card(l,ctx){
+ const r=me?.role;let a='';
+ if(ctx==='list'&&l.status==='aktif'&&(!me||(r==='carrier'&&!l.isTow)||(r==='shipper'&&l.isTow)))a=btn(l.isTow?'Aracı Kabul Et':'Yükü Al',`acc(${l.id},${!!l.isTow})`);
+ if(ctx==='mine'||(ctx==='list'&&l.isTaker)){
+  if(l.isTaker&&l.status==='taahhüt edildi'&&!l.paid)a=`<span class="muted">${l.hasReceipt?'Dekont yüklendi · yönetici onayı bekleniyor':'Ödeme bekleniyor'}</span>`;
+  else if(l.mine&&!l.isTaker&&l.status==='taahhüt edildi'&&!l.paid)a='<span class="muted">Ödeme onayı bekleniyor</span>';
+  else if(l.isDriver&&l.status==='taahhüt edildi'&&l.paid)a=btn('Yoldayım',`way(${l.id})`,'t');
+  else if(l.isDriver&&l.status==='yolda')a=btn('Teslim Ettim',`dlv(${l.id})`,'r');
+  else if(l.isTaker&&l.status==='taahhüt edildi'&&l.paid)a='<span class="muted">Sürücü bekleniyor</span>'}
+ if(ctx==='admin'){
+  if(l.status==='aktif'||l.status==='onay bekliyor')a=btn('Kaldır',`del(${l.id})`,'r');
+  if(l.status==='taahhüt edildi'&&!l.paid)a=(l.receipt?`<a class="btn s o" target="_blank" href="${fl(l.receipt)}">Dekont</a>`+btn('💵 Ödemeyi Onayla',`ap(${l.id})`,'g')+btn('Dekontu Reddet',`rr(${l.id})`,'r'):'<span class="muted">Dekont bekleniyor</span>');
+  if(l.status==='teslim edildi')a=(l.proof?`<a class="btn s o" target="_blank" href="${fl(l.proof)}">POD</a>`:'')+btn('Parayı Çöz',`rel(${l.id})`,'g')}
+ if(ctx==='arch')a=btn('Geri al',`arch(${l.id},false)`,'o');
+ if((ctx==='mine'||ctx==='list')&&l.mine&&(l.paid||l.status==='reddedildi'))a+=btn('Sil',`arch(${l.id},true)`,'r');
+ const own=l.paid&&l.mine;
+ const cap=`<div class="capr"><span class="ctl ${l.isTow?'tw':'ld'}">${l.isTow?IC_TW+' Boş araç ilanı':IC_LD+' Yük ilanı'}</span>${l.created?`<span class="muted ts">${fdt(l.created)}</span>`:''}</div>`;
+ return `<div class="card${l.isTow?' tow':''}" data-cid="${l.id}">${cap}<div class="row"><span class="badge idb">#${l.id}${l.isTow?' · çekici':''}</span><span class="badge ok tyb">${esc(l.type)}</span></div>
+ ${l.isTow?`<div><b>${(l.cities||[]).length>1?'Bulunduğu iller:':'Bulunduğu yer:'}</b> ${esc((l.cities&&l.cities.length?l.cities:[l.from]).join(', '))}${l.fromDistrict?' ('+esc(l.fromDistrict)+')':''}</div>`:`<div><b>Kalkış:</b> ${esc(l.from)}${l.fromDistrict?' ('+esc(l.fromDistrict)+')':''}<br><b>Varış:</b> ${esc(l.to)}${l.toDistrict?' ('+esc(l.toDistrict)+')':''}</div>`}
+ ${l.isTow?`<div class="muted">${esc(l.towFeature)}${l.capacity?' · Maks. '+l.capacity+' ton':''}</div>`:`<div class="muted">Yükleme: ${fdt(l.pickup)}<br>Teslim: ${fdt(l.delivery)}</div>`}
+ ${l.desc?`<div style="background:var(--bg);border-radius:8px;padding:.5rem;font-size:.88rem;white-space:pre-wrap;word-break:break-word"><b>Yük özelliği:</b> ${esc(l.desc)}</div>`:''}
+ ${l.weight?`<div class="muted">Maks. ${l.weight} ton${l.pallets?' · '+l.pallets+' palet':''}${l.vol?' · '+l.vol+' m³':''}${l.adr?' · ADR':''}<br>${esc(l.vehicle)} · ${esc(l.payTerm)}</div>`:''}
+ <div class="muted" style="border-top:1px dashed var(--line);padding-top:.4rem">${l.isTow?'Taşıyıcı':'Yük veren'}: ${esc(l.shipper)}${l.verified?' (onaylı)':''}${l.poster?` <span class="muted">(@${esc(l.poster)})</span>`:''}<br>Telefon: ${l.phone?esc(l.phone):'*********'}<br>Adres: ${l.address?esc(l.address):'*********'}${l.carrier?`<br>${l.isTow?'Yük veren':'Taşıyıcı'}: ${esc(l.carrier)}`:''}</div>
+ ${ctx==='admin'&&l.refCode?vbox(l):''}
+ <div class="row" style="margin-top:auto"><div><div class="muted">${r==='carrier'?'Net hak ediş':'Navlun'}</div><div class="price">${money(r==='carrier'?l.net:l.price)}</div></div><div class="row" style="gap:.3rem">${ctx==='list'?`<span class="badge">${ST[l.status]}</span>`:`<span class="badge">${ST[l.status]}</span>`}${a}</div></div></div>`}
+const vbox=l=>{const o=l.ocr,ib=cfg.iban||IBAN,ic=x=>o?(x?'✅':'❌'):'',
+ row=(n,e,g,k)=>`<div class="vr2"><span class="muted">${n}</span><span>Beklenen: <b>${esc(e)}</b> ${ic(k)}${o&&g?`<br><span class="muted">Okunan: ${esc(g)}</span>`:''}</span></div>`,
+ st=!o?(l.hasReceipt?'Dekont henüz kontrol edilmedi':'Dekont bekleniyor'):o.auto?'✅ 4/4 eşleşti · otomatik onaylandı':'❌ Eşleşmedi · manuel kontrol gerekli';
+ return `<div class="vbox ${o?(o.auto?'vg':'vr'):''}"><b>Ödeme doğrulama</b> <span class="muted">· ${st}</span>`
+  +row('Özel kod',l.refCode,o&&(o.codes.length?o.codes.join(', '):'bulunamadı'),o&&o.codeOk)
+  +row('IBAN',ib,o&&(o.ibanOk?'dekontta bulundu':'bulunamadı'),o&&o.ibanOk)
+  +row('Tutar',money(l.commission),o&&(o.amts.length?o.amts.slice(0,4).map(tl2).join(' · '):'bulunamadı'),o&&o.amtOk)
+  +row('Gönderen ad soyad',l.payer||'(girilmedi)',o&&(o.nameOk?'dekontta bulundu':'bulunamadı'),o&&o.nameOk)
+  +(l.bank?`<div class="muted" style="font-size:.8rem;margin-top:.3rem">Banka bildirimi: kod ${l.bank.codeOk?'✅':'❌'} · tutar ${l.bank.amtOk?'✅':'❌'} · ad soyad ${l.bank.nameOk?'✅':'❌'}${l.bank.auto?' · otomatik onaylandı':' · <b>manuel onay gerekli</b>'}<br>${esc(l.bank.text||'')}</div>`:'')
+  +(o?`<div class="muted" style="font-size:.75rem;margin-top:.3rem">Kontrol: ${fdt(o.at)}${o.len<20?' · dekonttan metin okunamadı':''}</div>`:'')+`</div>`};
+const cards=(a,c)=>a.map(l=>card(l,c)).join('')||'<p class="muted">Kayıt bulunamadı.</p>';
+
+const tsOf=x=>x.created?(Date.parse(x.created)||0):0;
+const srt=(a,fs)=>{const w=x=>x.weight||x.capacity||0;return a.sort(fs==='pa'?(x,y)=>x.price-y.price:fs==='pd'?(x,y)=>y.price-x.price:fs==='wa'?(x,y)=>w(x)-w(y):fs==='wd'?(x,y)=>w(y)-w(x):(x,y)=>(tsOf(y)-tsOf(x))||(y.id-x.id))};
+async function loadList(){const q=new URLSearchParams();let n=0;
+ for(const[id,k]of Object.entries(FPAR)){const v=String($(id).value||'').trim();if(v){q.set(k,v);if(id!=='fq'&&id!=='fs')n++}}
+ if(CP.f.length){q.set('from',CP.f.join(','));n++}if(CP.v.length){q.set('to',CP.v.join(','));n++}if($('fa').checked){q.set('adr','1');n++}
+ $('fcn').textContent=n?` (${n})`:'';
+ try{let all;
+  if(me?.role==='shipper'){const[a,m]=await Promise.all([api('loads?'+q),api('loads?scope=mine&'+q)]),ids=new Set(m.map(x=>x.id));
+   all=srt([...m.filter(x=>!x.paid),...a.filter(x=>x.isTow&&!ids.has(x.id))],$('fs').value).map(l=>card(l,ids.has(l.id)?'mine':'list'))}
+  else{let a=await api('loads?'+q);
+   if(me?.role==='carrier'){const m=(await api('loads?scope=mine&'+q)).filter(x=>x.mine&&!x.paid&&x.status!=='aktif'),ids=new Set(a.map(x=>x.id));a=[...m.filter(x=>!ids.has(x.id)),...a]}
+   all=srt(a,$('fs').value).map(l=>card(l,'list'))}
+  const kk=$('fk').value;$('fchip').innerHTML=kk?`<span class="chip">Filtre: ${kk==='tow'?IC_TW+' Boş araç ilanları':IC_LD+' Yük ilanları'} <b role="button" tabindex="0" aria-label="Filtreyi kaldır" onclick="clearKind()">✕ Tümünü göster</b></span>`:'';
+  $('gridL').innerHTML=all.join('')||'<p class="muted">Kayıt bulunamadı.</p>'}catch(_e){dbg(_e)}}
+function clearKind(){$('fk').value='';loadList()}
+let mtab=0;
+const mineTab=i=>{mtab=i;loadMine()};
+const mineSync=()=>{const all=document.querySelectorAll('.msel'),on=document.querySelectorAll('.msel:checked');$('mall').checked=all.length>0&&on.length===all.length;$('mdel').textContent='Seçilenleri sil'+(on.length?' ('+on.length+')':'')};
+const mineAll=c=>{document.querySelectorAll('.msel').forEach(x=>x.checked=c);mineSync()};
+async function mineDel(){const ids=[...document.querySelectorAll('.msel:checked')].map(x=>+x.value);if(!ids.length){toast('Silinecek kayıtları işaretleyin.');return}
+ if(!confirm(ids.length+' kayıt kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?'))return;
+ try{const r=await post('loads/archive-delete',{ids});toast(r.message);loadMine()}catch(_e){dbg(_e)}}
+const arch=async(id,on)=>{if(on&&!confirm('Bu işlem listenizden kaldırılacak. “Bitirilmiş operasyonlar” altında bulabilirsiniz. Silinsin mi?'))return;
+ try{const r=await post(`loads/${id}/archive`,{on});toast(r.message);refresh();bell()}catch(_e){dbg(_e)}};
+async function loadMine(){try{const[a,r]=await Promise.all([api('loads?scope=mine'),api('loads?scope=archive')]);
+ $('mt1').classList.toggle('on',mtab===0);$('mt2').classList.toggle('on',mtab===1);$('mcn').textContent=r.length?`(${r.length})`:'';$('mtool').style.display=mtab===1&&r.length?'flex':'none';
+ $('mine').innerHTML=mtab===0?cards(a.filter(x=>x.paid),'mine'):(r.map(l=>`<div><label class="ck" style="padding-left:0"><input type="checkbox" class="msel" value="${l.id}" onchange="mineSync()"> Seç</label>${card(l,'arch')}</div>`).join('')||'<p class="muted">Bitirilmiş operasyon yok.</p>');
+ if(mtab===1)mineSync()}catch(_e){dbg(_e)}}
+async function loadDocs(){try{const d=await api('docs/mine');const row=(k,n,u,req)=>`<div class="row" style="padding:.5rem 0;border-bottom:1px solid var(--line)"><b>${n}${req?' <span class="badge">zorunlu</span>':''}</b><span class="badge ${u?'ok':''}">${u?'Yüklendi':'Eksik'}</span>${btn(u?'Yenile':'Yükle',`docUp('${k}')`,'o')}</div>`;
+ $('docs').innerHTML=row('tax','Vergi levhası',d.tax,1)+(me.role==='carrier'?row('src','SRC Belgesi',d.src,1)+row('k1','K1 Yetki Belgesi',d.k1,1)+row('frigo','Frigo Belgesi',d.frigo,0):'')}catch(_e){dbg(_e)}}
+const docUp=k=>pick(f=>done(upload('docs/'+k,f)));
+let asub='g',asf={y:'n',t:'n'},afirm='',asm='p',AD=null,ADM=0,NOTES=[];
+const kind=k=>AD?AD.l.filter(x=>!x.adel&&(k==='t'?x.isTow:!x.isTow)):[];
+const seeking=x=>x.status==='aktif'||x.status==='onay bekliyor';
+const cnt=k=>{const a=kind(k);return{p:a.filter(x=>x.status==='onay bekliyor').length,n:a.filter(seeking).length,a:a.filter(x=>!seeking(x)).length}};
+const pendPay=l=>l.filter(x=>(x.status==='taahhüt edildi'&&!x.paid&&x.receipt)||x.status==='teslim edildi');
+function aTab(k){asub=k;document.querySelectorAll('.ap').forEach(e=>e.classList.toggle('on',e.id==='a-'+k));
+ const pp=AD?pendPay(AD.l).length:0,f=AD?AD.f:0,y=cnt('y').n,t=cnt('t').n,vk=AD?AD.l.filter(x=>x.refCode&&x.status==='taahhüt edildi'&&!x.paid&&x.hasReceipt&&(!x.ocr||!x.ocr.auto)).length:0;
+ const T=[['g','Para Alındı'+(pp?` 🔴${pp}`:' 🟢')],['k','Ödeme Kontrolü'+(vk?` 🔴${vk}`:'')],['f','Üyeler'+(f?` (${f})`:'')],['y','Yük İlanları'+(y?` (${y})`:'')],['t','Boş Araç İlanları'+(t?` (${t})`:'')],['d','Taşıyıcı Evrakları']];
+ $('atabs').innerHTML=T.map(([k,n])=>`<button class="btn ${k===asub?'':'o'} s" onclick="aTab('${k}')">${n}</button>`).join('')}
+const goAdm=(k,f)=>{afirm='';if(k==='f'){if(f)asm=f}else if(f)asf[k]=f;aTab(k);renderAdm();window.scrollTo(0,0)};
+const jump=(k,u)=>{afirm=u;asf[k]='a';aTab(k);renderAdm();window.scrollTo(0,0)};
+function listKind(k){const c=cnt(k),F=asf[k];let a=kind(k);if(afirm)a=a.filter(x=>x.poster===afirm);
+ $('sf-'+k).innerHTML=[['n','Müşteri arayan ilanlar',c.n],['a','İşi biten ilanlar',c.a]].map(([s,n,v])=>`<button class="${s===F?'on':''}" onclick="asf.${k}='${s}';renderAdm()">${n} (${v})</button>`).join('');
+ $('afc-'+k).innerHTML=afirm?`<span class="chip">Firma: @${esc(afirm)} <b onclick="afirm='';renderAdm()">✕</b></span>`:'';
+ const L=a.filter(x=>F==='p'?x.status==='onay bekliyor':F==='n'?seeking(x):!seeking(x)),fin=F==='a';
+ $('atool-'+k).style.display=fin&&L.length?'flex':'none';
+ $('a'+k.toUpperCase()).innerHTML=fin?(L.map(x=>`<div><label class="ck" style="padding-left:0"><input type="checkbox" class="asel" data-k="${k}" value="${x.id}" onchange="aSelSync('${k}')"> Seç</label>${cards([x],'admin')}</div>`).join('')||'<p class="muted">İşi biten ilan yok.</p>'):cards(L,'admin');
+ if(fin)aSelSync(k)}
+const aSelSync=k=>{const all=document.querySelectorAll(`.asel[data-k="${k}"]`),on=document.querySelectorAll(`.asel[data-k="${k}"]:checked`);$('aall-'+k).checked=all.length>0&&on.length===all.length;$('adel-'+k).textContent='Seçilenleri sil'+(on.length?' ('+on.length+')':'')};
+const aSelAll=(k,c)=>{document.querySelectorAll(`.asel[data-k="${k}"]`).forEach(x=>x.checked=c);aSelSync(k)};
+async function aDel(k){const ids=[...document.querySelectorAll(`.asel[data-k="${k}"]:checked`)].map(x=>+x.value);if(!ids.length){toast('Silinecek ilanları işaretleyin.');return}
+ if(!confirm(ids.length+' ilan yönetici listesinden silinecek. Devam edilsin mi?'))return;
+ try{const r=await post('admin/loads/bulk-delete',{ids});toast(r.message);loadAdmin()}catch(_e){dbg(_e)}}
+const memCard=f=>{const my=AD.l.filter(x=>x.poster===f.name),ny=my.filter(x=>!x.isTow).length,nt=my.length-ny,u=esc(f.name),nm=((f.first||'')+' '+(f.last||'')).trim(),d=AD.dm[f.name]||{};
+ const lk=(n,t)=>n?`<a target="_blank" href="${fl(n)}">${t}</a>`:'';const files=[lk(f.taxFile,'Vergi levhası'),lk(d.srcFile,'SRC'),lk(d.k1File,'K1'),lk(d.frigoFile,'Frigo')].filter(Boolean).join(' · ');
+ const chk=(k,l,on)=>`<label class="ck" style="padding-left:0"><input type="checkbox" id="${k}_${u}" ${on?'checked':''} onchange="flag('${u}')"> ${l}</label>`;
+ return `<div class="card"><div class="row"><b>${esc(nm||f.company||f.name)}</b><span class="badge ${f.status==='onaylı'?'ok':''}">${esc(f.status)}</span></div><div class="muted">@${u} · ${f.role==='shipper'?'Yük veren':'Taşıyıcı'}<br>Telefon: ${esc(f.phone)}${f.email?'<br>E-posta: '+esc(f.email):''}${f.company?`<br>Firma: ${esc(f.company)}${f.taxNo?' · Vergi no: '+esc(f.taxNo):''}`:''}${f.tcNo?`<br>T.C.: ${esc(f.tcNo)}`:''}${f.created?`<br>Kayıt: ${fdt(f.created)}`:''}${files?'<br>'+files:''}</div>
+ <div style="border-top:1px dashed var(--line);padding-top:.2rem">${chk('ftc','T.C. kimlik no zorunlu',f.reqTC)}${chk('fdc','Evrak menüsü zorunlu',f.reqDocs)}</div>
+ <div class="row">${f.status==='onaylı'?btn('Onayı kaldır',`firm('${u}','back')`,'o'):btn('Onayla',`firm('${u}',true)`,'g')+btn('Reddet',`firm('${u}',false)`,'r')}</div>${ny||nt?`<div class="row">${ny?btn('Yük ilanları ('+ny+')',`jump('y','${u}')`,'o'):''}${nt?btn('Boş araç ('+nt+')',`jump('t','${u}')`,'o'):''}</div>`:''}</div>`};
+function renderAdm(){if(!AD)return;const l=AD.l,fm=AD.fm,pp=pendPay(l),pm=fm.filter(x=>x.status!=='onaylı'),am=fm.filter(x=>x.status==='onaylı');
+ const A=$('aPend');A.className='box '+(pp.length?'alr':'alg');
+ A.innerHTML=`<b style="font-size:1.05rem">${pp.length?'🔴':'🟢'} İşlem bekleyen (dekont/teslim): ${pp.length}</b>`+(pp.length?`<div class="grid" style="margin-top:.8rem">${cards(pp,'admin')}</div>`:'<div class="muted">Bekleyen işlem yok. Tüm ödemeler kabul edildi.</div>');
+ $('aPaid').innerHTML=cards(l.filter(x=>x.paid),'admin');
+ $('sf-f').innerHTML=[['p','Onay Bekleyen Üyeler',pm.length],['u','Üyeler',am.length]].map(([s,n,v])=>`<button class="${s===asm?'on':''}" onclick="asm='${s}';renderAdm()">${n} (${v})</button>`).join('');
+ $('aF').innerHTML=(asm==='p'?pm:am).map(memCard).join('')||'<p class="muted">Kayıt yok.</p>';
+ const sc=[['Onay bekleyen üye',pm.length,"goAdm('f','p')"],['Yeni yük ilanı (7 gün)',cnt('y').n,"goAdm('y','n')"],['Yeni boş araç ilanı (7 gün)',cnt('t').n,"goAdm('t','n')"]];
+ $('aSC').innerHTML=sc.map(([n,v,f])=>`<div class="box" style="cursor:pointer" onclick="${f}"><div class="muted">${n}</div><div class="price" style="color:${v?'var(--bad)':'var(--ok)'}">${v} →</div></div>`).join('');
+ $('aV').innerHTML=cards(l.filter(x=>x.refCode&&!x.adel),'admin');listKind('y');listKind('t');aTab(asub)}
+async function loadAdmin(){try{bankInit();
+ const [s,l,c,fm]=await Promise.all([api('admin/stats'),api('loads?scope=all'),api('admin/carriers'),api('admin/firms')]);
+ $('aE').textContent=money(s.escrow);$('aK').textContent=money(s.earnings);$('aRv').textContent='%'+s.rate;curRate=s.rate;
+ const dm={};c.forEach(d=>dm[d.username]=d);AD={l,fm,dm,f:fm.filter(f=>f.status==='beklemede').length};
+ const tx=n=>(fm.find(u=>u.name===n)||{}).taxFile,names=[...new Set([...c.filter(d=>d.srcFile||d.k1File||d.frigoFile).map(d=>d.username),...fm.filter(u=>u.taxFile).map(u=>u.name)])];
+ $('aD').innerHTML=names.map(n=>{const d={username:n,...(dm[n]||{})},k=(f,t,q,ok)=>`<label style="display:flex;gap:.4rem;align-items:center;margin:.2rem 0;color:var(--text)"><input type="checkbox" id="${q}_${esc(n)}" ${ok?'checked':''} ${f?'':'disabled'}>${t} ${f?`<a target="_blank" href="${fl(f)}">Görüntüle</a>`:'<span class="muted">yüklenmedi</span>'}</label>`;
+  return `<div class="card"><b>${esc(n)}</b>${tx(n)?`<div class="muted"><a target="_blank" href="${fl(tx(n))}">Vergi levhası</a></div>`:''}${k(d.srcFile,'SRC','s',d.srcOk)}${k(d.k1File,'K1','k',d.k1Ok)}${k(d.frigoFile,'Frigo','f',d.frigoOk)}${btn('Kaydet',`docOk('${esc(n)}')`)}</div>`}).join('')||'<p class="muted">Henüz evrak yüklenmedi.</p>';
+ renderAdm()}catch(_e){dbg(_e)}}
+function goNote(i){const n=NOTES[i];if(!n)return;nts.close();const g=n.go||(me?.role==='admin'?'adm:g':/onaylandı|yola çıktı|teslim|tamamlandı/.test(n.text)?'mine':'list');if(g.startsWith('adm:')){let[,t,f]=g.split(':');if(t==='p'||t==='n')t='y';asub=t;afirm='';if(t==='f')asm='p';if(f&&(t==='y'||t==='t'))asf[t]=f==='p'?'n':f;show('admin')}else show(g)}
+const docOk=u=>done(post('admin/carriers/'+encodeURIComponent(u),{src:$('s_'+u).checked,k1:$('k_'+u).checked,frigo:$('f_'+u).checked}));
+
+/* ===== Kabul sonrası ödeme kartı ===== */
+let payCur=null,curRate=10,pendAcc=null,pendHq=null,relFor='';
+dlg.addEventListener('close',()=>{if(!me){pendAcc=null;pendHq=null}});
+/* ===== Ana sayfa hızlı işlemler: üye değilse ücretsiz üyelik, üyelik sonrası seçilen işleme devam ===== */
+const HQ={find:{r:'carrier',t:'Yük arıyorum'},tow:{r:'carrier',t:'Boş araç ilanı ver',post:1},aload:{r:'carrier',t:'Yük arama alarmı kur'},post:{r:'shipper',t:'Yük ilanı ver',post:1},seek:{r:'shipper',t:'Boş araç arıyorum'},atow:{r:'shipper',t:'Boş araç arama alarmı kur'}};
+function hqClose(){const m=$('hq'),f=$('hqf');if(m)m.style.display='none';if(f)f.setAttribute('aria-expanded','false')}
+function hqToggle(){hqClose();authBtn();if(!me)$('lnote').style.display='block'}
+document.addEventListener('click',e=>{if(!e.target.closest('#hq,#hqf'))hqClose()});
+addEventListener('keydown',e=>{if(e.key==='Escape')hqClose()});
+function openReg(r,h){hqClose();regMode(true);if(r)$('rr').value=r;
+ const own=r==='shipper'?'yük ilanı verebilir, boş araç arayabilir ve boş araç arama alarmı kurabilirsiniz':r==='carrier'?'boş araç ilanı verebilir, yük arayabilir ve yük arama alarmı kurabilirsiniz':'ilan verebilir, yük veya boş araç arayabilir ve alarm kurabilirsiniz';
+ const n=$('rnote');n.innerHTML=(h?`<b>“${h.t}”</b> için üye olmanız gerekir.<br>`:'')+`Üyelik <b>ücretsiz</b>: üye olduktan sonra ${own}.`+(h?'<br><span class="muted">Üyelik tamamlanınca seçtiğiniz işleme otomatik devam edilir.</span>':'');n.style.display='block';dlg.showModal();setTimeout(()=>$('rfn').focus(),60)}
+function hqGo(k){const h=HQ[k];if(!h)return;hqClose();
+ if(!me){pendHq=k;openReg(h.r,h);return}
+ if(me.role==='admin'){toast('Yönetici hesabıyla bu işlem yapılamaz.');return}
+ if(me.role!==h.r){toast(h.r==='carrier'?'Bu işlem için taşıyıcı hesabı gerekir.':'Bu işlem için yük veren hesabı gerekir.');return}
+ ({find:()=>{clearF();$('fk').value='load';show('list');loadList();setTimeout(()=>$('gridL').scrollIntoView({behavior:'smooth'}),250)},
+   seek:()=>{clearF();$('fk').value='tow';show('list');loadList();setTimeout(()=>$('gridL').scrollIntoView({behavior:'smooth'}),250)},
+   tow:()=>show('tow'),post:()=>show('new'),aload:()=>openAlarm(),atow:()=>openAlarm()})[k]()}
+function payShow(id,c,tow,ref){payCur={id,c,tow,ref};$('payRef').textContent=ref||'';const ib=cfg.iban||IBAN;
+ $('payT').textContent=tow?'Aracı kabul ettiniz':'Yükü aldınız';
+ $('payH').textContent='Dekont yüklenmezse işlem iptal olur ve ilan yeniden yayına alınır.';
+ $('payP').innerHTML=`İşleme devam etmek ve bilgilerin üyelik sayfanızda veya WhatsApp’ınıza açık edilmesi için <b>${ib}</b> nolu IBAN’a <b class="payamt">${tl2(c)} TL</b> aktarıp dekontunu yükleyiniz.`;
+ $('payIb').textContent=ib;
+ $('payW').href=`https://wa.me/${cfg.whatsapp||WHATSAPP}?text=`+encodeURIComponent(`Merhaba ALTER Yönetimi, #${id} nolu ilan için ${tl2(c)} TL komisyon ödememi yaptım. Özel kodum: ${ref}. Onayınızı bekliyorum.`);
+ $('payNe').textContent='';try{$('payNm').value=localStorage.getItem('alter_payer')||''}catch(_e){$('payNm').value=''}$('pay').classList.add('on')}
+const payClose=()=>$('pay').classList.remove('on');
+const payUp=()=>{if(!payCur)return;const id=payCur.id,nm=$('payNm').value.trim().replace(/\s+/g,' ');if(nm.split(' ').filter(x=>x.length>1).length<2){$('payNe').textContent='Lütfen ad ve soyadınızı yazın.';$('payNm').focus();return}
+ pick(async f=>{try{await post(`loads/${id}/payer`,{name:nm});try{localStorage.setItem('alter_payer',nm)}catch(_e){dbg(_e)}await upload(`loads/${id}/receipt`,f);payClose();payCur=null;toast('Dekont yüklendi. Kod, IBAN, tutar ve ad soyad okunuyor; birkaç saniye sürebilir…');refresh();
+  let txt='';try{txt=await ocrRead(f)}catch(_e){dbg(_e)}
+  const r=await post(`loads/${id}/verify`,{text:txt});toast(r.message);refresh();bell()}catch{toast(LASTMSG)}})};
+async function payDismiss(){if(!$('pay').classList.contains('on'))return;const c=payCur;payClose();payCur=null;if(c){try{await post(`loads/${c.id}/cancel`)}catch(_e){dbg(_e)}toast('Ödeme yapılmadığı için işlem iptal edildi; ilan yeniden yayında.');refresh();bell()}}
+async function copyText(t){t=String(t);try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);return true}}catch(_e){dbg(_e)}
+ try{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,t.length);const k=document.execCommand('copy');a.remove();return k}catch(_e){dbg(_e);return false}}
+const copyIban=async()=>{const ib=cfg.iban||IBAN;toast(await copyText(ib)?'IBAN kopyalandı.':'IBAN: '+ib)};
+const copyRef=async()=>{const c=payCur&&payCur.ref;if(!c)return;toast(await copyText(c)?'Kod kopyalandı: '+c+'. Havale açıklamasına yalnızca bu sayıyı yazın.':'Kodunuz: '+c)};
+const loadJs=src=>new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`))return res();const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)});
+async function ocrImg(src){await loadJs('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');const r=await Tesseract.recognize(src,'eng');return r.data.text||''}
+async function ocrRead(f){
+ if(/\.pdf$/i.test(f.name)||f.type==='application/pdf'){
+  await loadJs('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdf=await pdfjsLib.getDocument({data:await f.arrayBuffer()}).promise;let out='';
+  for(let i=1;i<=Math.min(pdf.numPages,3);i++){const pg=await pdf.getPage(i);out+=(await pg.getTextContent()).items.map(x=>x.str).join(' ')+'\n'}
+  if(out.replace(/\s/g,'').length<30){out='';for(let i=1;i<=Math.min(pdf.numPages,2);i++){const pg=await pdf.getPage(i),vp=pg.getViewport({scale:2.5}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;out+=await ocrImg(c)+'\n'}}
+  return out}
+ const u=URL.createObjectURL(f);try{return await ocrImg(u)}finally{URL.revokeObjectURL(u)}}
+/* ===== Komisyonu belirle (yönetici) ===== */
+function rateOpen(){$('rIn').value=curRate;$('rCf').style.display='none';$('rBt').style.display='flex';rateChk();$('rate').classList.add('on');setTimeout(()=>$('rIn').focus(),60)}
+const rateClose=()=>$('rate').classList.remove('on');
+function rateVal(){const raw=$('rIn').value.trim().replace(',','.');
+ if(raw==='')return{e:'Komisyon oranını girin.'};
+ if(!/^\d+(\.\d{1,2})?$/.test(raw))return{e:'Geçerli bir sayı girin (en fazla 2 ondalık).'};
+ const v=parseFloat(raw);if(v>100)return{e:'Oran 100’den büyük olamaz.',v};
+ if(v===curRate)return{e:'Oran zaten %'+curRate+' olarak kayıtlı.',v};return{v}}
+function rateChk(){const r=rateVal();$('rEr').textContent=r.e||'';$('rBtn').disabled=!!r.e;
+ $('rPv').textContent=r.v!==undefined&&r.v<=100?`Örnek: 10.000 TL’lik işlemde komisyon ${tl2(10000*r.v/100)} TL`:''}
+function rateAsk(){const r=rateVal();if(r.e)return rateChk();$('rCt').innerHTML=`Komisyon oranı <b>%${r.v}</b> olarak kaydedilsin mi?<br><span class="muted">Yalnızca bundan sonra kabul edilen işlere uygulanır.</span>`;$('rBt').style.display='none';$('rCf').style.display='block'}
+const rateBack=()=>{$('rCf').style.display='none';$('rBt').style.display='flex'};
+async function rateSave(){const r=rateVal();if(r.e)return rateBack();try{const x=await post('admin/commission',r.v);curRate=r.v;toast(x.message);rateClose();try{cfg=await api('config')}catch(_e){dbg(_e)}refresh();bell()}catch{rateBack()}}
+addEventListener('keydown',e=>{if(e.key==='Escape'){payDismiss();rateClose()}});
+
+const acc=async(id,tow)=>{if(!me){pendAcc={id,tow:!!tow};toast('Devam etmek için lütfen giriş yapın veya üye olun.');authBtn();return}
+ try{const r=await post(`loads/${id}/accept`);await loadList();bell();const c=document.querySelector(`.card[data-cid="${id}"]`);if(c){c.classList.add('pulse');c.scrollIntoView({block:'center',behavior:'smooth'})}payShow(r.id,r.commission,r.isTow,r.refCode)}catch{toast(LASTMSG)}},way=id=>done(post(`loads/${id}/ontheway`));
+const dlv=id=>pick(f=>done(upload(`loads/${id}/deliver`,f)));
+const ap=id=>done(post(`admin/loads/${id}/approve-payment`)),rr=id=>{const w=prompt('Red nedeni (isteğe bağlı):');if(w===null)return;return done(post(`admin/loads/${id}/reject-receipt`,{reason:w}))},rel=id=>done(post(`admin/loads/${id}/release`));
+const del=id=>confirm('İlan kaldırılsın mı?')&&done(api(`admin/loads/${id}`,{method:'DELETE'}));
+
+function comm(){const p=parseFloat($('npr').value);$('ncm').textContent=p>0?money(p*cfg.commission/100)+` (%${cfg.commission})`:'0 ₺'}
+function commT(){const p=parseFloat($('tpr').value);$('tcm').textContent=p>0?money(p*cfg.commission/100)+` (%${cfg.commission})`:'0 ₺'}
+
+/* ===== İletişim bilgisi sansürü (telefon, e-posta, sosyal medya, link) ===== */
+const NWL='sifir|bir|iki|uc|dort|bes|alti|yedi|sekiz|dokuz|yuz|on|yirmi|otuz|kirk|elli|altmis|yetmis|seksen|doksan',NWF=new RegExp('^(?:'+NWL+')+$'),NWG=new RegExp(NWL,'g');
+const nrm=w=>w.replace(/[ıİ]/g,'i').replace(/ş/gi,'s').replace(/ğ/gi,'g').replace(/ü/gi,'u').replace(/ö/gi,'o').replace(/ç/gi,'c').toLowerCase();
+/* rakam + rakam kelimesi (bitişik/ayrık/karışık): 7 ve üzeri birim -> yıldızla */
+function maskNum(t){const toks=t.match(/\d|\p{L}+|[^\p{L}\d]+/gu)||[],it=toks.map(s=>{
+  if(/^\d$/.test(s))return{s,k:'d',n:1};
+  if(/^\p{L}+$/u.test(s)){const n=nrm(s);if(NWF.test(n))return{s,k:'w',n:(n.match(NWG)||[]).length};return{s,k:'x'}}
+  return s.length<=3?{s,k:'s'}:{s,k:'x'}}),out=[];let run=[];
+ const flush=()=>{let u=0,hw=false;run.forEach(x=>{if(x.k==='d'||x.k==='w')u+=x.n;if(x.k==='w')hw=true});
+  run.forEach(x=>out.push(hw&&u>=7&&(x.k==='d'||x.k==='w')?'*'.repeat(x.s.length):x.s));run=[]};
+ for(const x of it){if(x.k==='x'){flush();out.push(x.s)}else run.push(x)}flush();return out.join('')}
+function censorText(t){if(typeof t!=='string'||!t)return t;const st=m=>'*'.repeat(m.length);
+ t=t.replace(/(?:https?:\/\/|www\.)\S+/gi,st);
+ t=t.replace(/[\p{L}0-9._%+\-]+\s*[\(\[\{]\s*(?:at|et)\s*[\)\]\}]\s*[\p{L}0-9.\-]+(?:\s*(?:nokta|dot)\s*[\p{L}0-9\-]+)*/giu,st);
+ t=t.replace(/[\p{L}0-9._%+\-]*@[\p{L}0-9._\-]{2,}/gu,st);
+ t=t.replace(/[\p{L}0-9\-]+\s*[\(\[]?\s*(?:nokta|dot)\s*[\)\]]?\s*(?:com|net|org|tr|info|biz)(?![\p{L}])/giu,st);
+ t=t.replace(/[\p{L}0-9\-]+(?:\.[\p{L}0-9\-]+)*\.(?:com|net|org|info|biz|edu|gov|tr|io|co|me|app|link|ly|gl|ws|xyz|shop|site|online)(?![\p{L}])(?:\/\S*)?/giu,st);
+ t=t.replace(/(^|[^\p{L}])(insta(?:gram)?|ig|face(?:book)?|fb|tiktok|telegram|snap(?:chat)?|twitter|whats?app|wp)(\s*[:\/\-–]\s*@?|\s+@)([A-Za-z0-9._]{3,})/giu,(m,a,k,sep,h)=>a+k+sep+st(h));
+ t=t.replace(/(^|[^\p{L}])(insta(?:gram)?|ig|face(?:book)?|fb|tiktok|telegram|snap(?:chat)?|twitter|whats?app|wp)(\s+)([A-Za-z._]*\d[A-Za-z0-9._]*)/giu,(m,a,k,sep,h)=>a+k+sep+st(h));
+ t=t.replace(/\+?\(?\d[\d\s().\-]{8,}\d/g,m=>{const d=m.replace(/\D/g,'');return d.length>=10&&d.length<=13&&/^(?:90|0)?[2-5]\d{9}$/.test(d)?st(m):m});
+ return maskNum(t)}
+let cenT=0;const warnCen=()=>{if(Date.now()-cenT>4000){cenT=Date.now();toast('Telefon, e-posta, sosyal medya adı ve link yazılamaz; otomatik gizlendi. İletişim bilgileriniz onaydan sonra paylaşılır.')}};
+function liveCensor(el){const v=el.value,c=censorText(v);if(c!==v){const a=el.selectionStart,b=el.selectionEnd;el.value=c;try{el.setSelectionRange(a,b)}catch(_e){dbg(_e)}warnCen()}}
+document.addEventListener('input',e=>{const t=e.target;if(t&&['nds','nad','tad'].includes(t.id))liveCensor(t)});
+document.addEventListener('change',e=>{const t=e.target;if(t&&['nds','nad','tad'].includes(t.id))liveCensor(t)});
+async function submitLoad(){
+ try{const r=await post('loads',{from:$('nf').value,fromDistrict:$('nfd').value,to:$('nt').value,toDistrict:$('ntd').value,pickup:$('np').value||null,delivery:$('nd').value||null,type:$('ny').value,towFeature:null,desc:$('nds').value,weight:+$('nw').value,pallets:+$('npl').value||0,vol:+$('nvl').value||0,adr:$('nadr').checked,vehicle:$('nvh').value,payTerm:$('npt').value,price:parseFloat($('npr').value)||0,isTow:false,phone:$('nph').value,address:$('nad').value});
+  toast(r.message);['nfd','ntd','np','nd','npr','nph','nad','nds','nw','npl','nvl'].forEach(i=>$(i).value='');$('nvh').value='';comm();show('list')}catch(_e){dbg(_e)}}
+async function submitTow(){
+ try{const r=await post('loads',{from:CP.t[0]||'',cities:CP.t.slice(),fromDistrict:$('tfd').value,to:'',toDistrict:'',pickup:null,delivery:null,type:$('ty').value,towFeature:$('tx').value,capacity:+$('ttn').value||0,price:parseFloat($('tpr').value)||0,isTow:true,phone:$('tph').value,address:$('tad').value});
+  toast(r.message);['tfd','tpr','tph','tad','ttn'].forEach(i=>$(i).value='');CP.t.length=0;cpSync('t');$('ty').value='';commT();show('list')}catch(_e){dbg(_e)}}
+const firm=(u,a)=>done(post('admin/firms/'+encodeURIComponent(u),{approve:a===true,back:a==='back'}));
+const flag=u=>done(post('admin/members/'+encodeURIComponent(u)+'/flags',{reqTC:$('ftc_'+u).checked,reqDocs:$('fdc_'+u).checked}));
+const regMode=r=>{$('rnote').style.display='none';$('rerr').textContent='';$('lerr').textContent='';if(r){ruTouched=false;$('ru').value='';$('ruh').textContent=''}$('lgf').style.display=r?'none':'block';$('rgf').style.display=r?'block':'none'};
+const RMAP={role:'rr',first:'rfn',last:'rln',phone:'rph',email:'rem',username:'ru',password:'rp'},PMAP={first:'pfn',last:'pln',phone:'pph',email:'pem'},FMAP={company:'pc',taxNo:'pv'};
+function clrErrs(m){Object.values(m).forEach(id=>{const e=$('e_'+id),i=$(id);if(e)e.textContent='';if(i&&i.classList)i.classList.remove('bad')})}
+function showErrs(m,errs,focus=true){if(!errs)return;clrErrs(m);let first=null;
+ for(const[k,id]of Object.entries(m))if(errs[k]){$('e_'+id).textContent=errs[k];const i=$(id);i.classList.add('bad');if(!first)first=i}
+ if(first&&focus){first.focus();first.scrollIntoView&&first.scrollIntoView({block:'center',behavior:'smooth'})}}
+let dupT;function chkDup(p){clearTimeout(dupT);dupT=setTimeout(async()=>{const M=p==='r'?{phone:'rph',email:'rem'}:{phone:'pph',email:'pem'},q=new URLSearchParams();
+ for(const[k,id]of Object.entries(M))if($(id).value.trim())q.set(k,$(id).value.trim());if(!q.toString())return;
+ try{showErrs(M,await api('member/check?'+q),false)}catch(_e){dbg(_e)}},300)}
+function chkTax(){const v=$('pv').value.trim(),o=$('pvh');if(!v){o.textContent='';return}
+ const ok=/^\d{10}$/.test(v);o.style.color=ok?'var(--ok)':'var(--muted)';o.textContent=ok?'10 hane':`Vergi numarası 10 haneli olmalı (şu an ${v.replace(/\D/g,'').length})`}
+async function register(){$('rerr').textContent='';clrErrs(RMAP);
+ const v={role:$('rr').value,first:$('rfn').value,last:$('rln').value,phone:$('rph').value,email:$('rem').value,username:$('ru').value,password:$('rp').value};
+ try{await post('register',v);me=await post('login',{username:v.username.trim().toLowerCase(),password:v.password,remember:true});
+  try{localStorage.setItem('alter_last_user',me.name)}catch(_e){dbg(_e)}
+  ['rfn','rln','rph','rem','ru','rp'].forEach(i=>$(i).value='');dlg.close();renderNav();show('list');toast('Üyeliğiniz oluşturuldu. Yönetici onayından sonra ilan verebilir ve işlem yapabilirsiniz.');
+  if(pendHq){const p=pendHq;pendHq=null;setTimeout(()=>{hqGo(p);if(HQ[p].post&&me&&me.role===HQ[p].r)toast('Üyeliğiniz oluşturuldu. Formu doldurup ilanınızı kaydedebilirsiniz; üyeliğiniz onaylanınca otomatik yayınlanır.')},350)}}
+ catch{if(FERR)showErrs(RMAP,FERR);else $('rerr').textContent=LASTMSG}}
+const TMAP={tc:'ptc'};
+async function loadProfile(){try{const p=await api('profile');
+ $('pfn').value=p.first;$('pln').value=p.last;$('pph').value=p.phone;$('pem').value=p.email;$('pc').value=p.company;$('pv').value=p.taxNo;chkTax();
+ const M={beklemede:['','Üyeliğiniz yönetici onayında. Onaylanınca ilan verebilir, yük veya boş araç kabul edebilirsiniz.'],'onaylı':['','Üyeliğiniz onaylı. Tüm özellikleri kullanabilirsiniz.'],reddedildi:['','Üyelik başvurunuz reddedildi.']}[p.status]||['',''];
+ $('pst').innerHTML=`<b>Hesap durumu</b><div class="muted">${M[1]}</div>`+(p.status==='reddedildi'?`<button class="btn s" style="margin-top:.6rem" onclick="resubmit()">Yeniden onaya gönder</button>`:'');
+ $('tcbox').style.display=p.reqTC?'block':'none';$('ptc').value=p.tcNo||'';$('dcbox').style.display=p.reqDocs?'block':'none';
+ $('dcst').textContent=p.docsOk?'Evraklarınız tamam.':'Evraklarınız eksik. Belgelerim menüsünden yükleyin.'}catch(_e){dbg(_e)}}
+async function savePersonal(){clrErrs(PMAP);try{const r=await post('profile/personal',{first:$('pfn').value,last:$('pln').value,phone:$('pph').value,email:$('pem').value});toast(r.message);loadProfile()}catch{showErrs(PMAP,FERR)}}
+async function saveFirm(){clrErrs(FMAP);try{const r=await post('profile/firm',{company:$('pc').value,taxNo:$('pv').value.trim()});toast(r.message);loadProfile()}catch{showErrs(FMAP,FERR)}}
+async function saveTC(){clrErrs(TMAP);try{const r=await post('profile/tc',{tc:$('ptc').value.trim()});toast(r.message);loadProfile();bell()}catch{showErrs(TMAP,FERR)}}
+const resubmit=()=>done(post('profile/resubmit'));
+async function bell(){if(!me)return;if(LU!==me.name){LU=me.name;announced.clear()}try{const [n,m]=await Promise.all([api('notes'),api('me')]);
+ const sg=x=>[x.status,x.reqTC,x.reqDocs,x.tcOk,x.docsOk].join();if(m.name&&sg(m)!==sg(me)){me={...me,...m};renderNav();refresh();return}
+ if(me.role==='admin'){const k=await api('admin/counts'),t=k.f+k.p;if(t!==ADM){ADM=t;renderNav();return}}
+ checkAlarms(n);const c=n.filter(x=>!x.read).length;$('bc').textContent=c;$('bb').classList.toggle('o',!c)}catch(_e){dbg(_e)}}
+async function openNotes(){try{const [n,a]=await Promise.all([api('notes'),api('alerts')]);
+ NOTES=n.slice(0,30);$('ntool').style.display=NOTES.length?'flex':'none';
+ $('nl').innerHTML=NOTES.map((x,i)=>`<div style="display:flex;gap:.55rem;align-items:flex-start;padding:.4rem 0;border-bottom:1px solid var(--line)"><input type="checkbox" class="nsel" value="${x.id}" aria-label="Bildirimi seç" style="margin-top:.25rem;flex:none;min-height:0;width:1.15rem;height:1.15rem" onchange="nSync()"><div onclick="goNote(${i})" style="cursor:pointer;flex:1;${x.read?'opacity:.6':'font-weight:700'}">${esc(x.text)}<div class="muted">${fdt(x.ts)}</div></div></div>`).join('')||'<p class="muted">Bildirim yok.</p>';nSync();
+ $('al').innerHTML=a.map(x=>`<div class="row" style="padding:.3rem 0"><span class="muted">${esc(x.label)}</span>${btn('Sil',`delAlert(${x.id})`,'r')}</div>`).join('')||'<p class="muted">Kayıtlı alarm yok. Gezinme çubuğundaki 🔔 düğmesiyle alarm kurabilirsiniz.</p>';
+ if(!nts.open)nts.showModal()}catch(_e){dbg(_e)}}
+const nSync=()=>{const all=document.querySelectorAll('.nsel'),on=document.querySelectorAll('.nsel:checked');$('nall').checked=all.length>0&&on.length===all.length;$('ndel').textContent='Seçilenleri sil'+(on.length?' ('+on.length+')':'')};
+const nAll=c=>{document.querySelectorAll('.nsel').forEach(x=>x.checked=c);nSync()};
+async function nDel(){const ids=[...document.querySelectorAll('.nsel:checked')].map(x=>x.value);if(!ids.length){toast('Silinecek bildirimleri işaretleyin.');return}
+ if(!confirm(ids.length+' bildirim silinecek. Devam edilsin mi?'))return;
+ try{const r=await post('notes/delete',{ids});toast(r.message);await openNotes();bell()}catch(_e){dbg(_e)}}
+let ac=null,soundOn=true,pend=false,almT=null,LU='';const announced=new Set();
+function unlockAudio(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state!=='running')ac.resume().then(()=>{if(pend&&ac.state==='running'){pend=false;siren()}}).catch(()=>{})}catch(_e){dbg(_e)}}
+function siren(){if(!soundOn)return;if(!ac){pend=true;return}
+ const go=()=>{try{const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.type='square';o.connect(g);g.connect(ac.destination);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.05);
+  for(let i=0;i<7;i++)o.frequency.setValueAtTime(i%2?660:988,t+i*.4);
+  g.gain.setValueAtTime(.25,t+2.6);g.gain.exponentialRampToValueAtTime(.0001,t+2.8);o.start(t);o.stop(t+2.8);
+  navigator.vibrate&&navigator.vibrate([300,150,300,150,300])}catch(_e){dbg(_e)}};
+ if(ac.state==='running')go();else ac.resume().then(()=>{if(ac.state==='running')go();else pend=true}).catch(()=>{pend=true})}
+function checkAlarms(n){const f=n.filter(x=>x.alarm&&!x.read&&!announced.has(x.id));if(!f.length)return;f.forEach(x=>announced.add(x.id));
+ const tow=f.some(x=>x.alarm==='tow'),ld=f.some(x=>x.alarm==='load');
+ const ti='🚨 '+(tow&&ld?'Aradığınız yük ve tır':tow?'Aradığınız tır':'Aradığınız yük')+' sisteme girdi!'+(f.length>1?` (${f.length} eşleşme)`:''),de=f[0].text.replace('🔔 Alarm eşleşti: ','');
+ $('alt').textContent=ti;$('ald').textContent=de;
+ lift($('alm'));$('alm').dataset.k=tow&&!ld?'tow':'load';$('alm').style.display='block';toast(ti+' '+de);siren();
+ setTimeout(()=>{if(pend&&$('alm').style.display==='block')$('ald').textContent=de+'  🔇 Ses için ekrana dokunun.'},500);
+ clearInterval(almT);almT=setInterval(()=>{if($('alm').style.display==='block')siren();else clearInterval(almT)},3200)}
+async function almClose(go){clearInterval(almT);$('alm').style.display='none';try{await post('notes/read')}catch(_e){dbg(_e)}bell();
+ if(go){clearF();$('fk').value=$('alm').dataset.k;show('list')}}
+const readAll=async()=>{await post('notes/read');bell();openNotes()};
+const alarmKind=()=>me&&me.role==='shipper'?'tow':'load';
+function openAlarm(){if(!me){toast('Alarm kurmak için giriş yapın.');authBtn();return}if(me.role==='admin')return;const tow=alarmKind()==='tow';
+ $('at').textContent=tow?'🔔 Boş Araç Talebi Oluştur':'🔔 Yük Arıyorum';
+ $('ahint').textContent=tow?'Seçtiğiniz şehirlerde, kasa tipinize ve yük ağırlığınıza uygun boş araç girince haber verilir.':'Seçtiğiniz şehirlerde, kasa tipinize ve tonajınıza uygun yük girince haber verilir.';
+ $('alw').textContent=tow?'Yükümün maksimum ağırlığı (ton)':'Kabul edebileceğim maksimum tonaj (ton)';
+ $('avh').innerHTML=opts(TT,'Tümü');$('aadrl').style.display=tow?'none':'';
+ cpEnsure('a');CP.a.length=0;cpSync('a');['am','aw'].forEach(i=>$(i).value='');$('aadr').checked=false;adlg.showModal()}
+async function saveAlert(){const tow=alarmKind()==='tow';
+ try{const r=await post('alerts',{tow,cities:CP.a.slice(),kasa:$('avh').value,maxTon:+$('aw').value||0,min:+$('am').value||0,adr:!tow&&$('aadr').checked});adlg.close();toast(r.message);bell()}catch(_e){dbg(_e)}}
+const delAlert=async id=>{await api('alerts/'+id,{method:'DELETE'});openNotes()};
+let ruTouched=false,dip=null;
+const slug=s=>{const p=s.toLocaleLowerCase('tr').replace(/\./g,'').replace(/ı/g,'i').replace(/ğ/g,'g').replace(/ü/g,'u').replace(/ş/g,'s').replace(/ö/g,'o').replace(/ç/g,'c').replace(/[^a-z0-9]+/g,'_').split('_').filter(Boolean),k=p.filter(x=>!['as','ltd','sti','anonim','limited','sirketi'].includes(x));return(k.length?k:p).join('_').slice(0,20)};
+let ckT;function autoUser(){if(ruTouched)return;$('ru').value=slug($('rfn').value+' '+$('rln').value);chkUser()}
+function chkUser(){clearTimeout(ckT);ckT=setTimeout(async()=>{const v=$('ru').value.trim().toLowerCase(),o=$('ruh');if(!v){o.textContent='';return}
+ try{const r=await api('username/check?name='+encodeURIComponent(v));
+  if(r.ok){o.style.color='var(--ok)';o.textContent='Kullanıcı adı müsait'}
+  else if(!ruTouched){$('ru').value=r.suggest;o.style.color='var(--ok)';o.textContent='Önerilen kullanıcı adı: '+r.suggest}
+  else{o.style.color='var(--bad)';o.innerHTML=r.valid?'Alınmış. Öneri: <b style="cursor:pointer;text-decoration:underline" onclick="$(\'ru\').value=\''+r.suggest+'\';chkUser()">'+r.suggest+'</b>':'3-20 karakter; yalnız harf, rakam ve _'}}catch(_e){dbg(_e)}},250)}
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isAnd=()=>/android/i.test(navigator.userAgent);
+const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function inbShow(){if(standalone())return;let x=0;try{x=+localStorage.getItem('alter_inb')||0}catch(_e){dbg(_e)}if(Date.now()-x>6048e5&&(dip||isIOS()||isAnd()))$('inb').style.display='block'}
+function hideInb(){$('inb').style.display='none';try{localStorage.setItem('alter_inb',Date.now())}catch(_e){dbg(_e)}}
+async function installApp(){if(dip){dip.prompt();try{await dip.userChoice}catch(_e){dbg(_e)}dip=null;$('inb').style.display='none';return}
+ let t;if(location.protocol==='file:')t='Uygulamayı yüklemek için bu sayfanın bir web adresinde (https) yayınlanması gerekir. Yayınlandıktan sonra telefonunuzdan siteyi açıp <b>İndir</b>e dokunun.';
+ else if(isIOS())t='<ol><li>Bu sayfayı <b>Safari</b>\'de açın.</li><li>Alt çubuktaki <b>Paylaş</b> simgesine dokunun.</li><li><b>Ana Ekrana Ekle</b>\'yi seçin.</li><li><b>Ekle</b>\'ye dokunun.</li></ol>';
+ else if(isAnd())t='<ol><li>Tarayıcı menüsünü (⋮) açın.</li><li><b>Uygulamayı yükle</b> veya <b>Ana ekrana ekle</b>\'ye dokunun.</li><li>Onaylayın.</li></ol>';
+ else t='Adres çubuğunun sağındaki <b>Yükle</b> (⊕) simgesine tıklayın ya da tarayıcı menüsünden <b>Uygulamayı yükle</b>\'yi seçin. Telefonunuza yüklemek için bu bağlantıyı telefondan açın.';
+ $('inbody').innerHTML=t;ins.showModal()}
+function pwaInit(){
+ ['click','touchend','pointerup','keydown'].forEach(ev=>addEventListener(ev,unlockAudio,{capture:true,passive:true}));
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)bell()});addEventListener('focus',()=>bell());
+ addEventListener('resize',hh);hh();
+ addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;inbShow()});
+ addEventListener('appinstalled',()=>{dip=null;$('inb').style.display='none';$('ib').style.display='none';toast('Uygulama yüklendi')});
+ document.addEventListener('input',e=>{const id=e.target.id,x=id&&$('e_'+id);if(x){x.textContent='';e.target.classList.remove('bad')}});
+ document.addEventListener('close',e=>{if(e.target.tagName==='DIALOG'){lift($('alm'));lift($('toast'))}},true);
+ addEventListener('popstate',e=>{if(e.state&&e.state.v)show(e.state.v,true)});
+ try{history.replaceState({v:'list'},'')}catch(_e){dbg(_e)}
+ if(standalone())$('ib').style.display='none';inbShow();
+ if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{})}
+
+/* ===== Banka bildirimi (Google Sheets / Apps Script) ile otomatik ödeme eşleştirme: yalnızca yönetici cihazında ===== */
+let bkBusy=false,bkLast=0,bkMem={u:'',t:''};
+const bkGet=k=>{try{const v=localStorage.getItem(k);if(v!==null)return v}catch(_e){}return k==='alter_bank_url'?bkMem.u:bkMem.t};
+function bankInit(){$('bkU').value=bkGet('alter_bank_url');$('bkT').value=bkGet('alter_bank_tok');
+ if(!/^https?:$/.test(location.protocol)&&$('bkS')&&!$('bkS').textContent)$('bkS').textContent='⚠️ Bu sayfa dosya olarak açılmış ('+location.protocol+'). Telefon tarayıcısı Google adresine erişimi engelleyebilir; siteyi https:// adresinden açın.'}
+function bankSave(){const u=$('bkU').value.trim(),t=$('bkT').value.trim();bkMem={u,t};try{localStorage.setItem('alter_bank_url',u);localStorage.setItem('alter_bank_tok',t)}catch(_e){dbg(_e)}bankSync(true)}
+async function bankSync(manual){
+ if(bkBusy||!me||me.role!=='admin')return;const u=bkGet('alter_bank_url'),t=bkGet('alter_bank_tok'),S=$('bkS'),say=x=>{if(S&&(manual||x.err))S.textContent=x.m};
+ if(!/^https:\/\//.test(u)||!t){say({m:'Önce adresi (https://script.google.com/…/exec) ve gizli anahtarı (TOKEN) girin.'});return}
+ const pend=(AD&&AD.l||[]).filter(x=>x.refCode&&!x.paid&&x.status==='taahhüt edildi');
+ bkBusy=true;say({m:'Banka kayıtları okunuyor…'});let txt='';
+ try{const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),20000);let r;
+  try{r=await fetch(u+(u.includes('?')?'&':'?')+'t='+encodeURIComponent(t),{cache:'no-store',signal:ctl.signal})}catch(e){clearTimeout(tm);throw{k:'net'}}
+  clearTimeout(tm);txt=await r.text();let j;try{j=JSON.parse(txt)}catch(_e){throw{k:'html',h:r.status}}
+  if(!j.ok)throw{k:'srv',m:j.error};
+  let n=0,pt=0;for(const l of pend)for(const row of j.rows){try{const x=await post(`admin/loads/${l.id}/bank-verify`,{row});if(x.matched){n++;break}if(x.partial){pt++;break}}catch(_e){dbg(_e)}}
+  bkLast=Date.now();const hm=new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+  say({m:`✅ Bağlantı çalışıyor · ${hm} · sayfada kod içeren ${j.rows.length} banka kaydı (son ${j.hours||72} saat) · bekleyen ödeme ${pend.length} · otomatik onay ${n}`+(pt?` · elle kontrol gereken ${pt}`:'')+(!j.rows.length?' · Kayıt görünmüyorsa: bildirimde 5 haneli kod var mı, sayfa adı web_havale mi, tarih son 72 saatte mi?':'')});
+  if(n||pt){if(n)toast(n+' ödeme banka bildirimiyle otomatik onaylandı.');refresh();bell()}
+ }catch(e){dbg(e);const k=e&&e.k;
+  say({err:1,m:k==='net'?'❌ Adrese ulaşılamadı (ağ ya da tarayıcı engeli). Siteyi dosya (content:// / file://) olarak değil, https:// adresinden açtığınızdan ve internet bağlantısından emin olun.'
+   :k==='html'?'❌ Adres JSON yerine bir sayfa döndürdü (HTTP '+(e.h||'?')+'). Apps Script\'te doGet\'li kodu yapıştırıp Dağıt > Dağıtımları yönet > Düzenle > "Yeni sürüm" yapmadınız, ya da erişim "Herkes" değil. Adres sonu /exec olmalı.'
+   :k==='srv'?(e.m==='yetkisiz'?'❌ Gizli anahtar (TOKEN) Apps Script\'tekiyle aynı değil.':'❌ Apps Script hatası: '+e.m)
+   :'❌ Beklenmeyen hata. Dekont okuma yöntemi çalışmaya devam eder.'})}
+ finally{bkBusy=false}}
+setInterval(()=>{if(!document.hidden&&me&&me.role==='admin'&&Date.now()-bkLast>60000)bankSync(false)},15000);
+setInterval(()=>{if(document.hidden)return;if(me)bell();else if(SYNC)pull()},5000);
+init();
+</script>
+</body></html>
